@@ -1,0 +1,3 @@
+
+int factorielle(int a);
+
