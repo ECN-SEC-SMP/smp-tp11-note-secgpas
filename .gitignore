@@ -5,6 +5,7 @@
 # Prerequisites
 *.d
 _deps/
+#.vscode/
 # Object files
 *.o
 *.ko
