@@ -29,5 +29,19 @@ bool Jeu::estFinie(){
 }
 
 void Jeu::partie(){
+    int decision;
+    cout << "0 : Pioche" << endl;
+    cout << "1 : Poser Wagon" << endl;
+    cout << "2 : Passer son Tour" << endl;
+    cin << decision << endl;
+    if(decision == 0){
+
+    }
+    if(decision == 1){
+
+    }else{
+
+    }
+    this->estFinie();
     
 }
