@@ -12,11 +12,11 @@ using namespace std;
 
 class Jeu {
     private: 
-        int nbJoueur;
         vector<Joueur> joueurs;
-        Plateau *p;
-        Pioche *tickets;
-        Pioche *train;
+        Plateau p;
+        Pioche tickets;
+        Pioche train;
+        int nbTour;
     public:
         Jeu(int nbJoueur);
         bool estFinie();
