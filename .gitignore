@@ -4,7 +4,7 @@
 ### C ###
 # Prerequisites
 *.d
-
+_deps/
 # Object files
 *.o
 *.ko
