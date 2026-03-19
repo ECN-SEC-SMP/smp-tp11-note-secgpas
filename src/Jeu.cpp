@@ -29,19 +29,23 @@ bool Jeu::estFinie(){
 }
 
 void Jeu::partie(){
-    int decision;
-    cout << "0 : Pioche" << endl;
-    cout << "1 : Poser Wagon" << endl;
-    cout << "2 : Passer son Tour" << endl;
-    cin << decision << endl;
-    if(decision == 0){
-
+    for(int i = 0; i <= (joueurs.size()-1); i++){
+        int decision;
+        cout << "Tour du Joueur :" << joueurs.at(i)->couleur << endl;
+        cout << "Choisis ton action" << endl;
+        cout << "0 : Pioche" << endl;
+        cout << "1 : Poser Wagon" << endl;
+        cout << "2 : Passer son Tour" << endl;
+        cin << decision << endl;
+        if(decision == 0){
+            joueurs.at(i).piocher(2, train); //444
+        }
+        if(decision == 1){
+            
+        }else{
+            
+        }
+        this->estFinie();
     }
-    if(decision == 1){
-
-    }else{
-
-    }
-    this->estFinie();
     
 }
