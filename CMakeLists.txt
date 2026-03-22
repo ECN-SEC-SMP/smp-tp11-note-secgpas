@@ -53,45 +53,46 @@ enable_testing()
 include_directories(include)
 
 # Déclaration de l'exécutable de tests.
-# Il sera construit à partir des fichiers suivants.
-#add_executable(mytest.out
-#    src/factorielle.cpp
-#    tests/mytest.cpp
-#)
+#Il sera construit à partir des fichiers suivants.
+add_executable(PiocheTest.out
+    src/Pioche.cpp
+    tests/PiocheTest.cpp
+)
 
-#add_executable(calculatorTest.out
-#        tests/calculatorTest.cpp
-#        src/Calculator.cpp
-#)
+add_executable(CarteTest.out
+        tests/CarteTest.cpp
+#        src/Carte.cpp
+)
 
 # Ajout d'options de compilation spécifiques à cette cible :
 # -Wall   : active la plupart des warnings
 # -Wextra : warnings supplémentaires
 # -pthread: nécessaire pour GoogleTest
 # -g      : ajoute les symboles de debug
-#target_compile_options(mytest.out PRIVATE -Wall -Wextra -pthread -g)
-#target_compile_options(calculatorTest.out PRIVATE -Wall -Wextra -pthread -g)
+target_compile_options(PiocheTest.out PRIVATE -Wall -Wextra -pthread -g)
+target_compile_options(CarteTest.out PRIVATE -Wall -Wextra -pthread -g)
 
 # Liaison de l'exécutable avec GoogleTest.
 # GTest::gtest_main fournit :
 #   - la bibliothèque GoogleTest
 #   - un main() déjà implémenté qui lance les tests
-#target_link_libraries(mytest.out
-#    GTest::gtest_main
-#)
+target_link_libraries(PiocheTest.out
+    GTest::gtest_main
+)
 
-#target_link_libraries(calculatorTest.out
-#        GTest::gtest_main
-#)
+target_link_libraries(CarteTest.out
+        GTest::gtest_main
+)
 
 # Permet d'utiliser les fonctions spécifiques à GoogleTest dans CMake.
-#include(GoogleTest)
+include(GoogleTest)
 
 # Cette commande exécute automatiquement l'exécutable de test
 # pour détecter tous les tests GoogleTest qu'il contient.
 # Chaque test est enregistré individuellement dans CTest.
 # Cela permet d'utiliser la commande "ctest" pour les exécuter.
-#gtest_discover_tests(mytest.out)
+gtest_discover_tests(PiocheTest.out)
+gtest_discover_tests(CarteTest.out)
 
 file(GLOB_RECURSE SOURCES "src/*.cpp")
 add_executable(main ${SOURCES})
