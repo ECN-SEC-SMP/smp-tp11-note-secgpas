@@ -11,7 +11,7 @@ using namespace std;
 listeVille_t vectVille;
 listeVoieFerre_t vectVoieFerree;
 
-void ouvrirFichierMap(const string nomFichier){  
+bool ouvrirFichierMap(const string nomFichier){
     string ligne;
     ifstream fichier(nomFichier);
 
@@ -38,9 +38,11 @@ void ouvrirFichierMap(const string nomFichier){
             }
             
         }
+        return true;
     }
     else{
-        cout << "fichier non ouvert" << endl; 
+        cout << "fichier non ouvert" << endl;
+        return false;
     }
 }
 
@@ -48,6 +50,42 @@ void afficheVectVille(vector<string> v){
     for (int i = 0; i < v.size(); i++){
         cout << i << " " << v[i] << endl;
     }
+}
+
+Couleur_e getCouleur(const string &couleur) {
+   if (couleur == "red") {
+       return Couleur_e::Rouge;
+   }
+
+   if (couleur == "green") {
+       return Couleur_e::Vert;
+   }
+
+   if (couleur == "blue") {
+       return Couleur_e::Bleu;
+   }
+
+   if (couleur == "yellow") {
+       return Couleur_e::Jaune;
+   }
+
+   if (couleur == "black") {
+       return Couleur_e::Noir;
+   }
+
+   if (couleur == "white") {
+       return Couleur_e::Blanc;
+   }
+
+   if (couleur == "orange") {
+       return Couleur_e::Orange;
+   }
+
+   if (couleur == "locomotive") {
+         return Couleur_e::Locomotive;
+   }
+   cerr << "Couleur non reconnue : " << couleur << endl;
+   return Couleur_e::Locomotive;
 }
 
 void afficheVectVoieFerree(vector<vector<string>> v){
@@ -59,11 +97,3 @@ void afficheVectVoieFerree(vector<vector<string>> v){
         cout << "]" << endl;
     }
 }
-
-// int main(){
-//     cout << "hello" << endl;
-//     ouvrirFichierMap("/home/riana/Documents/smp-tp11-note-secgpas/map.csv");
-//     afficheVectVille(vectVille);
-//     afficheVectVoieFerree(vectVoieFerree);
-//     return 0;
-// }

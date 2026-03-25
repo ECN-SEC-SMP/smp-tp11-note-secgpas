@@ -2,7 +2,6 @@
 #define SMP_TP8_DAVID_RIANA_VILLE_H
 
 #include<iostream>
-#include <map>
 #include<vector>
 
 using namespace std;
@@ -14,6 +13,7 @@ class Ville{
         vector<Ville*> villesAdjacentes; //vector d'adjacence du sommet
     public : 
         Ville(int i); //indice de la ville qu'on veut dans vectVille
+        Ville(string NomVille): ville_(NomVille) {};
         string getNomVille();
         void afficheAdjacent();
         bool estAdjacent(int i);
