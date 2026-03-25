@@ -1,0 +1,66 @@
+//
+// Created by David PROSPÉRIN on 22/03/2026.
+//
+
+#ifndef TP11_NOTE_PIOCHE_H
+#define TP11_NOTE_PIOCHE_H
+
+#include <vector>
+#include "Carte.h"
+#include "types.h"
+using namespace std;
+
+class Pioche {
+    vector<Carte*> deck_;
+    vector<Carte*> defausse_;
+    Pioche_type_e type_;
+
+    public:
+    /**
+     * Créer une pioche de type CarteW ou Ticket.
+     * La pioche de type CarteW contient 10 cartes de chaque couleur (Jaune, Bleu, Rouge, Vert, Noir, Blanc)
+     * et 12 cartes Locomotive.
+     * La pioche de tickets contient 32 tickets.
+     * Puis mélange les cartes de la pioche.
+     * @param type Le type de la pioche (CarteW ou Ticket)
+     */
+    Pioche(Pioche_type_e type) {
+        type_ = type;
+
+        if (type == Pioche_type_e::CarteW) {
+            for (int i = 0; i < 10; i++) {
+                deck_.push_back(new CTrain(Couleur_e::Jaune));
+                deck_.push_back(new CTrain(Couleur_e::Bleu));
+                deck_.push_back(new CTrain(Couleur_e::Rouge));
+                deck_.push_back(new CTrain(Couleur_e::Vert));
+                deck_.push_back(new CTrain(Couleur_e::Noir));
+                deck_.push_back(new CTrain(Couleur_e::Blanc));
+            }
+
+            for (int i = 0; i < 12; i++) {
+                deck_.push_back(new CTrain(Couleur_e::Locomotive));
+            }
+        } else if (type == Pioche_type_e::Ticket) {
+            // Remplir avec les tickets
+        }
+
+        melanger();
+    };
+
+    void melanger();
+    bool estPiocheVide() const;
+
+    Pioche_type_e getPiocheType() const {
+        return type_;
+    };
+
+    vector<Carte*> & getDeck() {
+        return deck_;
+    }
+
+    vector<Carte*> & getDefausse() {
+        return defausse_;
+    }
+};
+
+#endif //TP11_NOTE_PIOCHE_H
