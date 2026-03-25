@@ -16,6 +16,10 @@ Joueur* VoieFerree::getProprio(){
     return proprio;
 }
 
+void setProprio(Joueur j){
+    proprio = &j;
+}
+
 int VoieFerree::getPoids(){
     return poids;
 }

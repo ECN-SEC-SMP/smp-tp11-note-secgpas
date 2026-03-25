@@ -54,10 +54,11 @@ include_directories(include)
 
 # Déclaration de l'exécutable de tests.
 # Il sera construit à partir des fichiers suivants.
-#add_executable(mytest.out
-#    src/factorielle.cpp
-#    tests/mytest.cpp
-#)
+add_executable(testVille.out
+    src/fonctionAnnexe.cpp
+    src/Ville.cpp
+    tests/testVille.cpp
+)
 
 #add_executable(calculatorTest.out
 #        tests/calculatorTest.cpp
@@ -69,29 +70,31 @@ include_directories(include)
 # -Wextra : warnings supplémentaires
 # -pthread: nécessaire pour GoogleTest
 # -g      : ajoute les symboles de debug
-#target_compile_options(mytest.out PRIVATE -Wall -Wextra -pthread -g)
-#target_compile_options(calculatorTest.out PRIVATE -Wall -Wextra -pthread -g)
+target_compile_options(testVille.out PRIVATE -Wall -Wextra -pthread -g)
+# target_compile_options(calculatorTest.out PRIVATE -Wall -Wextra -pthread -g)
 
 # Liaison de l'exécutable avec GoogleTest.
 # GTest::gtest_main fournit :
 #   - la bibliothèque GoogleTest
 #   - un main() déjà implémenté qui lance les tests
-#target_link_libraries(mytest.out
-#    GTest::gtest_main
-#)
+target_link_libraries(testVille.out
+   GTest::gtest_main
+)
 
 #target_link_libraries(calculatorTest.out
 #        GTest::gtest_main
 #)
 
 # Permet d'utiliser les fonctions spécifiques à GoogleTest dans CMake.
-#include(GoogleTest)
+include(GoogleTest)
 
 # Cette commande exécute automatiquement l'exécutable de test
 # pour détecter tous les tests GoogleTest qu'il contient.
 # Chaque test est enregistré individuellement dans CTest.
 # Cela permet d'utiliser la commande "ctest" pour les exécuter.
-#gtest_discover_tests(mytest.out)
+gtest_discover_tests(testVille.out)
 
-file(GLOB_RECURSE SOURCES "src/*.cpp")
-add_executable(main ${SOURCES})
+# file(GLOB_RECURSE SOURCES "src/*.cpp")
+# add_executable(main ${SOURCES})
+
+add_executable(fonctionAnn src/fonctionAnnexe.cpp  src/Ville.cpp)

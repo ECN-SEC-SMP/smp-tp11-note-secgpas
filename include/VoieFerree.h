@@ -1,4 +1,3 @@
-//
 #ifndef SMP_TP8_DAVID_RIANA_VOIEFERREE_H
 #define SMP_TP8_DAVID_RIANA_VOIEFERREE_H
 
@@ -18,6 +17,7 @@ class VoieFerree{
     public:
         VoieFerree(Ville_e v1, Ville_e v2,int p,Couleur_e c);
         Joueur* getProprio();
+        void setProprio(Joueur j);
         int getPoids();
         Couleur_e getCouleur();        
         bool estDispo();
