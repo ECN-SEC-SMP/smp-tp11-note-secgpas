@@ -15,7 +15,6 @@ class Ville{
     public : 
         Ville(int i); //indice de la ville qu'on veut dans vectVille
         string getNomVille();
-        //void afficheListeVille(); //c'est ptete pas hyper malin de mettre ca en methode
         void afficheAdjacent();
         bool estAdjacent(int i);
         vector<Ville*> getAdjacent();
