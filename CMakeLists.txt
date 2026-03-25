@@ -53,6 +53,13 @@ enable_testing()
 include_directories(include)
 
 # Déclaration de l'exécutable de tests.
+
+# Il sera construit à partir des fichiers suivants.
+add_executable(testVille.out
+    src/fonctionAnnexe.cpp
+    src/Ville.cpp
+    tests/testVille.cpp
+)
 #Il sera construit à partir des fichiers suivants.
 add_executable(PiocheTest.out
     src/Pioche.cpp
@@ -69,13 +76,22 @@ add_executable(CarteTest.out
 # -Wextra : warnings supplémentaires
 # -pthread: nécessaire pour GoogleTest
 # -g      : ajoute les symboles de debug
+
+target_compile_options(testVille.out PRIVATE -Wall -Wextra -pthread -g)
 target_compile_options(PiocheTest.out PRIVATE -Wall -Wextra -pthread -g)
 target_compile_options(CarteTest.out PRIVATE -Wall -Wextra -pthread -g)
+
 
 # Liaison de l'exécutable avec GoogleTest.
 # GTest::gtest_main fournit :
 #   - la bibliothèque GoogleTest
 #   - un main() déjà implémenté qui lance les tests
+
+target_link_libraries(testVille.out
+   GTest::gtest_main
+)
+
+
 target_link_libraries(PiocheTest.out
     GTest::gtest_main
 )
@@ -91,8 +107,15 @@ include(GoogleTest)
 # pour détecter tous les tests GoogleTest qu'il contient.
 # Chaque test est enregistré individuellement dans CTest.
 # Cela permet d'utiliser la commande "ctest" pour les exécuter.
+
+gtest_discover_tests(testVille.out)
+
+
+add_executable(fonctionAnn src/fonctionAnnexe.cpp  src/Ville.cpp)
+
 gtest_discover_tests(PiocheTest.out)
 gtest_discover_tests(CarteTest.out)
 
 file(GLOB_RECURSE SOURCES "src/*.cpp")
 add_executable(main ${SOURCES})
+
