@@ -13,5 +13,15 @@ TEST(VilleTest,testDesMethodes){
 
     //Test de estAdjacent()
     Ville b = Ville(1);
-    
+    Ville c = Ville(7);
+    a.ajoutVilleAdjacente(&b);
+    EXPECT_EQ(true, a.estAdjacent(1));
+    EXPECT_EQ(false, a.estAdjacent(7));
+
+    testing::internal::CaptureStdout();
+    a.afficheAdjacent();
+    std::string output = testing::internal::GetCapturedStdout();
+
+    EXPECT_EQ("Calgary\n", output);
+
 }
