@@ -23,6 +23,14 @@ int VoieFerree::getPoids() {
     return poids;
 }
 
+Ville* VoieFerree::getVille1(){
+    return ville1;
+}
+
+Ville* VoieFerree::getVille2(){
+    return ville2;
+}
+
 Couleur_e VoieFerree::getCouleur() {
     return c;
 }

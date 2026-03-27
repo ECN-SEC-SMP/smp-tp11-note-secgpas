@@ -5,6 +5,9 @@
 #ifndef TP11_NOTE_TYPES_H
 #define TP11_NOTE_TYPES_H
 #include <vector>
+#include <iostream>
+
+using namespace std;
 
 enum class Couleur_e {
     Locomotive,
@@ -27,7 +30,7 @@ enum class Pioche_type_e {
     Ticket
 };
 
-using listeVille_t     = std::vector<std::string>;
-using listeVoieFerre_t = std::vector<std::vector<std::string>>;
+using listeVille_t     = vector<string>;
+using listeVoieFerre_t = vector<vector<string>>;
 
 #endif //TP11_NOTE_TYPES_H

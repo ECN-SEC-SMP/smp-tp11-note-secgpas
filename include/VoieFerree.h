@@ -20,6 +20,8 @@ class VoieFerree{
         int getPoids();
         Couleur_e getCouleur();        
         bool estDispo();
+        Ville* getVille1();
+        Ville* getVille2();
 
 };
 
