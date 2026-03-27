@@ -17,5 +17,6 @@ TEST(VoieFerreeTest,testDesMethodes){
     EXPECT_EQ("Seattle",v_1->getNomVille());
     EXPECT_EQ(Couleur_e::Noir, l1.getCouleur());
     EXPECT_EQ(4, l1.getPoids());
-  
+    
 }
+
