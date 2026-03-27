@@ -3,17 +3,17 @@
 
 #include <iostream>
 #include <vector>
+#include "types.h"
 
-using namespace std; 
-using listeVille_t     = vector<string>;
-using listeVoieFerre_t = vector<vector<string>>;
+using namespace std;
 
 extern listeVille_t vectVille;
-extern listeVoieFerre_t vectVoieFerree; 
+extern listeVoieFerre_t vectVoieFerree;
 
-void ouvrirFichierMap(const string nomFichier);
+bool ouvrirFichierMap(const string nomFichier);
 void afficheVectVille(vector<string> v);
 void afficheVectVoieFerree(vector<string> v);
+Couleur_e getCouleur(const string &couleur);
 
 
 #endif

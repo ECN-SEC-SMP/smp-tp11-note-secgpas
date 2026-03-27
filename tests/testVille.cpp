@@ -5,7 +5,7 @@
 
 
 TEST(VilleTest,testDesMethodes){
-    ouvrirFichierMap("/home/riana/Documents/smp-tp11-note-secgpas/map.csv");
+    ouvrirFichierMap("../map.csv");
 
     //Test de la création d'une ville et de l'ajout du nom
     Ville a = Ville(0);

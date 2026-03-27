@@ -1,34 +1,32 @@
 #include <iostream>
-#include<array>
-
 #include "VoieFerree.h"
+
 using namespace std;
 
-VoieFerree::VoieFerree(Ville_e v1, Ville_e v2,int p,Couleur_e couleur){
-    ville1 = v1;
-    ville2 = v2;
-    proprio = nullptr;
-    poids = p;
-    c = couleur;
+VoieFerree::VoieFerree(Ville *v1, Ville *v2, int p, Couleur_e couleur) :
+    ville1(v1),
+    ville2(v2),
+    poids(p),
+    c(couleur) {
+    //proprio = nullptr;
 }
 
-Joueur* VoieFerree::getProprio(){
-    return proprio;
-}
+// Joueur* VoieFerree::getProprio(){
+//     return proprio;
+// }
+//
+// void setProprio(Joueur j){
+//     proprio = &j;
+// }
 
-void setProprio(Joueur j){
-    proprio = &j;
-}
-
-int VoieFerree::getPoids(){
+int VoieFerree::getPoids() {
     return poids;
 }
 
-Couleur_e VoieFerree::getCouleur(){
+Couleur_e VoieFerree::getCouleur() {
     return c;
-}       
-
-bool estDispo(){
-    return (proprio == nullptr);
 }
 
+// bool estDispo() {
+//     return (proprio == nullptr);
+// }
