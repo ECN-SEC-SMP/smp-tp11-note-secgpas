@@ -7,6 +7,9 @@
 
 using namespace std;
 
+/**
+ * @brief Initialisation de la classe VoieFerree  
+ */
 class VoieFerree{
         Ville *ville1;
         Ville *ville2;
