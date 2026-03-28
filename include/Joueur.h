@@ -20,10 +20,13 @@ class Joueur{
         int mainWagon;
     public :
         Joueur(Couleur_e);
-        void piocher(int nbAPiocher, Pioche type);
+        int getMainWagon();
+        map<Couleur_e,int> getMainCarte();
+        void piocher(Pioche& type);
         void poserWagon(Ville* a, Ville* b, Couleur_e c);
+        void defausser();
         void afficherMain();
         Ticket rendreVisible();
-}
+};
 
 #endif

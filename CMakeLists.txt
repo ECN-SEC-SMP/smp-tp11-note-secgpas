@@ -74,6 +74,12 @@ add_executable(PiocheTest.out
         tests/PlateauTest.cpp
 )
 
+add_executable(JoueurTest.out
+    src/Joueur.cpp
+    src/Pioche.cpp
+    tests/JoueurTest.cpp
+)
+
 add_executable(CarteTest.out
         tests/CarteTest.cpp
 #        src/Carte.cpp
@@ -96,6 +102,7 @@ add_executable(PlateauTest.out
 target_compile_options(VilleTest.out PRIVATE -Wall -Wextra -pthread -g)
 target_compile_options(VoieFerreeTest.out PRIVATE -Wall -Wextra -pthread -g)
 target_compile_options(PiocheTest.out PRIVATE -Wall -Wextra -pthread -g)
+target_compile_options(JoueurTest.out PRIVATE -Wall -Wextra -pthread -g)
 target_compile_options(CarteTest.out PRIVATE -Wall -Wextra -pthread -g)
 target_compile_options(PlateauTest.out PRIVATE -Wall -Wextra -pthread -g)
 
@@ -114,6 +121,10 @@ target_link_libraries(VoieFerreeTest.out
 )
 
 target_link_libraries(PiocheTest.out
+    GTest::gtest_main
+)
+
+target_link_libraries(JoueurTest.out
     GTest::gtest_main
 )
 
@@ -136,6 +147,7 @@ include(GoogleTest)
 gtest_discover_tests(VilleTest.out)
 gtest_discover_tests(VoieFerreeTest.out)
 gtest_discover_tests(PiocheTest.out)
+gtest_discover_tests(JoueurTest.out)
 gtest_discover_tests(CarteTest.out)
 
 file(GLOB_RECURSE SOURCES "src/*.cpp")
