@@ -20,7 +20,7 @@ VoieFerree::VoieFerree(Ville *v1, Ville *v2, int p, Couleur_e couleur) :
 
 /**
  * @brief Accesseur au "propriétaire" de la voie. Permet de savoir quel joueur a posé ses wagon sur la voie
- * @return un pointeur vers le joueur ayant posé ses wagon sur la voie ferrée
+ * @return un pointeur vers le joueur ayant posé ses wagons sur la voie ferrée
  */
 // Joueur* VoieFerree::getProprio(){
 //     return proprio;
