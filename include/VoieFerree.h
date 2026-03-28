@@ -21,6 +21,14 @@ class VoieFerree{
         Couleur_e getCouleur();        
         bool estDispo();
 
+        Ville* getVille1() const {
+            return ville1;
+        };
+
+        Ville* getVille2() const {
+            return ville2;
+        }
+
 };
 
 

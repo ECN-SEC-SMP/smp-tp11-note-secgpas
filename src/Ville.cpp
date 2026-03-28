@@ -32,7 +32,7 @@ void Ville::afficheAdjacent(){
     }
 }
 
-vector<Ville*> Ville::getAdjacent(){
+vector<Ville *> &Ville::getAdjacent(){
     return villesAdjacentes;
 }
 

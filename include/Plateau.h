@@ -39,6 +39,8 @@ public:
   Ville& getVille(int i) {
       return villes_[i];
   }
+
+  void affichePlateau() const;
 };
 
 #endif //TP11_NOTE_PLATEAU_H

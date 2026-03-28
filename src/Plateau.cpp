@@ -44,6 +44,26 @@ Plateau::Plateau(const string & nomFichierMap) {
             cerr << endl;
         }
     }
+
+    // 3. Création du graphe
+    for (VoieFerree voie_ferree : voie_ferrees_) {
+        auto ville1 = voie_ferree.getVille1();
+        auto ville2 = voie_ferree.getVille2();
+
+        if (ville1 != nullptr && ville2 != nullptr) {
+            if (std::count(ville1->getAdjacent().begin(), ville1->getAdjacent().end(), ville2) == 0) {
+                ville1->ajoutVilleAdjacente(ville2);
+            }
+
+            if (std::count(ville2->getAdjacent().begin(), ville2->getAdjacent().end(), ville1) == 0) {
+                ville2->ajoutVilleAdjacente(ville1);
+            }
+        }
+    }
+
+    if (!villes_.empty()) {
+        graphe_ville_ = &villes_[0];
+    }
 }
 
 Ville* Plateau::getVille(const string &nomVille) {
@@ -56,4 +76,9 @@ Ville* Plateau::getVille(const string &nomVille) {
         }
     }
     return nullptr;
+}
+
+void Plateau::affichePlateau() const {
+    cout << "=== Plateau de jeu ===" << endl;
+
 }

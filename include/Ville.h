@@ -17,7 +17,8 @@ class Ville{
         string getNomVille();
         void afficheAdjacent();
         bool estAdjacent(int i);
-        vector<Ville*> getAdjacent();
+
+        vector<Ville *> &getAdjacent();
         void ajoutVilleAdjacente(Ville* v);
 };
 
