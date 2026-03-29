@@ -55,16 +55,29 @@ include_directories(include)
 # Déclaration de l'exécutable de tests.
 
 # Il sera construit à partir des fichiers suivants.
-add_executable(testVille.out
+add_executable(VilleTest.out
     src/fonctionAnnexe.cpp
     src/Ville.cpp
-    tests/testVille.cpp
+    tests/VilleTest.cpp
+)
+
+add_executable(VoieFerreeTest.out
+    src/fonctionAnnexe.cpp
+    src/Ville.cpp
+    src/VoieFerree.cpp
+    tests/VoieFerreeTest.cpp
 )
 
 add_executable(PiocheTest.out
     src/Pioche.cpp
     tests/PiocheTest.cpp
         tests/PlateauTest.cpp
+)
+
+add_executable(JoueurTest.out
+    src/Joueur.cpp
+    src/Pioche.cpp
+    tests/JoueurTest.cpp
 )
 
 add_executable(CarteTest.out
@@ -86,8 +99,10 @@ add_executable(PlateauTest.out
 # -pthread: nécessaire pour GoogleTest
 # -g      : ajoute les symboles de debug
 
-target_compile_options(testVille.out PRIVATE -Wall -Wextra -pthread -g)
+target_compile_options(VilleTest.out PRIVATE -Wall -Wextra -pthread -g)
+target_compile_options(VoieFerreeTest.out PRIVATE -Wall -Wextra -pthread -g)
 target_compile_options(PiocheTest.out PRIVATE -Wall -Wextra -pthread -g)
+target_compile_options(JoueurTest.out PRIVATE -Wall -Wextra -pthread -g)
 target_compile_options(CarteTest.out PRIVATE -Wall -Wextra -pthread -g)
 target_compile_options(PlateauTest.out PRIVATE -Wall -Wextra -pthread -g)
 
@@ -97,11 +112,19 @@ target_compile_options(PlateauTest.out PRIVATE -Wall -Wextra -pthread -g)
 #   - la bibliothèque GoogleTest
 #   - un main() déjà implémenté qui lance les tests
 
-target_link_libraries(testVille.out
+target_link_libraries(VilleTest.out
+   GTest::gtest_main
+)
+
+target_link_libraries(VoieFerreeTest.out
    GTest::gtest_main
 )
 
 target_link_libraries(PiocheTest.out
+    GTest::gtest_main
+)
+
+target_link_libraries(JoueurTest.out
     GTest::gtest_main
 )
 
@@ -121,8 +144,10 @@ include(GoogleTest)
 # Chaque test est enregistré individuellement dans CTest.
 # Cela permet d'utiliser la commande "ctest" pour les exécuter.
 
-gtest_discover_tests(testVille.out)
+gtest_discover_tests(VilleTest.out)
+gtest_discover_tests(VoieFerreeTest.out)
 gtest_discover_tests(PiocheTest.out)
+gtest_discover_tests(JoueurTest.out)
 gtest_discover_tests(CarteTest.out)
 
 file(GLOB_RECURSE SOURCES "src/*.cpp")

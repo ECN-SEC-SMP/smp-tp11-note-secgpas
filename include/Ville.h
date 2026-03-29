@@ -6,7 +6,9 @@
 
 using namespace std;
 
-
+/**
+ * @brief Définition de la classe Ville et des méthodes associées. Crée les sommets du graphe qui servira de plateau
+ */
 class Ville{
     private:
         string ville_;

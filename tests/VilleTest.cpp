@@ -23,5 +23,9 @@ TEST(VilleTest,testDesMethodes){
     std::string output = testing::internal::GetCapturedStdout();
 
     EXPECT_EQ("Calgary\n", output);
+    
+    vector<Ville*> attendu = { &b };
+    EXPECT_EQ(a.getAdjacent(), attendu);
+  
 
 }

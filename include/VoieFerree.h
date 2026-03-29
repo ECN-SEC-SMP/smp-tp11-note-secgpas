@@ -3,23 +3,28 @@
 
 #include "types.h"
 #include "Ville.h"
-//#include "Joueur.h"
+#include "Joueur.h"
 
 using namespace std;
 
+/**
+ * @brief Initialisation de la classe VoieFerree  
+ */
 class VoieFerree{
         Ville *ville1;
         Ville *ville2;
-        //Joueur* proprio;
+        Joueur* proprio;
         int poids;
         Couleur_e c;
     public:
         VoieFerree(Ville *v1, Ville *v2, int p, Couleur_e c);
-        //Joueur* getProprio();
-        //void setProprio(Joueur j);
+        Joueur* getProprio();
+        void setProprio(Joueur j);
         int getPoids();
         Couleur_e getCouleur();        
         bool estDispo();
+        Ville* getVille1();
+        Ville* getVille2();
 
         Ville* getVille1() const {
             return ville1;
