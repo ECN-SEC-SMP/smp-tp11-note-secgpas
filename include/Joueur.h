@@ -9,7 +9,7 @@
 #include "Pioche.h"
 #include "Ville.h"
 
-class Plateau; // forward declaration suffit ici
+class Plateau; 
 
 using namespace std;
 
@@ -32,8 +32,7 @@ class Joueur {
         // Méthodes principales
         void piocher(int nbAPiocher, Pioche& type);
         void poserWagon(Ville_e a, Ville_e b, Couleur_e c, Plateau& plateau);
-        void defausser(Pioche& piocheTicket);       // votre version originale
-        void defausserCarte(Carte* c);              // défausse une carte précise
+        void defausser(Pioche& piocheTicket);                    
         void afficherMain() const;
 };
 

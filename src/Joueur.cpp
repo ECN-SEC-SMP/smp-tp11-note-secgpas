@@ -52,7 +52,7 @@ void Joueur::poserWagon(Ville* a, Ville* b, Couleur_e c, Plateau& plateau){
         if (((plateau.getVoieFerree()[i].getVille1() == a && plateau.getVoieFerree()[i].getVille2() == b) ||(plateau.getVoieFerree()[i].getVille1() == b && plateau.getVoieFerree()[i].getVille2() == a)) && (plateau.getVoieFerree()[i].getCouleur() == c)){
             if (plateau.getVoieFerree()[i].estDispo()){
                 mainWagon = mainWagon - plateau.getVoieFerree()[i].getPoids();
-                plateau.getVoieFerree()[i].setProprio(this); // &this -> this
+                plateau.getVoieFerree()[i].setProprio(this); 
             }
         }
     }
