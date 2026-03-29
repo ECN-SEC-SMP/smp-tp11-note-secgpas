@@ -26,7 +26,10 @@ void Jeu::partie() {
         nbTour++;
         for (int i = 0; i < (int)joueurs.size(); i++) {
 
-            afficherEtat();
+            cout << "\n===== TOUR " << nbTour << " =====" << endl;
+            for (int i = 0; i < (int)joueurs.size(); i++) {
+                cout << "  Joueur " << i << " | Wagons : "          << joueurs.at(i).mainWagon << " | Tickets reussis : " << joueurs.at(i).nbTicketReussis << endl;
+            }
 
             int decision = -1;
             cout << "\nTour du Joueur : " << joueurs.at(i).couleur << endl;
