@@ -63,6 +63,44 @@ add_executable(calculatorTest.out
         tests/calculatorTest.cpp
         src/Calculator.cpp
 )
+add_executable(VilleTest.out
+    src/fonctionAnnexe.cpp
+    src/Ville.cpp
+    tests/VilleTest.cpp
+)
+
+add_executable(VoieFerreeTest.out
+    src/fonctionAnnexe.cpp
+    src/Ville.cpp
+    src/VoieFerree.cpp
+    tests/VoieFerreeTest.cpp
+)
+
+add_executable(PiocheTest.out
+    src/Pioche.cpp
+    tests/PiocheTest.cpp
+        tests/PlateauTest.cpp
+)
+
+add_executable(JoueurTest.out
+    src/Joueur.cpp
+    src/Pioche.cpp
+    tests/JoueurTest.cpp
+)
+
+add_executable(CarteTest.out
+        tests/CarteTest.cpp
+#        src/Carte.cpp
+)
+
+add_executable(PlateauTest.out
+        tests/PlateauTest.cpp
+        src/Plateau.cpp
+        src/VoieFerree.cpp
+        src/fonctionAnnexe.cpp
+        src/Ville.cpp
+)
+
 
 # Ajout d'options de compilation spécifiques à cette cible :
 # -Wall   : active la plupart des warnings
@@ -71,6 +109,12 @@ add_executable(calculatorTest.out
 # -g      : ajoute les symboles de debug
 target_compile_options(mytest.out PRIVATE -Wall -Wextra -pthread -g)
 target_compile_options(calculatorTest.out PRIVATE -Wall -Wextra -pthread -g)
+target_compile_options(VilleTest.out PRIVATE -Wall -Wextra -pthread -g)
+target_compile_options(VoieFerreeTest.out PRIVATE -Wall -Wextra -pthread -g)
+target_compile_options(PiocheTest.out PRIVATE -Wall -Wextra -pthread -g)
+target_compile_options(JoueurTest.out PRIVATE -Wall -Wextra -pthread -g)
+target_compile_options(CarteTest.out PRIVATE -Wall -Wextra -pthread -g)
+target_compile_options(PlateauTest.out PRIVATE -Wall -Wextra -pthread -g)
 
 # Liaison de l'exécutable avec GoogleTest.
 # GTest::gtest_main fournit :
@@ -83,6 +127,30 @@ target_link_libraries(mytest.out
 target_link_libraries(calculatorTest.out
         GTest::gtest_main
 )
+target_link_libraries(VilleTest.out
+   GTest::gtest_main
+)
+
+target_link_libraries(VoieFerreeTest.out
+   GTest::gtest_main
+)
+
+target_link_libraries(PiocheTest.out
+    GTest::gtest_main
+)
+
+target_link_libraries(JoueurTest.out
+    GTest::gtest_main
+)
+
+target_link_libraries(CarteTest.out
+        GTest::gtest_main
+)
+
+target_link_libraries(PlateauTest.out
+        GTest::gtest_main
+)
+
 
 # Permet d'utiliser les fonctions spécifiques à GoogleTest dans CMake.
 include(GoogleTest)
@@ -92,3 +160,11 @@ include(GoogleTest)
 # Chaque test est enregistré individuellement dans CTest.
 # Cela permet d'utiliser la commande "ctest" pour les exécuter.
 gtest_discover_tests(mytest.out)
+gtest_discover_tests(VilleTest.out)
+gtest_discover_tests(VoieFerreeTest.out)
+gtest_discover_tests(PiocheTest.out)
+gtest_discover_tests(JoueurTest.out)
+gtest_discover_tests(CarteTest.out)
+
+file(GLOB_RECURSE SOURCES "src/*.cpp")
+add_executable(main ${SOURCES})
