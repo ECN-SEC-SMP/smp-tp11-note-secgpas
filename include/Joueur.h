@@ -31,7 +31,7 @@ class Joueur {
 
         // Méthodes principales
         void piocher(int nbAPiocher, Pioche& type);
-        void poserWagon(Ville_e a, Ville_e b, Couleur_e c, Plateau& plateau);
+        void poserWagon(Ville a, Ville b, Couleur_e c, Plateau& plateau);
         void defausser(Pioche& piocheTicket);       // votre version originale
         void defausserCarte(Carte* c);              // défausse une carte précise
         void afficherMain() const;
