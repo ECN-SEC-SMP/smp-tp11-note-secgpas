@@ -20,6 +20,7 @@ class Joueur {
         vector<Ticket*> mainTicket;
         int mainWagon;
 
+
     public:
         Joueur(Couleur_e c);
 
