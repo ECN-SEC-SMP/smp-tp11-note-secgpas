@@ -30,7 +30,7 @@ public:
         return Carte_type_e::Train;
     }
 
-    bool estRealise() const override {};
+    bool estRealise() const override { return false; };
 };
 
 class Ticket : public Carte {

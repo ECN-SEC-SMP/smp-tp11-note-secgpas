@@ -19,7 +19,7 @@ class VoieFerree{
     public:
         VoieFerree(Ville *v1, Ville *v2, int p, Couleur_e c);
         Joueur* getProprio();
-        void setProprio(Joueur j);
+        void setProprio(Joueur* j);
         int getPoids();
         Couleur_e getCouleur();        
         bool estDispo();

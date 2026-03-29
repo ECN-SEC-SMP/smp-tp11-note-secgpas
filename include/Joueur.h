@@ -28,6 +28,7 @@ class Joueur {
         Couleur_e getCouleur() const;
         map<Couleur_e, int> getMainCarte() const;
         vector<Ticket*> getMainTicket() const;
+        int getNbTicketReussis() const;
 
         // Méthodes principales
         void piocher(int nbAPiocher, Pioche& type);
