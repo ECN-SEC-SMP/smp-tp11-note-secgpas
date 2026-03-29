@@ -1,5 +1,6 @@
 #include <iostream>
 #include "VoieFerree.h"
+#include "Joueur.h"
 
 using namespace std;
 
@@ -22,16 +23,16 @@ VoieFerree::VoieFerree(Ville *v1, Ville *v2, int p, Couleur_e couleur) :
  * @brief Accesseur au "propriétaire" de la voie. Permet de savoir quel joueur a posé ses wagon sur la voie
  * @return un pointeur vers le joueur ayant posé ses wagons sur la voie ferrée
  */
-// Joueur* VoieFerree::getProprio(){
-//     return proprio;
-// }
+Joueur* VoieFerree::getProprio(){
+    return proprio;
+}
 
 /**
  * @brief Mutateur qui permet de modifier l'attribut proprio lorsqu'un joueur pose ses trains
  */
-// void setProprio(Joueur j){
-//     proprio = &j;
-// }
+void setProprio(Joueur j){
+    proprio = &j;
+}
 
 /**
  * @brief Accesseur vers le poids
@@ -69,6 +70,6 @@ Couleur_e VoieFerree::getCouleur() {
  * @brief Teste si la voie ferrée est libre.
  * @return Booléen true si elle est libre false sinon
  */
-// bool VoieFerree::estDispo() {
-//     return (proprio == nullptr);
-// }
+bool VoieFerree::estDispo() {
+    return (proprio == nullptr);
+}

@@ -1,5 +1,7 @@
 #include <iostream>
 #include "Joueur.h"
+#include "Plateau.h"
+#include "VoieFerree.h"
 
 using namespace std;
 
@@ -44,9 +46,16 @@ void Joueur::piocher(Pioche& type){
     
 }
 
-// void Joueur::poserWagon(Ville* a, Ville* b, Couleur_e c){
-
-// }
+void Joueur::poserWagon(Ville* a, Ville* b, Couleur_e c){
+    for (int i = 0; i < /*nomplateau*/.getVoieFerree().size(); i++){
+        if (((/*nomplateau*/.getVoieFerree()[i].getVille1() == a && /*nomplateau*/.getVoieFerree()[i].getVille2() == b) ||(/*nomplateau*/.getVoieFerree()[i].getVille1() == b && /*nomplateau*/.getVoieFerree()[i].getVille2() == a)) && (/*nomplateau*/.getVoieFerree()[i].getCouleur() == c)){
+            if (/*nomplateau*/.getVoieFerree()[i].estDispo()){
+                mainWagon = mainWagon - /*nomplateau*/.getVoieFerree()[i].getPoids();
+                /*nomplateau*/.getVoieFerree()[i].setProprio(&this);
+            }
+        }
+    }
+}
 
 void Joueur::defausser(){
     mainTicket.pop_back();
