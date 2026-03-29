@@ -40,6 +40,10 @@ public:
       return villes_[i];
   }
 
+  vector<VoieFerree>& getVoieFerrees() {
+      return voie_ferrees_;
+  }
+
   void affichePlateau() const;
 };
 
