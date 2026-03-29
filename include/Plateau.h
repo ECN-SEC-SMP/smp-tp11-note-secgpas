@@ -39,6 +39,12 @@ public:
   Ville& getVille(int i) {
       return villes_[i];
   }
+
+  vector<VoieFerree>& getVoieFerrees() {
+      return voie_ferrees_;
+  }
+
+  void affichePlateau() const;
 };
 
 #endif //TP11_NOTE_PLATEAU_H

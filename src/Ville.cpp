@@ -51,7 +51,7 @@ void Ville::afficheAdjacent(){
  * @brief Accesseur qui permet de d'obtenir le vector contenant les pointeurs vers les villes adjacentes à la ville courante
  * @return Renvoie le vector de pointeurs vers les villes adjacentes 
  */
-vector<Ville*> Ville::getAdjacent(){
+vector<Ville*> &Ville::getAdjacent(){
     return villesAdjacentes;
 }
 

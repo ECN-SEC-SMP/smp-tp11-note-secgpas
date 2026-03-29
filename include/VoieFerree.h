@@ -26,6 +26,14 @@ class VoieFerree{
         Ville* getVille1();
         Ville* getVille2();
 
+        Ville* getVille1() const {
+            return ville1;
+        };
+
+        Ville* getVille2() const {
+            return ville2;
+        }
+
 };
 
 
