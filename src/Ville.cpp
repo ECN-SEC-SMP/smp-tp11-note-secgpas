@@ -17,7 +17,7 @@ Ville::Ville(int i){
  * @brief Accesseur qui renvoie le nom de la ville sur laquelle est appliquée la méthode.
  * @return Renvoie le nom de la ville sous forme de string
  */
-string Ville::getNomVille(){
+string Ville::getNomVille() const {
     return ville_;
 }
 

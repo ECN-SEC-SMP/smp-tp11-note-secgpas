@@ -21,8 +21,8 @@ TEST(PlateauTest, AffichagePlateau) {
     Plateau p("../map.csv");
 
     p.affichePlateau();
-    std::cout << terminal::GREEN << "[OK]" << terminal::RESET << " Opération réussie" << std::endl;
+    /*std::cout << terminal::GREEN << "[OK]" << terminal::RESET << " Opération réussie" << std::endl;
     std::cout << "\033[1;31m[ERROR]\033[0m Échec" << std::endl;
-    std::cout << "\033[32;44mTexte vert sur fond bleu\033[0m" << std::endl;
+    std::cout << "\033[32;44mTexte vert sur fond bleu\033[0m" << std::endl;*/
 
 }

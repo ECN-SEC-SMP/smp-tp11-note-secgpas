@@ -50,7 +50,7 @@ public:
     * @param villeB la ville d'arrivée
     * @return un vecteur de voies ferrées entre les deux villes
     */
-  vector<VoieFerree> getVoiesFerrees(Ville villeA, Ville villeB);
+  vector<VoieFerree> getVoiesFerrees(const Ville & villeA, const Ville & villeB) const;
 
   void affichePlateau() const;
 };

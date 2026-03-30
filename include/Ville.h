@@ -16,7 +16,7 @@ class Ville{
     public : 
         Ville(int i); //indice de la ville qu'on veut dans vectVille
         Ville(string NomVille): ville_(NomVille) {};
-        string getNomVille();
+        string getNomVille() const;
         void afficheAdjacent();
         bool estAdjacent(int i);
 

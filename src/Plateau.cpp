@@ -6,6 +6,8 @@
 #include "VoieFerree.h"
 #include "fonctionAnnexe.h"
 #include <algorithm>
+#include <iomanip>
+#include <sstream>
 
 Plateau::Plateau(const string & nomFichierMap) {
     graphe_ville_ = nullptr;
@@ -79,7 +81,7 @@ Ville* Plateau::getVille(const string &nomVille) {
     return nullptr;
 }
 
-vector<VoieFerree> Plateau::getVoiesFerrees(Ville villeA, Ville villeB) {
+vector<VoieFerree> Plateau::getVoiesFerrees(const Ville & villeA, const Ville & villeB) const {
     vector<VoieFerree> trouvees;
 
     for (VoieFerree voie_ferree : voie_ferrees_) {
@@ -91,7 +93,68 @@ vector<VoieFerree> Plateau::getVoiesFerrees(Ville villeA, Ville villeB) {
 
     return trouvees;
 }
-void Plateau::affichePlateau() const {
-    cout << "=== Plateau de jeu ===" << endl;
 
+/**
+ * Affiche le plateau de jeu en affichant les villes et les voies ferrées dans le flux standard de sortie.
+ * Un joueur (max 4) possède une couleur parmi : bleu, jaune, vert et rouge.
+ * La sortie prend la forme de matrice d'adjacence où chaque case représente une ou plusieurs voies ferrées entre deux villes.
+ * Lorsqu'un joueur possède une voie ferrée, le texte de cette voie prend la couleur du joueur.
+ *
+ * Avec les villes suivantes : Seattle, Calgary et Helena
+ * et les voies ferrées suivantes :
+ * Seattle-Calgary (bleu)  poid  : 2
+ * Seattle-Calgary (rouge) poids : 4
+ *
+ * Seattle-Helena (rouge)  poids : 1
+ * Seattle-Helena (vert)   poids : 2
+ *
+ * Calgary-Helena (vert)   poids : 3
+ *
+ * Voici un exemple de sortie possible :
+ *
+ * ----------=== Plateau de jeu ===----------
+ *          Seattle    Calgary     Helena       (Ville A)
+ *         ------------------------------------
+ * Seattle | X         | 2 (bleu) | 1 (rouge) |
+ * Calgary | 4 (rouge) | X        | 3 (vert)  |
+ * Helena  | 2 (vert)  | X        | X         |
+ *         ------------------------------------
+ * (Ville B)
+ */
+void Plateau::affichePlateau() const {
+    // TODO: Finir l'implémentation de la méthode affichePlateau
+    std::ostringstream header_villeA;
+    cout << "----------=== Plateau de jeu ===----------" << endl;
+
+    cout << "         ";
+    for (Ville ville : villes_) {
+        header_villeA << setw(14) << left << ville.getNomVille() << " ";
+    }
+    cout << header_villeA.str() << endl;
+    cout << "         ";
+    cout << string(header_villeA.str().size(), '-') << endl;
+
+    for (Ville villeB : villes_) {
+        cout << villeB.getNomVille();
+
+        for (Ville villeA : villes_) {
+            if (villeA.getNomVille() == villeB.getNomVille()) {
+                cout << " | X         ";
+            } else {
+                vector<VoieFerree> voies_ferrees = getVoiesFerrees(villeA, villeB);
+
+                if (voies_ferrees.empty()) {
+                    cout << " | X         ";
+                } else {
+                    stringstream ss;
+                    for (VoieFerree voie_ferree : voies_ferrees) {
+                        ss << voie_ferree.getPoids();
+                        // << " (" << getCouleurString(voie_ferree.getCouleur()) << ") ";
+                    }
+                    cout << " | " << setw(11) << left << ss.str();
+                }
+            }
+        }
+        cout << endl;
+    }
 }
