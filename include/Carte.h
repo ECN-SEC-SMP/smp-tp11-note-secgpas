@@ -68,6 +68,8 @@ public:
 
     Ticket(Plateau *plateau, const string & nomVilleA, const string & nomVilleB, const int id);
 
+    static vector<Ticket> loadFromCSVFile(Plateau *plateau, const string & nomFichierCSVTicket);
+
     bool estRealise() const {
         return false;
     };
