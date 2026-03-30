@@ -79,6 +79,18 @@ Ville* Plateau::getVille(const string &nomVille) {
     return nullptr;
 }
 
+vector<VoieFerree> Plateau::getVoiesFerrees(Ville villeA, Ville villeB) {
+    vector<VoieFerree> trouvees;
+
+    for (VoieFerree voie_ferree : voie_ferrees_) {
+        if ((voie_ferree.getVille1()->getNomVille() == villeA.getNomVille() && voie_ferree.getVille2()->getNomVille() == villeB.getNomVille()) ||
+            (voie_ferree.getVille1()->getNomVille() == villeB.getNomVille() && voie_ferree.getVille2()->getNomVille() == villeA.getNomVille())) {
+            trouvees.push_back(voie_ferree);
+        }
+    }
+
+    return trouvees;
+}
 void Plateau::affichePlateau() const {
     cout << "=== Plateau de jeu ===" << endl;
 

@@ -44,6 +44,14 @@ public:
       return voie_ferrees_;
   }
 
+  /**
+    * Permet de trouver les voies ferrées entre deux villes
+    * @param villeA la ville de départ
+    * @param villeB la ville d'arrivée
+    * @return un vecteur de voies ferrées entre les deux villes
+    */
+  vector<VoieFerree> getVoiesFerrees(Ville villeA, Ville villeB);
+
   void affichePlateau() const;
 };
 
