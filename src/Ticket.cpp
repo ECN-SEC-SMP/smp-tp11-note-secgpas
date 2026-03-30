@@ -57,7 +57,6 @@ vector<Ticket> Ticket::loadFromCSVFile(Plateau *plateau, const string &nomFichie
     else{
         cerr << "fichier contenant les tickets non ouvert" << endl;
         cerr << "Nom du fichier : " << nomFichierCSVTicket << endl;
-        return tickets;
         exit(EXIT_FAILURE);
     }
 }
