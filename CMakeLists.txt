@@ -36,8 +36,8 @@ add_executable(PiocheTest.out
     src/VoieFerree.cpp
     src/fonctionAnnexe.cpp
     src/Ville.cpp
+    src/Ticket.cpp
     tests/PiocheTest.cpp
-    tests/PlateauTest.cpp
 )
 
 add_executable(JoueurTest.out

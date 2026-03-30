@@ -24,28 +24,7 @@ class Pioche {
      * Puis mélange les cartes de la pioche.
      * @param type Le type de la pioche (CarteW ou Ticket)
      */
-    Pioche(Pioche_type_e type) {
-        type_ = type;
-
-        if (type == Pioche_type_e::CarteW) {
-            for (int i = 0; i < 10; i++) {
-                deck_.push_back(new CTrain(Couleur_e::Jaune));
-                deck_.push_back(new CTrain(Couleur_e::Bleu));
-                deck_.push_back(new CTrain(Couleur_e::Rouge));
-                deck_.push_back(new CTrain(Couleur_e::Vert));
-                deck_.push_back(new CTrain(Couleur_e::Noir));
-                deck_.push_back(new CTrain(Couleur_e::Blanc));
-            }
-
-            for (int i = 0; i < 12; i++) {
-                deck_.push_back(new CTrain(Couleur_e::Locomotive));
-            }
-        } else if (type == Pioche_type_e::Ticket) {
-            // Remplir avec les tickets
-        }
-
-        melanger();
-    };
+    Pioche(Pioche_type_e type);
 
     void melanger();
     bool estPiocheVide() const;
