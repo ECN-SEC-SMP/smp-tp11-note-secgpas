@@ -25,7 +25,7 @@ void Joueur::piocher(int nbAPiocher, Pioche& la_pioche){  // : ajoute les cartes
             mainCarte[carte->getCouleur()] ++;}                           // on rajoute +1 au compteur de cartes correspondant à la couleur de la carte qu'on a pioché
         else {
             mainTicket.pushback(carte);
-            la_pioche.deleteBack();}
+            la_pioche.popLastCarte();}
     }
 
 }; 
@@ -34,11 +34,10 @@ void Joueur::poserWagon(enumVille a, enumVille b, enumCouleur c){ // : permet à
 
 };
 void Joueur::defausser(Carte c){ // : méthode qui permet de défausser une carte
+    pushDefausse(Carte* c);
     if (c.getType() == 0){                                      // si les cartes de la pioches sont des cartes train
-        pushDefausseTrain(c);
         mainCarte[c.getCouleur()] --;}                           // on enlève 1 au compteur de cartes correspondant à la couleur de la carte
     else {
-        pushDefausseTicket(c);
         mainTicket["c"].pop;};
 };
 
