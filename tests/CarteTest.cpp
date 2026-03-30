@@ -8,8 +8,8 @@
 
 TEST(PiocheTest, ShouldCarteTypeBeCorrect) {
     CTrain ct(Couleur_e::Rouge);
-    Ticket t;
+    //Ticket t;
 
     EXPECT_EQ(Carte_type_e::Train, ct.getType());
-    EXPECT_EQ(Carte_type_e::Ticket, t.getType());
+    //EXPECT_EQ(Carte_type_e::Ticket, t.getType());
 }

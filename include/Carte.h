@@ -8,12 +8,13 @@
 #include "types.h"
 #include "Ville.h"
 
+class Plateau;
+
 class Carte {
     public:
     virtual bool estRealise() const = 0;
     virtual Carte_type_e getType()    const = 0;
 };
-
 
 class CTrain : public Carte {
     Couleur_e couleur_;
@@ -31,7 +32,9 @@ public:
         return Carte_type_e::Train;
     }
 
-    bool estRealise() const override { return false; };
+    bool estRealise() const {
+        return false;
+    };
 };
 
 class Ticket : public Carte {
@@ -39,8 +42,35 @@ public:
     Ville *villeA_;
     Ville *villeB_;
     int   id_;
+    Plateau *plateau_;
 
-    bool estRealise() const override;
+    Ticket(Plateau *plateau, Ville *villeA, Ville *villeB, const int id) {
+        if (plateau == nullptr) {
+            cerr << "Erreur : le plateau ne peut pas être nul." << endl;
+            exit(EXIT_FAILURE);
+        }
+
+        if (villeA == nullptr) {
+            cerr << "Erreur : la *villeA ne peut pas être nul." << endl;
+            exit(EXIT_FAILURE);
+        }
+
+        if (villeB == nullptr) {
+            cerr << "Erreur : la *villeB ne peut pas être nul." << endl;
+            exit(EXIT_FAILURE);
+        }
+
+        plateau_ = plateau;
+        villeA_ = villeA;
+        villeB_ = villeB;
+        id_      = id;
+    }
+
+    Ticket(Plateau *plateau, const string & nomVilleA, const string & nomVilleB, const int id);
+
+    bool estRealise() const {
+        return false;
+    };
 
     Carte_type_e getType() const override {
         return Carte_type_e::Ticket;
