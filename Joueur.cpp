@@ -29,8 +29,28 @@ void Joueur::piocher(int nbAPiocher, Pioche& la_pioche){  // : ajoute les cartes
     }
 
 }; 
-void Joueur::poserWagon(enumVille a, enumVille b, enumCouleur c){ // : permet à un joueur de poser sa carte (attention à bien vérifier la disponibilité du trajet et le fait qu’il n’ait pas pris l’autre éventuel trajet parallèle)
+void Joueur::poserWagon(VoieFerre& voie){ // : permet à un joueur de poser sa carte (attention à bien vérifier la disponibilité du trajet et le fait qu’il n’ait pas pris l’autre éventuel trajet parallèle)
+    if ((voie->poids <= (mainCarte[voie.c] + mainCarte["Locomotive"])) && (voie.estDispo == 1)){       // on check que le joueur a suffisement de cartes train
+        if ((voie.getVoiesFerrees().size() == 1) || ( (voie.getVoiesFerrees()[1].getProprio() || voie.getVoiesFerrees()[2].getProprio()) == Joueur )){ // si le joueur n'est pas proprio de l'autre voie
+            for (int i ; i < voie.poids ; i++){     // on répète autant de foiq 'uil y a de trains
+                if (mainCarte[voie.c] != 0){        // tant que le nombre de cartes train couleur est non nul
+                    mainCarte[voie.c] --;               // on les envleve de la main
+                    // mettre dans la défausse ???
+                }
+                else{
+                    mainCarte["Locomotive"] --;         // sinon on enlève les locomotives
+                    // mettre dans la défausse ???
+                }
+            }
+            voie.setProprio(Joueur);
+            nbTicketGagne ++ ;
+        }
 
+    }
+    else{
+        cout << "Vous n'avez pas assez de wagons" << endl;
+    }
+    
 
 };
 void Joueur::defausser(Carte c){ // : méthode qui permet de défausser une carte
