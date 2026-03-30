@@ -7,6 +7,7 @@
 #include <algorithm>
 #include <random>
 #include <vector>
+#include "config.h"
 using namespace std;
 
 /**
@@ -41,8 +42,8 @@ Pioche::Pioche(Pioche_type_e type) {
             deck_.push_back(new CTrain(Couleur_e::Locomotive));
         }
     } else if (type == Pioche_type_e::Ticket) {
-        Plateau p("../map.csv");
-        vector<Ticket> tickets = Ticket::loadFromCSVFile(&p, "../ticket.csv");
+        Plateau p(MAP_FILE_PATH);
+        vector<Ticket> tickets = Ticket::loadFromCSVFile(&p, TICKET_FILE_PATH);
 
         for (int i = 0; i < tickets.size(); i++) {
             deck_.push_back(new Ticket(tickets[i]));

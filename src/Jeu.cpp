@@ -1,6 +1,8 @@
 #include "Jeu.h"
 #include "Ville.h"
-Jeu::Jeu(int nbJoueur) : p("map.csv"), tickets(Pioche_type_e::Ticket), train(Pioche_type_e::CarteW), nbTour(0) {
+#include "config.h"
+
+Jeu::Jeu(int nbJoueur) : p(MAP_FILE_PATH), tickets(Pioche_type_e::Ticket), train(Pioche_type_e::CarteW), nbTour(0) {
     for (int i = 0; i < nbJoueur; i++) {
         int couleur;
         cout << "Joueur " << (i+1) << ", quelle couleur ? (0=Rouge 1=Bleu 2=Vert 3=Jaune) : ";

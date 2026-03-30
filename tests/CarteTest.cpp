@@ -6,6 +6,7 @@
 #include "Carte.h"
 #include "types.h"
 #include <gtest/gtest.h>
+#include "config.h"
 
 // ============== CTrain Tests ==============
 
@@ -34,14 +35,14 @@ TEST(CarteTest, CTrainShouldNotBeRealized) {
 // ============== Ticket Tests ==============
 
 TEST(CarteTest, ShouldCreateTicketsFromCSV) {
-    Plateau p("../map.csv");
-    vector<Ticket> tickets = Ticket::loadFromCSVFile(&p, "../ticket.csv");
+    Plateau p(MAP_FILE_PATH);
+    vector<Ticket> tickets = Ticket::loadFromCSVFile(&p, TICKET_FILE_PATH);
 
     EXPECT_EQ(32, tickets.size());
 }
 
 TEST(CarteTest, TicketConstructorWithCities) {
-    Plateau p("../map.csv");
+    Plateau p(MAP_FILE_PATH);
     Ticket t(&p, "Seattle", "Los Angeles", 1);
 
     EXPECT_EQ(1, t.getId());
@@ -52,7 +53,7 @@ TEST(CarteTest, TicketConstructorWithCities) {
 }
 
 TEST(CarteTest, TicketConstructorWithPointers) {
-    Plateau p("../map.csv");
+    Plateau p(MAP_FILE_PATH);
     Ville* villeA = p.getVille("Seattle");
     Ville* villeB = p.getVille("Los Angeles");
 
@@ -64,7 +65,7 @@ TEST(CarteTest, TicketConstructorWithPointers) {
 }
 
 TEST(CarteTest, TicketGetVilleA) {
-    Plateau p("../map.csv");
+    Plateau p(MAP_FILE_PATH);
     Ticket t(&p, "Seattle", "Los Angeles", 1);
 
     Ville* villeA = t.getVilleA();
@@ -73,7 +74,7 @@ TEST(CarteTest, TicketGetVilleA) {
 }
 
 TEST(CarteTest, TicketGetVilleB) {
-    Plateau p("../map.csv");
+    Plateau p(MAP_FILE_PATH);
     Ticket t(&p, "Seattle", "Los Angeles", 1);
 
     Ville* villeB = t.getVilleB();
@@ -82,14 +83,14 @@ TEST(CarteTest, TicketGetVilleB) {
 }
 
 TEST(CarteTest, TicketGetId) {
-    Plateau p("../map.csv");
+    Plateau p(MAP_FILE_PATH);
     Ticket t(&p, "Seattle", "Los Angeles", 99);
 
     EXPECT_EQ(99, t.getId());
 }
 
 TEST(CarteTest, TicketSetVilleA) {
-    Plateau p("../map.csv");
+    Plateau p(MAP_FILE_PATH);
     Ticket t(&p, "Seattle", "Los Angeles", 1);
     Ville* newVille = p.getVille("Helena");
 
@@ -100,7 +101,7 @@ TEST(CarteTest, TicketSetVilleA) {
 }
 
 TEST(CarteTest, TicketSetVilleB) {
-    Plateau p("../map.csv");
+    Plateau p(MAP_FILE_PATH);
     Ticket t(&p, "Seattle", "Los Angeles", 1);
     Ville* newVille = p.getVille("New York");
 
@@ -111,7 +112,7 @@ TEST(CarteTest, TicketSetVilleB) {
 }
 
 TEST(CarteTest, TicketSetId) {
-    Plateau p("../map.csv");
+    Plateau p(MAP_FILE_PATH);
     Ticket t(&p, "Seattle", "Los Angeles", 1);
 
     t.setId(100);
@@ -120,22 +121,22 @@ TEST(CarteTest, TicketSetId) {
 }
 
 TEST(CarteTest, TicketGetType) {
-    Plateau p("../map.csv");
+    Plateau p(MAP_FILE_PATH);
     Ticket t(&p, "Seattle", "Los Angeles", 1);
 
     EXPECT_EQ(Carte_type_e::Ticket, t.getType());
 }
 
 TEST(CarteTest, TicketShouldNotBeRealized) {
-    Plateau p("../map.csv");
+    Plateau p(MAP_FILE_PATH);
     Ticket t(&p, "Seattle", "Los Angeles", 1);
 
     EXPECT_FALSE(t.estRealise());
 }
 
 TEST(CarteTest, AllLoadedTicketsHaveCorrectIds) {
-    Plateau p("../map.csv");
-    vector<Ticket> tickets = Ticket::loadFromCSVFile(&p, "../ticket.csv");
+    Plateau p(MAP_FILE_PATH);
+    vector<Ticket> tickets = Ticket::loadFromCSVFile(&p, TICKET_FILE_PATH);
 
     for (int i = 0; i < tickets.size(); i++) {
         EXPECT_EQ(i + 1, tickets[i].getId());
@@ -143,8 +144,8 @@ TEST(CarteTest, AllLoadedTicketsHaveCorrectIds) {
 }
 
 TEST(CarteTest, AllLoadedTicketsHaveValidCities) {
-    Plateau p("../map.csv");
-    vector<Ticket> tickets = Ticket::loadFromCSVFile(&p, "../ticket.csv");
+    Plateau p(MAP_FILE_PATH);
+    vector<Ticket> tickets = Ticket::loadFromCSVFile(&p, TICKET_FILE_PATH);
 
     for (const auto& ticket : tickets) {
         EXPECT_NE(nullptr, ticket.getVilleA());
@@ -155,8 +156,8 @@ TEST(CarteTest, AllLoadedTicketsHaveValidCities) {
 }
 
 TEST(CarteTest, TicketFirstLoadedTicket) {
-    Plateau p("../map.csv");
-    vector<Ticket> tickets = Ticket::loadFromCSVFile(&p, "../ticket.csv");
+    Plateau p(MAP_FILE_PATH);
+    vector<Ticket> tickets = Ticket::loadFromCSVFile(&p, TICKET_FILE_PATH);
 
     EXPECT_EQ(1, tickets[0].getId());
     EXPECT_EQ("Seattle", tickets[0].getVilleA()->getNomVille());
@@ -164,8 +165,8 @@ TEST(CarteTest, TicketFirstLoadedTicket) {
 }
 
 TEST(CarteTest, TicketLastLoadedTicket) {
-    Plateau p("../map.csv");
-    vector<Ticket> tickets = Ticket::loadFromCSVFile(&p, "../ticket.csv");
+    Plateau p(MAP_FILE_PATH);
+    vector<Ticket> tickets = Ticket::loadFromCSVFile(&p, TICKET_FILE_PATH);
 
     EXPECT_EQ(32, tickets[31].getId());
     EXPECT_EQ("Seattle", tickets[31].getVilleA()->getNomVille());
@@ -173,8 +174,8 @@ TEST(CarteTest, TicketLastLoadedTicket) {
 }
 
 TEST(CarteTest, TicketSpecificLoadedTicket) {
-    Plateau p("../map.csv");
-    vector<Ticket> tickets = Ticket::loadFromCSVFile(&p, "../ticket.csv");
+    Plateau p(MAP_FILE_PATH);
+    vector<Ticket> tickets = Ticket::loadFromCSVFile(&p, TICKET_FILE_PATH);
 
     // Check ticket 15: Denver - Dallas
     EXPECT_EQ(15, tickets[14].getId());
@@ -183,7 +184,7 @@ TEST(CarteTest, TicketSpecificLoadedTicket) {
 }
 
 TEST(CarteTest, TicketMultipleSettersChaining) {
-    Plateau p("../map.csv");
+    Plateau p(MAP_FILE_PATH);
     Ticket t(&p, "Seattle", "Los Angeles", 1);
 
     t.setId(50);

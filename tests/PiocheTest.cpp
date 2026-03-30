@@ -5,6 +5,7 @@
 #include "Pioche.h"
 #include <gtest/gtest.h>
 #include <algorithm>
+#include "config.h"
 
 // ============== Constructor Tests ==============
 

@@ -2,10 +2,11 @@
 #include "fonctionAnnexe.h"
 #include <gtest/gtest.h>
 #include <iostream>
+#include "config.h"
 
 
-TEST(VilleTest,testDesMethodes){
-    ouvrirFichierMap("../map.csv");
+TEST(VilleTest, testDesMethodes) {
+    ouvrirFichierMap(MAP_FILE_PATH);
 
     //Test de la création d'une ville et de l'ajout du nom
     Ville a = Ville(0);

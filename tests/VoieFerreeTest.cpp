@@ -4,11 +4,11 @@
 #include "types.h"
 #include <gtest/gtest.h>
 #include <iostream>
+#include "config.h"
 
 
-
-TEST(VoieFerreeTest,testDesMethodes){
-    ouvrirFichierMap("/home/riana/Documents/smp-tp11-note-secgpas/map.csv");
+TEST(VoieFerreeTest, testDesMethodes) {
+    ouvrirFichierMap(MAP_FILE_PATH);
 
     Ville a = Ville(0);
     Ville b = Ville(1);

@@ -4,9 +4,10 @@
 
 #include <gtest/gtest.h>
 #include "Plateau.h"
+#include "config.h"
 
 TEST(PlateauTest, PlateauInitialisation) {
-    Plateau p("../map.csv");
+    Plateau p(MAP_FILE_PATH);
 
     ASSERT_EQ(p.getVilles().size(), 19);
     ASSERT_EQ(p.getVille(0).getNomVille(), "Seattle");
@@ -18,7 +19,7 @@ TEST(PlateauTest, PlateauInitialisation) {
 }
 
 TEST(PlateauTest, AffichagePlateau) {
-    Plateau p("../map.csv");
+    Plateau p(MAP_FILE_PATH);
 
     p.affichePlateau();
     /*std::cout << terminal::GREEN << "[OK]" << terminal::RESET << " Opération réussie" << std::endl;
