@@ -7,7 +7,7 @@
 #include <gtest/gtest.h>
 
 TEST(PiocheTest, ShouldCarteTypeBeCorrect) {
-    CTrain ct;
+    CTrain ct(Couleur_e::Rouge);
     Ticket t;
 
     EXPECT_EQ(Carte_type_e::Train, ct.getType());

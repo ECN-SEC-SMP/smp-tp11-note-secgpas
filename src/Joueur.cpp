@@ -13,58 +13,68 @@ Joueur::Joueur(Couleur_e c){
     mainWagon = 20;
 }
 
-int Joueur::getMainWagon(){
+int Joueur::getMainWagon() const {
     return mainWagon;
 }
 
-map<Couleur_e,int> Joueur::getMainCarte(){
+map<Couleur_e,int> Joueur::getMainCarte() const {
     return mainCarte;
 }
 
-void Joueur::piocher(Pioche& type){
+void Joueur::piocher(int nbAPiocher, Pioche& type){
     if (! type.estPiocheVide()){
         switch (type.getPiocheType())
     {
     case Pioche_type_e::CarteW :
-        for (int i = 0; i < 2; i++){
-            CTrain* carte = dynamic_cast<CTrain*>(type.getDeck().back()); //polymorphisme sur Carte et CTrain
-            type.getDeck().pop_back(); //retire la carte de la pioche
-            mainCarte[carte->getCouleur()] ++ ; //ajoute 1 au nombre de carte possédées par le joueur
+        for (int i = 0; i < nbAPiocher; i++){
+            CTrain* carte = dynamic_cast<CTrain*>(type.getDeck().back());
+            type.getDeck().pop_back();
+            mainCarte[carte->getCouleur()]++;
         }
         break;
 
     case Pioche_type_e::Ticket :
-        for (int i = 0; i < 2; i++){
-            Ticket* carte1 = dynamic_cast<Ticket*>(type.getDeck().back()); //polymorphisme sur Carte et Ticket
-            type.getDeck().pop_back(); //retire la carte de la pioche
+        for (int i = 0; i < nbAPiocher; i++){
+            Ticket* carte1 = dynamic_cast<Ticket*>(type.getDeck().back());
+            type.getDeck().pop_back();
             mainTicket.push_back(carte1);
         }
+        break;
+
     default:
         break;
     }
     }
-    
 }
 
-void Joueur::poserWagon(Ville* a, Ville* b, Couleur_e c){
-    for (int i = 0; i < /*nomplateau*/.getVoieFerree().size(); i++){
-        if (((/*nomplateau*/.getVoieFerree()[i].getVille1() == a && /*nomplateau*/.getVoieFerree()[i].getVille2() == b) ||(/*nomplateau*/.getVoieFerree()[i].getVille1() == b && /*nomplateau*/.getVoieFerree()[i].getVille2() == a)) && (/*nomplateau*/.getVoieFerree()[i].getCouleur() == c)){
-            if (/*nomplateau*/.getVoieFerree()[i].estDispo()){
-                mainWagon = mainWagon - /*nomplateau*/.getVoieFerree()[i].getPoids();
-                /*nomplateau*/.getVoieFerree()[i].setProprio(&this);
+void Joueur::poserWagon(Ville a, Ville b, Couleur_e c, Plateau& plateau){
+    for (int i = 0; i < plateau.getVoieFerrees().size(); i++){
+        if (((plateau.getVoieFerrees()[i].getVille1()->getNomVille() == a.getNomVille() &&
+            plateau.getVoieFerrees()[i].getVille2()->getNomVille() == b.getNomVille()) ||
+            (plateau.getVoieFerrees()[i].getVille1()->getNomVille() == b.getNomVille() &&
+            plateau.getVoieFerrees()[i].getVille2()->getNomVille() == a.getNomVille())) &&
+            (plateau.getVoieFerrees()[i].getCouleur() == c)) {
+
+            if (plateau.getVoieFerrees()[i].estDispo()) {              
+                mainWagon -= plateau.getVoieFerrees()[i].getPoids();  
+                plateau.getVoieFerrees()[i].setProprio(this); 
             }
         }
     }
 }
 
-void Joueur::defausser(){
+void Joueur::defausser(Pioche& piocheTicket){
     mainTicket.pop_back();
     mainTicket.pop_back();
-    piocher(/*pioche qui stocke le deck ticket*/ );
+    piocher(2, piocheTicket);
 }
 
-void Joueur::afficherMain(){
-    for(map<Couleur_e, int>::iterator it = mainCarte.begin(); it != mainCarte.end(); ++it){
+Couleur_e Joueur::getCouleur() const {
+    return couleur;
+}
+
+void Joueur::afficherMain() const {
+    for(map<Couleur_e, int>::const_iterator it = mainCarte.begin(); it != mainCarte.end(); ++it){
         switch(it->first) {
             case Couleur_e::Jaune: 
                 cout << "Jaune : " << it->second << endl;
@@ -92,4 +102,8 @@ void Joueur::afficherMain(){
                 break;
         }
     }
+}
+
+int Joueur::getNbTicketReussis() const {
+    return mainTicket.size(); // Placeholder, should count completed tickets
 }

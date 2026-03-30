@@ -10,7 +10,7 @@ TEST(JoueurTest, testDesMethodes) {
 
     //Test de la méthode piocher
     Pioche pw(Pioche_type_e::CarteW);
-    j1.piocher(pw);
+    j1.piocher(3, pw);
     int compt = 0;
     for (map<Couleur_e, int>::iterator it = (j1.getMainCarte()).begin(); it != (j1.getMainCarte()).end(); ++it){
         compt = compt + it->second;
