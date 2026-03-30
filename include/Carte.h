@@ -6,6 +6,7 @@
 #define TP11_NOTE_CARTE_H
 
 #include "types.h"
+#include "Ville.h"
 
 class Carte {
     public:
@@ -35,10 +36,38 @@ public:
 
 class Ticket : public Carte {
 public:
+    Ville *villeA_;
+    Ville *villeB_;
+    int   id_;
+
     bool estRealise() const override;
 
     Carte_type_e getType() const override {
         return Carte_type_e::Ticket;
+    }
+
+    Ville* getVilleA() const {
+        return villeA_;
+    }
+
+    Ville* getVilleB() const {
+        return villeB_;
+    }
+
+    int getId() const {
+        return id_;
+    }
+
+    void setVilleA(Ville *villeA) {
+        villeA_ = villeA;
+    }
+
+    void setVilleB(Ville *villeB) {
+        villeB_ = villeB;
+    }
+
+    void setId(const int id) {
+        id_ = id;
     }
 };
 #endif //TP11_NOTE_CARTE_H
