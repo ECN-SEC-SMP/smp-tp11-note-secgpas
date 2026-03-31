@@ -1,0 +1,54 @@
+//
+// Created by David PROSPÉRIN on 22/03/2026.
+//
+
+#include "Pioche.h"
+#include "Plateau.h"
+#include <algorithm>
+#include <random>
+#include <vector>
+#include "config.h"
+using namespace std;
+
+/**
+ * Mélange aléatoirement les cartes du deck.
+ */
+void Pioche::melanger() {
+    std::shuffle(deck_.begin(), deck_.end(), std::default_random_engine());
+}
+
+/**
+ * Vérifie si la pioche est vide.
+ * @return true si la pioche est vide, false sinon.
+ */
+bool Pioche::estPiocheVide() const {
+    return deck_.empty();
+}
+
+Pioche::Pioche(Pioche_type_e type) {
+    type_ = type;
+
+    if (type == Pioche_type_e::CarteW) {
+        for (int i = 0; i < 10; i++) {
+            deck_.push_back(new CTrain(Couleur_e::Jaune));
+            deck_.push_back(new CTrain(Couleur_e::Bleu));
+            deck_.push_back(new CTrain(Couleur_e::Rouge));
+            deck_.push_back(new CTrain(Couleur_e::Vert));
+            deck_.push_back(new CTrain(Couleur_e::Noir));
+            deck_.push_back(new CTrain(Couleur_e::Blanc));
+        }
+
+        for (int i = 0; i < 12; i++) {
+            deck_.push_back(new CTrain(Couleur_e::Locomotive));
+        }
+    } else if (type == Pioche_type_e::Ticket) {
+        Plateau p(MAP_FILE_PATH);
+        vector<Ticket> tickets = Ticket::loadFromCSVFile(&p, TICKET_FILE_PATH);
+
+        for (int i = 0; i < tickets.size(); i++) {
+            deck_.push_back(new Ticket(tickets[i]));
+        }
+    }
+
+    melanger();
+};
