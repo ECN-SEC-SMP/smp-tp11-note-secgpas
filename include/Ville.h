@@ -7,23 +7,56 @@
 using namespace std;
 
 /**
- * @brief Définition de la classe Ville et des méthodes associées. Crée les sommets du graphe qui servira de plateau
+ * @brief Classe représentant une ville dans le jeu, servant de sommet dans le graphe du plateau.
  */
 class Ville{
     private:
+        /**
+         * @brief Nom de la ville.
+         */
         string ville_;
+        /**
+         * @brief Vecteur des villes adjacentes (voisins dans le graphe).
+         */
         vector<Ville*> villesAdjacentes; //vector d'adjacence du sommet
-    public : 
+    public :
+        /**
+         * @brief Constructeur de Ville utilisant un indice.
+         * @param i Indice de la ville dans le vecteur global des villes.
+         */
         Ville(int i); //indice de la ville qu'on veut dans vectVille
+        /**
+         * @brief Constructeur de Ville avec nom direct.
+         * @param NomVille Nom de la ville.
+         */
         Ville(string NomVille): ville_(NomVille) {};
+        /**
+         * @brief Retourne le nom de la ville.
+         * @return Le nom de la ville.
+         */
         string getNomVille() const;
+        /**
+         * @brief Affiche les villes adjacentes.
+         */
         void afficheAdjacent();
+        /**
+         * @brief Vérifie si une ville est adjacente via indice.
+         * @param i Indice de la ville à tester.
+         * @return true si adjacente, false sinon.
+         */
         bool estAdjacent(int i);
 
+        /**
+         * @brief Retourne le vecteur des villes adjacentes.
+         * @return Référence vers le vecteur des villes adjacentes.
+         */
         vector<Ville *> &getAdjacent();
+        /**
+         * @brief Ajoute une ville adjacente.
+         * @param v Pointeur vers la ville à ajouter.
+         */
         void ajoutVilleAdjacente(Ville* v);
 };
-
 
 
 #endif
