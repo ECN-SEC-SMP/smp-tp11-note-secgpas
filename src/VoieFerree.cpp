@@ -30,8 +30,8 @@ Joueur* VoieFerree::getProprio(){
 /**
  * @brief Mutateur qui permet de modifier l'attribut proprio lorsqu'un joueur pose ses trains
  */
-void setProprio(Joueur j){
-    proprio = &j;
+void VoieFerree::setProprio(Joueur* j){
+    proprio = j;
 }
 
 /**

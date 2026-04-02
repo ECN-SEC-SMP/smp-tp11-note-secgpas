@@ -61,6 +61,16 @@ class Pioche {
     vector<Carte*> & getDefausse() {
         return defausse_;
     }
+
+    void popLastCarte() {
+        if (!deck_.empty()) {
+            deck_.pop_back();
+        }
+    }
+
+    void pushDefausse(Carte* carte) {
+        defausse_.push_back(carte);
+    }
 };
 
 #endif //TP11_NOTE_PIOCHE_H

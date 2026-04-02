@@ -5,6 +5,7 @@
 #include "Plateau.h"
 #include "VoieFerree.h"
 #include "fonctionAnnexe.h"
+#include <algorithm>
 
 Plateau::Plateau(const string & nomFichierMap) {
     graphe_ville_ = nullptr;

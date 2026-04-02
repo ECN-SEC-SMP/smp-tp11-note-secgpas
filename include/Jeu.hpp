@@ -3,8 +3,7 @@
 #include "Pioche.h"
 #include "Joueur.h"
 #include "Plateau.h"
-#include "NoeudVille.h"
-#include "VoieFerre.h"
+#include "VoieFerree.h"
 #include <iostream>
 #include <vector>
 #include <stdlib.h>
@@ -21,6 +20,7 @@ class Jeu {
         Jeu(int nbJoueur);
         bool estFinie();
         void partie();
+        void afficherEtat() const;
 };
 
 #endif

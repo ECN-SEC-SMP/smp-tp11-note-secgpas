@@ -28,10 +28,11 @@ class Joueur {
         Couleur_e getCouleur() const;
         map<Couleur_e, int> getMainCarte() const;
         vector<Ticket*> getMainTicket() const;
+        int getNbTicketReussis() const;
 
         // Méthodes principales
         void piocher(int nbAPiocher, Pioche& type);
-        void poserWagon(Ville_e a, Ville_e b, Couleur_e c, Plateau& plateau);
+        void poserWagon(Ville a, Ville b, Couleur_e c, Plateau& plateau);
         void defausser(Pioche& piocheTicket);                    
         void afficherMain() const;
 };

@@ -13,11 +13,11 @@ Joueur::Joueur(Couleur_e c){
     mainWagon = 20;
 }
 
-int Joueur::getMainWagon(){
+int Joueur::getMainWagon() const {
     return mainWagon;
 }
 
-map<Couleur_e,int> Joueur::getMainCarte(){
+map<Couleur_e,int> Joueur::getMainCarte() const {
     return mainCarte;
 }
 
@@ -47,12 +47,17 @@ void Joueur::piocher(int nbAPiocher, Pioche& type){
     }
 }
 
-void Joueur::poserWagon(Ville* a, Ville* b, Couleur_e c, Plateau& plateau){
-    for (int i = 0; i < plateau.getVoieFerree().size(); i++){
-        if (((plateau.getVoieFerree()[i].getVille1() == a && plateau.getVoieFerree()[i].getVille2() == b) ||(plateau.getVoieFerree()[i].getVille1() == b && plateau.getVoieFerree()[i].getVille2() == a)) && (plateau.getVoieFerree()[i].getCouleur() == c)){
-            if (plateau.getVoieFerree()[i].estDispo()){
-                mainWagon = mainWagon - plateau.getVoieFerree()[i].getPoids();
-                plateau.getVoieFerree()[i].setProprio(this); 
+void Joueur::poserWagon(Ville a, Ville b, Couleur_e c, Plateau& plateau){
+    for (int i = 0; i < plateau.getVoieFerrees().size(); i++){
+        if (((plateau.getVoieFerrees()[i].getVille1()->getNomVille() == a.getNomVille() &&
+            plateau.getVoieFerrees()[i].getVille2()->getNomVille() == b.getNomVille()) ||
+            (plateau.getVoieFerrees()[i].getVille1()->getNomVille() == b.getNomVille() &&
+            plateau.getVoieFerrees()[i].getVille2()->getNomVille() == a.getNomVille())) &&
+            (plateau.getVoieFerrees()[i].getCouleur() == c)) {
+
+            if (plateau.getVoieFerrees()[i].estDispo()) {              
+                mainWagon -= plateau.getVoieFerrees()[i].getPoids();  
+                plateau.getVoieFerrees()[i].setProprio(this); 
             }
         }
     }
@@ -64,8 +69,12 @@ void Joueur::defausser(Pioche& piocheTicket){
     piocher(2, piocheTicket);
 }
 
-void Joueur::afficherMain(){
-    for(map<Couleur_e, int>::iterator it = mainCarte.begin(); it != mainCarte.end(); ++it){
+Couleur_e Joueur::getCouleur() const {
+    return couleur;
+}
+
+void Joueur::afficherMain() const {
+    for(map<Couleur_e, int>::const_iterator it = mainCarte.begin(); it != mainCarte.end(); ++it){
         switch(it->first) {
             case Couleur_e::Jaune: 
                 cout << "Jaune : " << it->second << endl;
@@ -93,4 +102,8 @@ void Joueur::afficherMain(){
                 break;
         }
     }
+}
+
+int Joueur::getNbTicketReussis() const {
+    return mainTicket.size(); // Placeholder, should count completed tickets
 }

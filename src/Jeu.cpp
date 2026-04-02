@@ -1,21 +1,18 @@
 #include "Jeu.hpp"
-
-Jeu::Jeu(int nbJoueur) : nbTour(0) {
+#include "Ville.h"
+Jeu::Jeu(int nbJoueur) : p("map.csv"), tickets(Pioche_type_e::Ticket), train(Pioche_type_e::CarteW), nbTour(0) {
     for (int i = 0; i < nbJoueur; i++) {
         int couleur;
         cout << "Joueur " << (i+1) << ", quelle couleur ? (0=Rouge 1=Bleu 2=Vert 3=Jaune) : ";
         cin >> couleur;
         joueurs.push_back(Joueur(static_cast<Couleur_e>(couleur)));
     }
-    p       = Plateau();
-    tickets = Pioche();
-    train   = Pioche();
 }
 
 bool Jeu::estFinie() {
     for (int i = 0; i < (int)joueurs.size(); i++) {
         if (joueurs.at(i).getMainWagon() == 0 || joueurs.at(i).getNbTicketReussis() == 6) {
-            cout << "Partie finie ! Gagnant : joueur " << joueurs.at(i).getCouleur() << endl;
+            cout << "Partie finie ! Gagnant : joueur " << (int)joueurs.at(i).getCouleur() << endl;
             return true;
         }
     }
@@ -36,8 +33,7 @@ void Jeu::partie() {
             }
 
             int decision = -1;
-            cout << "\nTour du Joueur : " << joueurs.at(i).getCouleur() << endl;
-            cout << "0 : Piocher | 1 : Poser wagon | 2 : Passer son tour" << endl;
+            cout << "\nTour du Joueur : " << (int)joueurs.at(i).getCouleur() << endl;            cout << "0 : Piocher | 1 : Poser wagon | 2 : Passer son tour" << endl;
             cin >> decision;
 
             while (decision < 0 || decision > 2) {
@@ -52,10 +48,10 @@ void Jeu::partie() {
                 int v1, v2;
                 cout << "Ville départ : ";  cin >> v1;
                 cout << "Ville arrivée : "; cin >> v2;
-                joueurs.at(i).poserWagon((Ville_e)v1, (Ville_e)v2, joueurs.at(i).getCouleur(), p); 
+                joueurs.at(i).poserWagon((Ville)v1, (Ville)v2, joueurs.at(i).getCouleur(), p); 
             }
             else {
-                joueurs.at(i).passerTour();
+                joueurs.at(i).defausser(tickets);
             }
 
             if (estFinie()) return;
