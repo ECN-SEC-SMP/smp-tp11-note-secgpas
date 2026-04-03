@@ -20,7 +20,8 @@ enum class Couleur_e {
     Vert,       /**< Couleur verte */
     Noir,       /**< Couleur noire */
     Blanc,      /**< Couleur blanche */
-    Orange      /**< Couleur orange */
+    Orange,     /**< Couleur orange */
+    Inconnue    /**< Couleur inconnue */
 };
 
 /**

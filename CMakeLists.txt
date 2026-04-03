@@ -68,12 +68,18 @@ add_executable(PlateauTest.out
     tests/PlateauTest.cpp
 )
 
+add_executable(fonctionAnnexeTest.out
+        tests/fonctionAnnexeTest.cpp
+        src/fonctionAnnexe.cpp
+)
+
 target_compile_options(VilleTest.out PRIVATE -Wall -Wextra -pthread -g)
 target_compile_options(VoieFerreeTest.out PRIVATE -Wall -Wextra -pthread -g)
 target_compile_options(PiocheTest.out PRIVATE -Wall -Wextra -pthread -g)
 target_compile_options(JoueurTest.out PRIVATE -Wall -Wextra -pthread -g)
 target_compile_options(CarteTest.out PRIVATE -Wall -Wextra -pthread -g)
 target_compile_options(PlateauTest.out PRIVATE -Wall -Wextra -pthread -g)
+target_compile_options(fonctionAnnexeTest.out PRIVATE -Wall -Wextra -pthread -g)
 
 target_link_libraries(VilleTest.out GTest::gtest_main)
 target_link_libraries(VoieFerreeTest.out GTest::gtest_main)
@@ -81,6 +87,7 @@ target_link_libraries(PiocheTest.out GTest::gtest_main)
 target_link_libraries(JoueurTest.out GTest::gtest_main)
 target_link_libraries(CarteTest.out GTest::gtest_main)
 target_link_libraries(PlateauTest.out GTest::gtest_main)
+target_link_libraries(fonctionAnnexeTest.out GTest::gtest_main)
 
 include(GoogleTest)
 

@@ -8,30 +8,23 @@
 using namespace std;
 
 /**
- * @brief Vecteur global des noms de villes.
- */
-extern listeVille_t vectVille;
-/**
- * @brief Vecteur global des voies ferrées.
- */
-extern listeVoieFerre_t vectVoieFerree;
-
-/**
- * @brief Ouvre le fichier map et charge les données.
+ * @brief Ouvre le fichier map et charge les villes et les voies ferrées dans les vecteurs correspondants.
  * @param nomFichier Nom du fichier map.
+ * @param listeVoieFerre Vecteur qui contient les voies ferrées du jeu
+ * @param listeVille Vecteur qui contient les villes du jeu
  * @return true si réussi, false sinon.
  */
-bool ouvrirFichierMap(const string nomFichier);
+bool ouvrirFichierMap(string nomFichier, listeVoieFerre_t &listeVoieFerre, listeVille_t &listeVille);
 /**
  * @brief Affiche le vecteur des villes.
  * @param v Vecteur des villes.
  */
-void afficheVectVille(vector<string> v);
+void afficheVectVille(listeVille_t v);
 /**
  * @brief Affiche le vecteur des voies ferrées.
  * @param v Vecteur des voies ferrées.
  */
-void afficheVectVoieFerree(vector<string> v);
+void afficheVectVoieFerree(listeVoieFerre_t v);
 /**
  * @brief Retourne la couleur correspondante à la chaîne.
  * @param couleur Chaîne représentant la couleur.
