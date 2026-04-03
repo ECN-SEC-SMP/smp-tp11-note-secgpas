@@ -73,12 +73,35 @@ public:
    * @param villeB la ville d'arrivée
    * @return un vecteur de voies ferrées entre les deux villes
    */
-  vector<VoieFerree> getVoiesFerrees(const Ville & villeA, const Ville & villeB) const;
+  vector<VoieFerree> getVoieFerrees(const Ville & villeA, const Ville & villeB) const;
 
   /**
    * @brief Affiche le plateau de jeu en format matrice d'adjacence.
-   * Affiche les villes et les voies ferrées avec leur poids.
-   * Les voies ferrées possédées par un joueur affichent la couleur du joueur.
+   * Affiche le plateau de jeu en affichant les villes et les voies ferrées dans le flux standard de sortie.
+   * Un joueur (max 4) possède une couleur parmi : bleu, jaune, vert et rouge.
+   * La sortie prend la forme de matrice d'adjacence où chaque case représente une ou plusieurs voies ferrées entre deux villes.
+   * Lorsqu'un joueur possède une voie ferrée, le texte de cette voie prend la couleur du joueur.
+   *
+   * Avec les villes suivantes : Seattle, Calgary et Helena
+   * et les voies ferrées suivantes :
+   * Seattle-Calgary (bleu)  poids : 2
+   * Seattle-Calgary (rouge) poids : 4
+   *
+   * Seattle-Helena (rouge)  poids : 1
+   * Seattle-Helena (vert)   poids : 2
+   *
+   * Calgary-Helena (vert)   poids : 3
+   *
+   * Voici un exemple de sortie possible :
+   *
+   * ----------=== Plateau de jeu ===----------
+   *          Seattle    Calgary     Helena       (Ville A)
+   *         ------------------------------------
+   * Seattle | X         | 2, 4     | 1, 2      |
+   * Calgary | 2, 4      | X        | 3         |
+   * Helena  | 1, 2      | X        | X         |
+   *         ------------------------------------
+   * (Ville B)
    */
   void affichePlateau() const;
 };

@@ -11,8 +11,10 @@
 
 Plateau::Plateau(const string & nomFichierMap) {
     graphe_ville_ = nullptr;
+    listeVille_t vectVille;
+    listeVoieFerre_t vectVoieFerrees;
 
-    if (!ouvrirFichierMap(nomFichierMap))
+    if (!ouvrirFichierMap(nomFichierMap,vectVoieFerrees, vectVille))
         cerr << "Plateau non chargé" << endl;
 
     // 1. Créer toutes les villes
@@ -21,7 +23,7 @@ Plateau::Plateau(const string & nomFichierMap) {
     }
     // 2. Créer toutes les voies ferrées
     // TODO : Ne pas ajouter les doublons
-    for (vector<string> voieFerre : vectVoieFerree) {
+    for (vector<string> voieFerre : vectVoieFerrees) {
         Ville* villeA = getVille(voieFerre[0]);
         Ville* villeB = getVille(voieFerre[1]);
 
@@ -81,7 +83,7 @@ Ville* Plateau::getVille(const string &nomVille) {
     return nullptr;
 }
 
-vector<VoieFerree> Plateau::getVoiesFerrees(const Ville & villeA, const Ville & villeB) const {
+vector<VoieFerree> Plateau::getVoieFerrees(const Ville & villeA, const Ville & villeB) const {
     vector<VoieFerree> trouvees;
 
     for (VoieFerree voie_ferree : voie_ferrees_) {
@@ -94,33 +96,6 @@ vector<VoieFerree> Plateau::getVoiesFerrees(const Ville & villeA, const Ville & 
     return trouvees;
 }
 
-/**
- * Affiche le plateau de jeu en affichant les villes et les voies ferrées dans le flux standard de sortie.
- * Un joueur (max 4) possède une couleur parmi : bleu, jaune, vert et rouge.
- * La sortie prend la forme de matrice d'adjacence où chaque case représente une ou plusieurs voies ferrées entre deux villes.
- * Lorsqu'un joueur possède une voie ferrée, le texte de cette voie prend la couleur du joueur.
- *
- * Avec les villes suivantes : Seattle, Calgary et Helena
- * et les voies ferrées suivantes :
- * Seattle-Calgary (bleu)  poid  : 2
- * Seattle-Calgary (rouge) poids : 4
- *
- * Seattle-Helena (rouge)  poids : 1
- * Seattle-Helena (vert)   poids : 2
- *
- * Calgary-Helena (vert)   poids : 3
- *
- * Voici un exemple de sortie possible :
- *
- * ----------=== Plateau de jeu ===----------
- *          Seattle    Calgary     Helena       (Ville A)
- *         ------------------------------------
- * Seattle | X         | 2 (bleu) | 1 (rouge) |
- * Calgary | 4 (rouge) | X        | 3 (vert)  |
- * Helena  | 2 (vert)  | X        | X         |
- *         ------------------------------------
- * (Ville B)
- */
 void Plateau::affichePlateau() const {
     // TODO: Finir l'implémentation de la méthode affichePlateau
     std::ostringstream header_villeA;
@@ -140,15 +115,18 @@ void Plateau::affichePlateau() const {
             if (villeA.getNomVille() == villeB.getNomVille()) {
                 cout << setw(14) << " | X";
             } else {
-                vector<VoieFerree> voies_ferrees = getVoiesFerrees(villeA, villeB);
+                vector<VoieFerree> voies_ferrees = getVoieFerrees(villeA, villeB);
 
                 if (voies_ferrees.empty()) {
                     cout << setw(14) << left << " | X";
                 } else {
                     stringstream ss;
-                    for (VoieFerree voie_ferree : voies_ferrees) {
-                        ss << voie_ferree.getPoids();
-                        // << " (" << getCouleurString(voie_ferree.getCouleur()) << ") ";
+
+                    for (size_t i = 0; i < voies_ferrees.size(); i++) {
+                        ss << voies_ferrees[i].getPoids();
+                        if (i < voies_ferrees.size() - 1) {
+                            ss << ", ";
+                        }
                     }
                     cout << " | " << setw(11) << left << ss.str();
                 }
