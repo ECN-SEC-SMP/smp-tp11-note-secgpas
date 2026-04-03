@@ -126,25 +126,24 @@ void Plateau::affichePlateau() const {
     std::ostringstream header_villeA;
     cout << "----------=== Plateau de jeu ===----------" << endl;
 
-    cout << "         ";
+    cout << string(15, ' ');
     for (Ville ville : villes_) {
-        header_villeA << setw(14) << left << ville.getNomVille() << " ";
+        header_villeA << setw(14) << left << ville.getNomVille();
     }
     cout << header_villeA.str() << endl;
-    cout << "         ";
-    cout << string(header_villeA.str().size(), '-') << endl;
+    cout << string(14, ' ') << string(header_villeA.str().size(), '-') << endl;
 
     for (Ville villeB : villes_) {
-        cout << villeB.getNomVille();
+        cout << setw(14) << left << villeB.getNomVille();
 
         for (Ville villeA : villes_) {
             if (villeA.getNomVille() == villeB.getNomVille()) {
-                cout << " | X         ";
+                cout << setw(14) << " | X";
             } else {
                 vector<VoieFerree> voies_ferrees = getVoiesFerrees(villeA, villeB);
 
                 if (voies_ferrees.empty()) {
-                    cout << " | X         ";
+                    cout << setw(14) << left << " | X";
                 } else {
                     stringstream ss;
                     for (VoieFerree voie_ferree : voies_ferrees) {
