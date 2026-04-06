@@ -65,6 +65,9 @@ add_executable(PlateauTest.out
     src/VoieFerree.cpp
     src/fonctionAnnexe.cpp
     src/Ville.cpp
+    src/Joueur.cpp
+    src/Pioche.cpp
+    src/Ticket.cpp
     tests/PlateauTest.cpp
 )
 

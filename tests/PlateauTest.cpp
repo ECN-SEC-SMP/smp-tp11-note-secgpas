@@ -222,10 +222,11 @@ TEST(PlateauTest, VoiesFerreesInitialisation) {
 
 TEST(PlateauTest, AffichagePlateau) {
     Plateau p(MAP_FILE_PATH);
+    Joueur joueur_rouge(Couleur_e::Rouge);
+    Joueur joueur_bleu(Couleur_e::Bleu);
+
+    p.getVoieFerrees()[0].setProprio(&joueur_rouge);
+    p.getVoieFerrees()[1].setProprio(&joueur_bleu);
 
     p.affichePlateau();
-    /*std::cout << terminal::GREEN << "[OK]" << terminal::RESET << " Opération réussie" << std::endl;
-    std::cout << "\033[1;31m[ERROR]\033[0m Échec" << std::endl;
-    std::cout << "\033[32;44mTexte vert sur fond bleu\033[0m" << std::endl;*/
-
 }

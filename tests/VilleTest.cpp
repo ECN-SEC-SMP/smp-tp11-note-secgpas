@@ -6,7 +6,7 @@
 
 
 TEST(VilleTest, testDesMethodes) {
-    ouvrirFichierMap(MAP_FILE_PATH);
+    ouvrirFichierMap(MAP_FILE_PATH, TODO);
 
     //Test de la création d'une ville et de l'ajout du nom
     Ville a = Ville(0);

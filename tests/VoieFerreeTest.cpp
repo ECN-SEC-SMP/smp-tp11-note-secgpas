@@ -8,7 +8,7 @@
 
 
 TEST(VoieFerreeTest, testDesMethodes) {
-    ouvrirFichierMap(MAP_FILE_PATH);
+    ouvrirFichierMap(MAP_FILE_PATH, TODO);
 
     Ville a = Ville(0);
     Ville b = Ville(1);

@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <utility>
 #include "fonctionAnnexe.h"
+#include "Joueur.h"
 
 using namespace std;
 
@@ -91,5 +92,20 @@ void afficheVectVoieFerree(const listeVoieFerre_t v){
             cout << v[i][j] << " ";
         }
         cout << "]" << endl;
+    }
+}
+
+string applyPlayerColor(const string &text, Joueur* joueur) {
+    switch (joueur->getCouleur()) {
+        case Couleur_e::Rouge:
+            return terminal::RED + text + terminal::RESET;
+        case Couleur_e::Vert:
+            return terminal::GREEN + text + terminal::RESET;
+        case Couleur_e::Bleu:
+            return terminal::BLUE + text + terminal::RESET;
+        case Couleur_e::Jaune:
+            return terminal::YELLOW + text + terminal::RESET;
+        default:
+            return text;
     }
 }

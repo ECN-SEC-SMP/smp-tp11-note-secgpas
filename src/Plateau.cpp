@@ -97,7 +97,7 @@ vector<VoieFerree> Plateau::getVoieFerrees(const Ville & villeA, const Ville & v
 }
 
 void Plateau::affichePlateau() const {
-    // TODO: Finir l'implémentation de la méthode affichePlateau
+    // TODO: Largeur de colonne dynamique en fonction du nom de la ville et du poids des voies ferrées
     std::ostringstream header_villeA;
     cout << "----------=== Plateau de jeu ===----------" << endl;
 
@@ -122,13 +122,29 @@ void Plateau::affichePlateau() const {
                 } else {
                     stringstream ss;
 
+                    bool color_applied = false;
+
                     for (size_t i = 0; i < voies_ferrees.size(); i++) {
-                        ss << voies_ferrees[i].getPoids();
+                        color_applied = false;
+                        if (voies_ferrees[i].getProprio() == nullptr) {
+                            ss << voies_ferrees[i].getPoids();
+                        } else {
+                            ss << applyPlayerColor(to_string(voies_ferrees[i].getPoids()), voies_ferrees[i].getProprio());
+                            color_applied = true;
+                        }
+
                         if (i < voies_ferrees.size() - 1) {
                             ss << ", ";
                         }
                     }
-                    cout << " | " << setw(11) << left << ss.str();
+                    cout << " | ";
+
+                    if (color_applied) {
+                        cout << setw(33);
+                    } else {
+                        cout << setw(11);
+                    }
+                    cout << left << ss.str();
                 }
             }
         }

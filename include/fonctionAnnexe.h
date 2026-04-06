@@ -5,6 +5,7 @@
 #include <vector>
 #include "types.h"
 
+class Joueur;
 using namespace std;
 
 /**
@@ -32,5 +33,6 @@ void afficheVectVoieFerree(listeVoieFerre_t v);
  */
 Couleur_e getCouleur(const string &couleur);
 
+string applyPlayerColor(const string &text, Joueur* joueur);
 
 #endif

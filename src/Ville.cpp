@@ -10,7 +10,7 @@ using namespace std;
  * @param i Correspond à l'indice de la ville dans vectVille (vector généré lors de l'ouverture du fichier)
 */
 Ville::Ville(int i){
-    ville_ = vectVille[i]; 
+    //ville_ = vectVille[i];
 }
 
 /**
@@ -27,7 +27,7 @@ string Ville::getNomVille() const {
  * @return Booléen à true si la ville i est adjacente à la ville courante et false sinon 
  */
 bool Ville::estAdjacent(int i){
-    if (i > vectVille.size() || i < 0){
+   /* if (i > vectVille.size() || i < 0){
         return false;
     }
     for (int k = 0; k < villesAdjacentes.size(); k++){
@@ -35,7 +35,7 @@ bool Ville::estAdjacent(int i){
             return true;
         }
     }
-    return false;
+    return false;*/
 }
 
 /**

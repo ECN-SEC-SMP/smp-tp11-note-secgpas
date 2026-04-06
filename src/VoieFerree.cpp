@@ -16,7 +16,7 @@ VoieFerree::VoieFerree(Ville *v1, Ville *v2, int p, Couleur_e couleur) :
     ville2(v2),
     poids(p),
     c(couleur) {
-    //proprio = nullptr;
+    proprio = nullptr;
 }
 
 /**
