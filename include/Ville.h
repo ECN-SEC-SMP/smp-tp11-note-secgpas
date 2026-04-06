@@ -41,10 +41,17 @@ class Ville{
         void afficheAdjacent();
         /**
          * @brief Vérifie si une ville est adjacente via indice.
-         * @param i Indice de la ville à tester.
+         * @param ville Indice de la ville à tester.
          * @return true si adjacente, false sinon.
          */
-        bool estAdjacent(int i);
+        bool estAdjacent(Ville *ville);
+
+      /**
+        * @brief Méthode qui teste si une ville est adjacente à une autre.
+        * @param nomVille Nom de la ville à tester
+        * @return Booléen à true si la ville i est adjacente à la ville courante et false sinon
+        */
+        bool estAdjacent(const string &nomVille);
 
         /**
          * @brief Retourne le vecteur des villes adjacentes.

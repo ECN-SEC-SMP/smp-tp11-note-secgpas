@@ -4,7 +4,7 @@
 #include <iostream>
 #include "config.h"
 
-
+// TODO: Revoir les tests pour les méthodes et l'initialisation de la classe Ville
 TEST(VilleTest, testDesMethodes) {
     ouvrirFichierMap(MAP_FILE_PATH, TODO);
 
