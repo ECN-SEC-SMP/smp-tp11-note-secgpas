@@ -60,3 +60,18 @@ vector<Ticket> Ticket::loadFromCSVFile(Plateau *plateau, const string &nomFichie
         exit(EXIT_FAILURE);
     }
 }
+
+bool Ticket::estRealise(Joueur *joueur) const {
+    // TODO: Prise en charge des chemins plus longs que 1 voie ferrée
+    if (joueur == nullptr) {
+        cerr << "Erreur : le joueur ne peut pas être nul." << endl;
+        exit(EXIT_FAILURE);
+    }
+
+    for (VoieFerree voie_ferree : plateau_->getVoieFerrees(*villeA_, *villeB_)) {
+        if (voie_ferree.getProprio() == joueur) {
+            return true;
+        }
+    }
+    return false;
+}

@@ -44,7 +44,7 @@ class Ville{
          * @param ville Indice de la ville à tester.
          * @return true si adjacente, false sinon.
          */
-        bool estAdjacent(Ville *ville);
+        bool estAdjacent(Ville *ville) const;
 
       /**
         * @brief Méthode qui teste si une ville est adjacente à une autre.

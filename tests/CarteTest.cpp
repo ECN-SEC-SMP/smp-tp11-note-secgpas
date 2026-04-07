@@ -27,11 +27,6 @@ TEST(CarteTest, CTrainShouldHaveCorrectColor) {
     EXPECT_EQ(Couleur_e::Jaune, ctYellow.getCouleur());
 }
 
-TEST(CarteTest, CTrainShouldNotBeRealized) {
-    CTrain ct(Couleur_e::Rouge);
-    EXPECT_FALSE(ct.estRealise());
-}
-
 // ============== Ticket Tests ==============
 
 TEST(CarteTest, ShouldCreateTicketsFromCSV) {
@@ -127,13 +122,6 @@ TEST(CarteTest, TicketGetType) {
     EXPECT_EQ(Carte_type_e::Ticket, t.getType());
 }
 
-TEST(CarteTest, TicketShouldNotBeRealized) {
-    Plateau p(MAP_FILE_PATH);
-    Ticket t(&p, "Seattle", "Los Angeles", 1);
-
-    EXPECT_FALSE(t.estRealise());
-}
-
 TEST(CarteTest, AllLoadedTicketsHaveCorrectIds) {
     Plateau p(MAP_FILE_PATH);
     vector<Ticket> tickets = Ticket::loadFromCSVFile(&p, TICKET_FILE_PATH);
@@ -198,3 +186,106 @@ TEST(CarteTest, TicketMultipleSettersChaining) {
     EXPECT_EQ("Washington", t.getVilleB()->getNomVille());
 }
 
+TEST(CarteTest, TicketShouldBeRealized) {
+    Plateau p(MAP_FILE_PATH);
+    Ticket t(&p, "Seattle", "Calgary", 1);
+    Joueur j(Couleur_e::Bleu);
+
+    p.getVoieFerrees()[0].setProprio(&j);
+    EXPECT_TRUE(t.estRealise(&j));
+}
+
+TEST(CarteTest, TicketShouldBeRealized2) {
+    Plateau p(MAP_FILE_PATH);
+    Ticket t(&p, "Calgary", "Seattle", 1);
+    Joueur j(Couleur_e::Bleu);
+
+    p.getVoieFerrees()[0].setProprio(&j);
+    EXPECT_TRUE(t.estRealise(&j));
+}
+
+
+TEST(CarteTest, TicketShouldBeNotRealized) {
+    Plateau p(MAP_FILE_PATH);
+    Ticket t(&p, "Salt Lake City", "Helena", 1);
+    Joueur j(Couleur_e::Bleu);
+
+    EXPECT_FALSE(t.estRealise(&j));
+}
+
+TEST(CarteTest, TicketShouldBeRealizedWithMultiplePaths) {
+    Plateau p(MAP_FILE_PATH);
+    Ticket t(&p, "San Francisco", "Salt Lake City", 1);
+    Joueur j(Couleur_e::Bleu);
+
+    p.getVoieFerrees()[0].setProprio(&j); // Seattle - Calgary
+    p.getVoieFerrees()[5].setProprio(&j); // San Francisco - Salt Lake City
+
+    EXPECT_TRUE(t.estRealise(&j));
+}
+
+TEST(CarteTest, TicketShouldBeNotRealizedWithMultiplePaths) {
+    Plateau p(MAP_FILE_PATH);
+    Ticket t(&p, "San Francisco", "Salt Lake City", 1);
+    Joueur j(Couleur_e::Bleu);
+
+    p.getVoieFerrees()[0].setProprio(&j); // Seattle - Calgary
+    p.getVoieFerrees()[7].setProprio(&j); // Los Angeles - Albuquerque
+
+    EXPECT_FALSE(t.estRealise(&j));
+}
+
+TEST(CarteTest, TicketShouldBeRealizedWith2Paths) {
+    Plateau p(MAP_FILE_PATH);
+    Ticket t(&p, "Seattle", "Salt Lake City", 1);
+    Joueur j(Couleur_e::Bleu);
+
+    p.getVoieFerrees()[0].setProprio(&j); // Seattle - Calgary
+    p.getVoieFerrees()[3].setProprio(&j); // Seattle - San Francisco
+    p.getVoieFerrees()[5].setProprio(&j); // San Francisco - Salt Lake City
+
+    EXPECT_TRUE(t.estRealise(&j));
+}
+
+TEST(CarteTest, TicketShouldBeRealizedWith2Paths2) {
+    Plateau p(MAP_FILE_PATH);
+    Ticket t(&p, "Salt Lake City", "Seattle", 1);
+    Joueur j(Couleur_e::Bleu);
+
+    p.getVoieFerrees()[0].setProprio(&j); // Seattle - Calgary
+    p.getVoieFerrees()[3].setProprio(&j); // Seattle - San Francisco
+    p.getVoieFerrees()[5].setProprio(&j); // San Francisco - Salt Lake City
+
+    EXPECT_TRUE(t.estRealise(&j));
+}
+
+TEST(CarteTest, TicketShouldBeRealizedWith3Paths) {
+    Plateau p(MAP_FILE_PATH);
+    Ticket t(&p, "Salt Lake City", "Calgary", 1);
+    Joueur j(Couleur_e::Bleu);
+
+    p.getVoieFerrees()[0].setProprio(&j); // Seattle - Calgary
+    p.getVoieFerrees()[3].setProprio(&j); // Seattle - San Francisco
+    p.getVoieFerrees()[5].setProprio(&j); // San Francisco - Salt Lake City
+
+    EXPECT_TRUE(t.estRealise(&j));
+}
+
+TEST(CarteTest, TicketShouldBeRealizedWith3Paths2) {
+    Plateau p(MAP_FILE_PATH);
+    Ticket t(&p, "Calgary", "Salt Lake City", 1);
+    Joueur j(Couleur_e::Bleu);
+
+    p.getVoieFerrees()[0].setProprio(&j); // Seattle - Calgary
+    p.getVoieFerrees()[3].setProprio(&j); // Seattle - San Francisco
+    p.getVoieFerrees()[5].setProprio(&j); // San Francisco - Salt Lake City
+
+    EXPECT_TRUE(t.estRealise(&j));
+}
+
+TEST(CarteTest, TicketShouldBeNotRealizedWithNullPlayer) {
+    Plateau p(MAP_FILE_PATH);
+    Ticket t(&p, "Seattle", "Calgary", 1);
+
+    EXPECT_DEATH(t.estRealise(nullptr), "Erreur : le joueur ne peut pas être nul.");
+}

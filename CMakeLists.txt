@@ -54,10 +54,12 @@ add_executable(JoueurTest.out
 add_executable(CarteTest.out
     src/Ticket.cpp
     tests/CarteTest.cpp
-     src/Plateau.cpp
+    src/Plateau.cpp
     src/VoieFerree.cpp
     src/fonctionAnnexe.cpp
     src/Ville.cpp
+    src/Joueur.cpp
+    src/Pioche.cpp
 )
 
 add_executable(PlateauTest.out

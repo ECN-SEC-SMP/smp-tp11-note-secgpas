@@ -8,6 +8,7 @@
 #include "types.h"
 #include "Ville.h"
 
+class Joueur;
 class Plateau;
 
 /**
@@ -17,9 +18,10 @@ class Carte {
     public:
     /**
      * @brief Vérifie si la carte est réalisée.
+     * @param joueur Pointeur vers le joueur pour lequel vérifier la réalisation de la carte.
      * @return true si réalisée, false sinon.
      */
-    virtual bool estRealise() const = 0;
+    virtual bool estRealise(Joueur *joueur) const = 0;
     /**
      * @brief Retourne le type de la carte.
      * @return Le type de la carte.
@@ -65,7 +67,7 @@ public:
      * @brief Vérifie si la carte train est réalisée.
      * @return true si réalisée, false sinon.
      */
-    bool estRealise() const {
+    bool estRealise(Joueur *joueur) const {
         // TODO: implémenter CTrain::estRealise
         return false;
     };
@@ -140,12 +142,11 @@ public:
     static vector<Ticket> loadFromCSVFile(Plateau *plateau, const string & nomFichierCSVTicket);
 
     /**
-     * @brief Vérifie si le ticket est réalisé.
+     * @brief Vérifie si le ticket est réalisé pour un joueur donné.
+     * @param joueur Pointeur vers le joueur à vérifier.
      * @return true si réalisé, false sinon.
      */
-    bool estRealise() const {
-        return false;
-    };
+    bool estRealise(Joueur *joueur) const override;
 
     /**
      * @brief Retourne le type de la carte.

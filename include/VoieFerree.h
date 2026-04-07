@@ -44,7 +44,12 @@ class VoieFerree{
      * @brief Retourne le propriétaire de la voie.
      * @return Pointeur vers le joueur propriétaire.
      */
-    Joueur* getProprio();
+    Joueur* getProprio() const;
+
+    bool estProprio(Joueur *joueur) const {
+        return getProprio() == joueur;
+    };
+
     /**
      * @brief Définit le propriétaire de la voie.
      * @param j Pointeur vers le joueur.

@@ -18,7 +18,7 @@ string Ville::getNomVille() const {
  * @param ville Pointeur vers une ville à tester
  * @return Booléen à true si la ville i est adjacente à la ville courante et false sinon 
  */
-bool Ville::estAdjacent(Ville *ville){
+bool Ville::estAdjacent(Ville *ville) const {
     if (ville == nullptr){
         return false;
     }
