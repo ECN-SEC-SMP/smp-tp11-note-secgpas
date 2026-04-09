@@ -49,11 +49,41 @@ cd build
 cmake ..
 cmake --build .
 ```
-
 Puis exécuter le binaire `main` :
 
 - Linux/Mac : `./main`
 - Windows : `main.exe`
+
+### Précautions
+#### Couleur du texte
+Le projet utilise des codes ANSI pour colorer le texte dans la console.
+- Si votre terminal ne supporte pas les couleurs ANSI, vous verrez des séquences de caractères comme `\033[31m` au lieu de texte coloré.
+- Sur Windows, assurez-vous d'utiliser un terminal compatible ANSI (comme Windows Terminal ou Git Bash) pour voir les couleurs correctement.
+- Sur Terminal.app (Mac), si les couleurs ne s'affichent pas, essayez d'activer "Afficher les couleurs ANSI" dans les préférences du terminal.
+
+#### Charger les fichiers de données
+Les chemins sont éditable dans `include/config.h`
+```
+MAP_FILE_PATH = "../map.csv";
+TICKET_FILE_PATH = "../ticket.csv";
+```
+
+Message d'erreur si le fichier `map.csv` n'est pas trouvé :
+```test
+Erreur de chargement du fichier carte : ../map.csv
+Plateau non chargé
+```
+Message d'erreur si le fichier `ticket.csv` n'est pas trouvé :
+```text
+fichier contenant les tickets non ouvert
+Nom du fichier : ../ticket.csv
+```
+
+#### Wrap lines lors de l'affichage du Plateau
+L'affichage du plateau peut être difficile à lire si les lignes sont trop longues, car il contient beaucoup de colonnes.
+Si le terminal ne gère pas bien les longues lignes, vous pouvez redimensionner la fenêtre du terminal pour éviter les retours à la ligne automatiques, ou utiliser un terminal qui gère mieux les longues lignes (comme Windows Terminal ou iTerm2 sur Mac).
+
+<img src="specs/terminal-warp-lines.png" alt="drawing" width="600"/>
 
 ## 🧪 Lancer les tests unitaires
 Depuis `build` :
@@ -63,7 +93,6 @@ ctest --output-on-failure
 ```
 
 Ou exécuter chaque cible :
-- `mytest.out`
 - `VilleTest.out`
 - `VoieFerreeTest.out`
 - `PiocheTest.out`
