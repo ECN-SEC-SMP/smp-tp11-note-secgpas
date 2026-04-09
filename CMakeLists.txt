@@ -38,6 +38,7 @@ add_executable(PiocheTest.out
     src/Ville.cpp
     src/Ticket.cpp
     tests/PiocheTest.cpp
+    src/Joueur.cpp
 )
 
 add_executable(JoueurTest.out
@@ -76,6 +77,12 @@ add_executable(PlateauTest.out
 add_executable(fonctionAnnexeTest.out
         tests/fonctionAnnexeTest.cpp
         src/fonctionAnnexe.cpp
+        src/Joueur.cpp
+        src/VoieFerree.cpp
+        src/Ville.cpp
+        src/Pioche.cpp
+        src/Ticket.cpp
+        src/Plateau.cpp
 )
 
 target_compile_options(VilleTest.out PRIVATE -Wall -Wextra -pthread -g)
