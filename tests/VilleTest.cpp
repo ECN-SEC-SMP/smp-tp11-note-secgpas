@@ -6,7 +6,9 @@
 
 // TODO: Revoir les tests pour les méthodes et l'initialisation de la classe Ville
 TEST(VilleTest, testDesMethodes) {
-    ouvrirFichierMap(MAP_FILE_PATH, TODO);
+    listeVoieFerre_t voies;
+    listeVille_t villes;
+    EXPECT_TRUE(ouvrirFichierMap(MAP_FILE_PATH, voies, villes));
 
     //Test de la création d'une ville et de l'ajout du nom
     Ville a = Ville(0);
@@ -16,8 +18,8 @@ TEST(VilleTest, testDesMethodes) {
     Ville b = Ville(1);
     Ville c = Ville(7);
     a.ajoutVilleAdjacente(&b);
-    EXPECT_EQ(true, a.estAdjacent(1));
-    EXPECT_EQ(false, a.estAdjacent(7));
+    EXPECT_EQ(true, a.estAdjacent(&b));
+    EXPECT_EQ(false, a.estAdjacent(&c));
 
     testing::internal::CaptureStdout();
     a.afficheAdjacent();

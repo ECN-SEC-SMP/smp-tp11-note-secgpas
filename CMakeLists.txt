@@ -20,6 +20,11 @@ include_directories(include)
 add_executable(VilleTest.out
     src/fonctionAnnexe.cpp
     src/Ville.cpp
+    src/Joueur.cpp
+    src/VoieFerree.cpp
+    src/Plateau.cpp
+    src/Pioche.cpp
+    src/Ticket.cpp
     tests/VilleTest.cpp
 )
 
@@ -27,6 +32,10 @@ add_executable(VoieFerreeTest.out
     src/fonctionAnnexe.cpp
     src/Ville.cpp
     src/VoieFerree.cpp
+    src/Joueur.cpp
+    src/Plateau.cpp
+    src/Pioche.cpp
+    src/Ticket.cpp
     tests/VoieFerreeTest.cpp
 )
 

@@ -8,7 +8,9 @@
 
 
 TEST(VoieFerreeTest, testDesMethodes) {
-    ouvrirFichierMap(MAP_FILE_PATH, TODO);
+    listeVoieFerre_t voies;
+    listeVille_t villes;
+    EXPECT_TRUE(ouvrirFichierMap(MAP_FILE_PATH, voies, villes));
 
     Ville a = Ville(0);
     Ville b = Ville(1);

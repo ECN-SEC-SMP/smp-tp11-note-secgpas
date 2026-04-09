@@ -3,6 +3,7 @@
 #include <fstream>
 #include <sstream>
 #include <stack>
+#include <algorithm>
 
 Ticket::Ticket(Plateau *plateau, const string & nomVilleA, const string & nomVilleB, const int id) {
     Ville* villeA = nullptr;

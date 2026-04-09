@@ -45,15 +45,21 @@ void Jeu::partie() {
 
             if (decision == 0) {
                 joueurs.at(i).piocher(2, train);
+                cout << "\n--- Plateau après pioche ---" << endl;
+                p.affichePlateau();
             }
             else if (decision == 1) {
                 int v1, v2;
                 cout << "Ville départ : ";  cin >> v1;
                 cout << "Ville arrivée : "; cin >> v2;
                 joueurs.at(i).poserWagon((Ville)v1, (Ville)v2, joueurs.at(i).getCouleur(), p); 
+                cout << "\n--- Plateau après pose de wagon ---" << endl;
+                p.affichePlateau();
             }
             else {
                 joueurs.at(i).defausser(tickets);
+                cout << "\n--- Plateau après défausse ---" << endl;
+                p.affichePlateau();
             }
 
             if (estFinie()) return;
