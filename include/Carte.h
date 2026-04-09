@@ -143,6 +143,7 @@ public:
 
     /**
      * @brief Vérifie si le ticket est réalisé pour un joueur donné.
+     * @note Cette implémentation utilise l'algorithme de DFS des voies possédées par le joueur j pour parcourir le graphe.
      * @param joueur Pointeur vers le joueur à vérifier.
      * @return true si réalisé, false sinon.
      */

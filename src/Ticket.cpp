@@ -2,6 +2,7 @@
 #include "Plateau.h"
 #include <fstream>
 #include <sstream>
+#include <stack>
 
 Ticket::Ticket(Plateau *plateau, const string & nomVilleA, const string & nomVilleB, const int id) {
     Ville* villeA = nullptr;
@@ -62,16 +63,53 @@ vector<Ticket> Ticket::loadFromCSVFile(Plateau *plateau, const string &nomFichie
 }
 
 bool Ticket::estRealise(Joueur *joueur) const {
-    // TODO: Prise en charge des chemins plus longs que 1 voie ferrée
     if (joueur == nullptr) {
         cerr << "Erreur : le joueur ne peut pas être nul." << endl;
         exit(EXIT_FAILURE);
     }
 
-    for (VoieFerree voie_ferree : plateau_->getVoieFerrees(*villeA_, *villeB_)) {
-        if (voie_ferree.getProprio() == joueur) {
+    stack<Ville*> aTraiter;
+    vector<Ville*> dejaVu;
+
+    aTraiter.push(villeA_);
+    dejaVu.push_back(villeA_);
+
+    while (!aTraiter.empty()) {
+        Ville* villeCourante = aTraiter.top();
+        aTraiter.pop();
+
+        // Condition de réussite
+        if (villeCourante == villeB_) {
             return true;
         }
+
+        // Parcours des voisins
+        for (auto& villeVoisine : villeCourante->getAdjacent()) {
+
+            // Déjà visité ?
+            if (std::find(dejaVu.begin(), dejaVu.end(), villeVoisine) != dejaVu.end()) {
+                continue;
+            }
+
+            // Récupérer les voies entre les deux villes
+            auto voies = plateau_->getVoieFerrees(*villeCourante, *villeVoisine);
+
+            // Vérifier si au moins une voie appartient au joueur
+            bool voieValide = false;
+            for (auto& voie : voies) {
+                if (voie.estProprio(joueur)) {
+                    voieValide = true;
+                    break;
+                }
+            }
+
+            // Si oui -> on peut continuer le chemin
+            if (voieValide) {
+                aTraiter.push(villeVoisine);
+                dejaVu.push_back(villeVoisine);
+            }
+        }
     }
-    return false;
+
+    return false; // Aucun chemin trouvé
 }

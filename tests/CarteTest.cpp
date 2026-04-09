@@ -289,3 +289,72 @@ TEST(CarteTest, TicketShouldBeNotRealizedWithNullPlayer) {
 
     EXPECT_DEATH(t.estRealise(nullptr), "Erreur : le joueur ne peut pas être nul.");
 }
+
+TEST(CarteTest, TicketShouldBeRealizedWithLongerPath) {
+    Plateau p(MAP_FILE_PATH);
+    Ticket t(&p, "Seattle", "Helena", 1);
+    Joueur j(Couleur_e::Bleu);
+
+    // Assuming indices: 0: Seattle-Calgary, 1: Calgary-Helena
+    p.getVoieFerrees()[0].setProprio(&j); // Seattle - Calgary
+    p.getVoieFerrees()[2].setProprio(&j); // Calgary - Helena
+
+    EXPECT_TRUE(t.estRealise(&j));
+}
+
+TEST(CarteTest, TicketShouldBeNotRealizedWithPartialPath) {
+    Plateau p(MAP_FILE_PATH);
+    Ticket t(&p, "Seattle", "Helena", 1);
+    Joueur j(Couleur_e::Bleu);
+
+    // Possède seulement Seattle - Calgary, pas Calgary - Helena
+    p.getVoieFerrees()[0].setProprio(&j); // Seattle - Calgary
+
+    EXPECT_FALSE(t.estRealise(&j));
+}
+
+TEST(CarteTest, TicketShouldBeRealizedWithAlternativePaths) {
+    Plateau p(MAP_FILE_PATH);
+    Ticket t(&p, "Seattle", "Salt Lake City", 1);
+    Joueur j(Couleur_e::Bleu);
+
+    // Possède un chemin alternatif : Seattle - San Francisco - Salt Lake City
+    p.getVoieFerrees()[3].setProprio(&j); // Seattle - San Francisco
+    p.getVoieFerrees()[5].setProprio(&j); // San Francisco - Salt Lake City
+
+    EXPECT_TRUE(t.estRealise(&j));
+}
+
+TEST(CarteTest, TicketShouldBeNotRealizedIfNoPathExists) {
+    Plateau p(MAP_FILE_PATH);
+    Ticket t(&p, "Seattle", "New York", 1); // Assuming no direct or indirect path without possessing all
+    Joueur j(Couleur_e::Bleu);
+
+    // Possède seulement quelques voies, pas un chemin complet
+    p.getVoieFerrees()[0].setProprio(&j);
+
+    EXPECT_FALSE(t.estRealise(&j));
+}
+
+TEST(CarteTest, TicketShouldBeRealizedWithDoubleRoutes) {
+    Plateau p(MAP_FILE_PATH);
+    Ticket t(&p, "Seattle", "Calgary", 1);
+    Joueur j(Couleur_e::Bleu);
+
+    // Possède seulement une des deux voies entre Seattle et Calgary
+    p.getVoieFerrees()[0].setProprio(&j); // Assuming [0] is one route
+
+    EXPECT_TRUE(t.estRealise(&j));
+}
+
+TEST(CarteTest, TicketShouldBeNotRealizedWithOtherPlayerOwnership) {
+    Plateau p(MAP_FILE_PATH);
+    Ticket t(&p, "Seattle", "Calgary", 1);
+    Joueur j1(Couleur_e::Bleu);
+    Joueur j2(Couleur_e::Rouge);
+
+    // j2 possède la voie, pas j1
+    p.getVoieFerrees()[0].setProprio(&j2);
+
+    EXPECT_FALSE(t.estRealise(&j1));
+}
