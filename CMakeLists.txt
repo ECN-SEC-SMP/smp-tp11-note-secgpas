@@ -17,16 +17,6 @@ FetchContent_MakeAvailable(googletest)
 enable_testing()
 include_directories(include)
 
-add_executable(mytest.out
-    src/factorielle.cpp
-    tests/mytest.cpp
-)
-
-add_executable(calculatorTest.out
-    tests/calculatorTest.cpp
-    src/Calculator.cpp
-)
-
 add_executable(VilleTest.out
     src/fonctionAnnexe.cpp
     src/Ville.cpp
@@ -46,8 +36,9 @@ add_executable(PiocheTest.out
     src/VoieFerree.cpp
     src/fonctionAnnexe.cpp
     src/Ville.cpp
+    src/Ticket.cpp
     tests/PiocheTest.cpp
-    tests/PlateauTest.cpp
+    src/Joueur.cpp
 )
 
 add_executable(JoueurTest.out
@@ -64,6 +55,12 @@ add_executable(JoueurTest.out
 add_executable(CarteTest.out
     src/Ticket.cpp
     tests/CarteTest.cpp
+    src/Plateau.cpp
+    src/VoieFerree.cpp
+    src/fonctionAnnexe.cpp
+    src/Ville.cpp
+    src/Joueur.cpp
+    src/Pioche.cpp
 )
 
 add_executable(PlateauTest.out
@@ -71,30 +68,41 @@ add_executable(PlateauTest.out
     src/VoieFerree.cpp
     src/fonctionAnnexe.cpp
     src/Ville.cpp
+    src/Joueur.cpp
+    src/Pioche.cpp
+    src/Ticket.cpp
     tests/PlateauTest.cpp
 )
 
-target_compile_options(mytest.out PRIVATE -Wall -Wextra -pthread -g)
-target_compile_options(calculatorTest.out PRIVATE -Wall -Wextra -pthread -g)
+add_executable(fonctionAnnexeTest.out
+        tests/fonctionAnnexeTest.cpp
+        src/fonctionAnnexe.cpp
+        src/Joueur.cpp
+        src/VoieFerree.cpp
+        src/Ville.cpp
+        src/Pioche.cpp
+        src/Ticket.cpp
+        src/Plateau.cpp
+)
+
 target_compile_options(VilleTest.out PRIVATE -Wall -Wextra -pthread -g)
 target_compile_options(VoieFerreeTest.out PRIVATE -Wall -Wextra -pthread -g)
 target_compile_options(PiocheTest.out PRIVATE -Wall -Wextra -pthread -g)
 target_compile_options(JoueurTest.out PRIVATE -Wall -Wextra -pthread -g)
 target_compile_options(CarteTest.out PRIVATE -Wall -Wextra -pthread -g)
 target_compile_options(PlateauTest.out PRIVATE -Wall -Wextra -pthread -g)
+target_compile_options(fonctionAnnexeTest.out PRIVATE -Wall -Wextra -pthread -g)
 
-target_link_libraries(mytest.out GTest::gtest_main)
-target_link_libraries(calculatorTest.out GTest::gtest_main)
 target_link_libraries(VilleTest.out GTest::gtest_main)
 target_link_libraries(VoieFerreeTest.out GTest::gtest_main)
 target_link_libraries(PiocheTest.out GTest::gtest_main)
 target_link_libraries(JoueurTest.out GTest::gtest_main)
 target_link_libraries(CarteTest.out GTest::gtest_main)
 target_link_libraries(PlateauTest.out GTest::gtest_main)
+target_link_libraries(fonctionAnnexeTest.out GTest::gtest_main)
 
 include(GoogleTest)
 
-gtest_discover_tests(mytest.out)
 gtest_discover_tests(VilleTest.out)
 gtest_discover_tests(VoieFerreeTest.out)
 gtest_discover_tests(PiocheTest.out)
