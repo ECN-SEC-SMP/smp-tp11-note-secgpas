@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Ville.h"
 #include "fonctionAnnexe.h"
+#include "config.h"
 
 
 using namespace std;
@@ -11,6 +12,16 @@ using namespace std;
  */
 string Ville::getNomVille() const {
     return ville_;
+}
+
+Ville::Ville(int i) {
+    listeVoieFerre_t voies;
+    listeVille_t villes;
+    if (i < 0 || !ouvrirFichierMap(MAP_FILE_PATH, voies, villes) || i >= static_cast<int>(villes.size())) {
+        ville_ = "";
+    } else {
+        ville_ = villes[i];
+    }
 }
 
 /**
