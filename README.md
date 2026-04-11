@@ -41,7 +41,7 @@ Le jeu implémente une version simplifiée de "Ticket to Ride" :
    - a 6 tickets réussis.
 
 ## 🛠️ Comment compiler et exécuter
-Pré-requis : CMake, compilateur C++17 (g++, clang++, MSVC). 
+Pré-requis : CMake, compilateur C++17 (g++, clang++, MSVC, mingw64). 
 
 ```bash
 mkdir -p build
@@ -49,6 +49,10 @@ cd build
 cmake ..
 cmake --build .
 ```
+### Problème lors de la compilation
+#### Compilation avec mingw64 de Google Test error : 'mutex' in namespace 'std' does not name a type
+Réinstaller mingw64 depuis cette page : https://www.msys2.org/
+
 Puis exécuter le binaire `main` :
 
 - Linux/Mac : `./main`
@@ -83,7 +87,7 @@ Nom du fichier : ../ticket.csv
 L'affichage du plateau peut être difficile à lire si les lignes sont trop longues, car il contient beaucoup de colonnes.
 Si le terminal ne gère pas bien les longues lignes, vous pouvez redimensionner la fenêtre du terminal pour éviter les retours à la ligne automatiques, ou utiliser un terminal qui gère mieux les longues lignes (comme Windows Terminal ou iTerm2 sur Mac).
 
-<img src="specs/terminal-warp-lines.png" alt="drawing" width="600"/>
+![Terminal wrap lines](specs/terminal-warp-lines.png)
 
 ## 🧪 Lancer les tests unitaires
 Depuis `build` :
