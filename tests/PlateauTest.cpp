@@ -16,7 +16,20 @@ TEST(PlateauTest, PlateauInitialisation) {
     ASSERT_EQ(p.getVille(2).getNomVille(), "Helena");
     ASSERT_EQ(p.getVille(3).getNomVille(), "San Francisco");
     ASSERT_EQ(p.getVille(4).getNomVille(), "Los Angeles");
-    // TODO: Compléter toutes les villes
+    ASSERT_EQ(p.getVille(5).getNomVille(), "Salt Lake City");
+    ASSERT_EQ(p.getVille(6).getNomVille(), "Albuquerque");
+    ASSERT_EQ(p.getVille(7).getNomVille(), "Denver");
+    ASSERT_EQ(p.getVille(8).getNomVille(), "Winnipeg");
+    ASSERT_EQ(p.getVille(9).getNomVille(), "Duluth");
+    ASSERT_EQ(p.getVille(10).getNomVille(), "Kansas City");
+    ASSERT_EQ(p.getVille(11).getNomVille(), "Dallas");
+    ASSERT_EQ(p.getVille(12).getNomVille(), "New Orleans");
+    ASSERT_EQ(p.getVille(13).getNomVille(), "Atlanta");
+    ASSERT_EQ(p.getVille(14).getNomVille(), "Miami");
+    ASSERT_EQ(p.getVille(15).getNomVille(), "Chicago");
+    ASSERT_EQ(p.getVille(16).getNomVille(), "Washington");
+    ASSERT_EQ(p.getVille(17).getNomVille(), "Montreal");
+    ASSERT_EQ(p.getVille(18).getNomVille(), "New York");
 }
 
 TEST(PlateauTest, VoiesFerreesInitialisation) {
