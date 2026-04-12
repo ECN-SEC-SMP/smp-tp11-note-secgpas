@@ -170,15 +170,18 @@ void Jeu::partie() {
                     break;
                 }
 
-                // Afficher les voies disponibles entre ces deux villes
-                Ville& va = p.getVille(v1);
-                Ville& vb = p.getVille(v2);
-                vector<VoieFerree> voiesDispo = p.getVoieFerrees(va, vb);
+                bool poseReussie = false;
+                while (!poseReussie) {
+                    // Afficher les voies disponibles entre ces deux villes
+                    Ville& va = p.getVille(v1);
+                    Ville& vb = p.getVille(v2);
+                    vector<VoieFerree> voiesDispo = p.getVoieFerrees(va, vb);
 
-                if (voiesDispo.empty()) {
-                    cout << "Aucune voie ferrée entre ces deux villes." << endl;
-                }
-                else {
+                    if (voiesDispo.empty()) {
+                        cout << "Aucune voie ferrée entre ces deux villes." << endl;
+                        break;
+                    }
+
                     cout << "Voies disponibles :" << endl;
                     for (size_t k = 0; k < voiesDispo.size(); ++k) {
                         cout << "  " << k << " : couleur=" << static_cast<int>(voiesDispo[k].getCouleur())
@@ -188,13 +191,22 @@ void Jeu::partie() {
 
                     // Demander la couleur de la voie à prendre
                     cout << "Entrez la couleur de la voie (0=Loco,1=Jaune,2=Bleu,3=Rouge,4=Vert,5=Noir,6=Blanc,7=Orange) : ";
-                    int couleurInt = -1;
-                    cin >> couleurInt;
+                    int couleurInt;
+                    if (!(cin >> couleurInt)) {
+                        cin.clear();
+                        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                        cout << "Couleur invalide." << endl;
+                        continue;
+                    }
                     if (couleurInt < 0 || couleurInt > 7) {
                         cout << "Couleur invalide." << endl;
-                    } else {
-                        Couleur_e couleurVoie = static_cast<Couleur_e>(couleurInt);
-                        joueurs.at(i).poserWagon(va, vb, couleurVoie, p);
+                        continue;
+                    }
+
+                    Couleur_e couleurVoie = static_cast<Couleur_e>(couleurInt);
+                    poseReussie = joueurs.at(i).poserWagon(va, vb, couleurVoie, p);
+                    if (!poseReussie) {
+                        cout << "La pose a échoué. Vous pouvez réessayer." << endl;
                     }
                 }
             }

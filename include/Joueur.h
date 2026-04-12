@@ -66,8 +66,9 @@ class Joueur {
          * @param b Ville d'arrivée.
          * @param couleurVoie Couleur de la voie à prendre.
          * @param plateau Le plateau de jeu.
+         * @return true si la pose a réussi, false sinon.
          */
-        void poserWagon(Ville a, Ville b, Couleur_e couleurVoie, Plateau& plateau);
+        bool poserWagon(Ville a, Ville b, Couleur_e couleurVoie, Plateau& plateau);
 
         /**
          * @brief Vérifie tous les tickets en main et annonce les tickets réussis.

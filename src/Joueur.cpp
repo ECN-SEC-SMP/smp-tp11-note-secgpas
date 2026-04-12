@@ -88,7 +88,7 @@ void Joueur::piocher(int nbAPiocher, Pioche& type) {
  * Vérifie que le joueur possède assez de cartes (couleur + locomotives comme jokers),
  * défausse les cartes utilisées, pose les wagons et vérifie les tickets.
  */
-void Joueur::poserWagon(Ville a, Ville b, Couleur_e couleurVoie, Plateau& plateau) {
+bool Joueur::poserWagon(Ville a, Ville b, Couleur_e couleurVoie, Plateau& plateau) {
     vector<VoieFerree>& voies = plateau.getVoieFerrees();
 
     for (int i = 0; i < (int)voies.size(); i++) {
@@ -112,7 +112,7 @@ void Joueur::poserWagon(Ville a, Ville b, Couleur_e couleurVoie, Plateau& platea
         // Vérifier wagons disponibles
         if (mainWagon < poids) {
             cout << "Pas assez de wagons (il en faut " << poids << ", vous en avez " << mainWagon << ")." << endl;
-            return;
+            return false;
         }
 
         // Calculer cartes disponibles : cartes de la couleur + locomotives (jokers)
@@ -122,7 +122,7 @@ void Joueur::poserWagon(Ville a, Ville b, Couleur_e couleurVoie, Plateau& platea
         if (cartesColor + locos < poids) {
             cout << "Pas assez de cartes (couleur=" << cartesColor
                  << " + locos=" << locos << " < " << poids << " nécessaires)." << endl;
-            return;
+            return false;
         }
 
         // Utiliser d'abord les cartes de la couleur, compléter avec des locomotives
@@ -143,12 +143,13 @@ void Joueur::poserWagon(Ville a, Ville b, Couleur_e couleurVoie, Plateau& platea
 
         // Vérifier si un ticket est réussi après la pose
         verifierTickets();
-        return;
+        return true;
     }
 
     cout << "Aucune voie disponible trouvée entre " << a.getNomVille()
          << " et " << b.getNomVille()
          << " avec la couleur demandée." << endl;
+    return false;
 }
 
 /**
