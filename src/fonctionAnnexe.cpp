@@ -5,19 +5,16 @@
 #include <algorithm>
 #include <utility>
 #include "fonctionAnnexe.h"
+#include "Joueur.h"
 
 using namespace std;
 
-listeVille_t vectVille;
-listeVoieFerre_t vectVoieFerree;
-
-bool ouvrirFichierMap(const string nomFichier){
+bool ouvrirFichierMap(const string nomFichier, listeVoieFerre_t &listeVoieFerre, listeVille_t &listeVille){
     string ligne;
     ifstream fichier(nomFichier);
 
     if (fichier.is_open()){
         //LES DEUX GETLINE SONT POUR NE PAS RÉCUPÉRER LES DEUX PREMIÈRES VALEURS
-        getline(fichier,ligne);
         getline(fichier,ligne);
         while (getline(fichier,ligne)){
             string info;
@@ -30,23 +27,23 @@ bool ouvrirFichierMap(const string nomFichier){
             //Vérification de la présence d'au moins 2 élements par colonnes
             if (colonne.size() >= 2){
                 for (int i = 0; i < 2; i++){ //Les villes concernées sont les deux premiers éléments d'une ligne
-                    if (find(vectVille.begin(),vectVille.end(),colonne[i]) == vectVille.end()){
-                        vectVille.push_back(colonne[i]);
+                    if (find(listeVille.begin(),listeVille.end(),colonne[i]) == listeVille.end()){
+                        listeVille.push_back(colonne[i]);
                     }
                 }
-                vectVoieFerree.push_back(colonne);
+                listeVoieFerre.push_back(colonne);
             }
             
         }
         return true;
     }
     else{
-        cout << "fichier non ouvert" << endl;
+        cerr << "Erreur de chargement du fichier carte : " << nomFichier << endl;
         return false;
     }
 }
 
-void afficheVectVille(vector<string> v){
+void afficheVectVille(const listeVille_t v){
     for (int i = 0; i < v.size(); i++){
         cout << i << " " << v[i] << endl;
     }
@@ -85,15 +82,30 @@ Couleur_e getCouleur(const string &couleur) {
          return Couleur_e::Locomotive;
    }
    cerr << "Couleur non reconnue : " << couleur << endl;
-   return Couleur_e::Locomotive;
+   return Couleur_e::Inconnue;
 }
 
-void afficheVectVoieFerree(vector<vector<string>> v){
+void afficheVectVoieFerree(const listeVoieFerre_t v){
     for (int i = 0; i < v.size(); i++){
         cout << "[";
         for (int j = 0; j < v[i].size(); j++){
             cout << v[i][j] << " ";
         }
         cout << "]" << endl;
+    }
+}
+
+string applyPlayerColor(const string &text, Joueur* joueur) {
+    switch (joueur->getCouleur()) {
+        case Couleur_e::Rouge:
+            return terminal::RED + text + terminal::RESET;
+        case Couleur_e::Vert:
+            return terminal::GREEN + text + terminal::RESET;
+        case Couleur_e::Bleu:
+            return terminal::BLUE + text + terminal::RESET;
+        case Couleur_e::Jaune:
+            return terminal::YELLOW + text + terminal::RESET;
+        default:
+            return text;
     }
 }

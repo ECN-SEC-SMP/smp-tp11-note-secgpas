@@ -16,22 +16,22 @@ VoieFerree::VoieFerree(Ville *v1, Ville *v2, int p, Couleur_e couleur) :
     ville2(v2),
     poids(p),
     c(couleur) {
-    //proprio = nullptr;
+    proprio = nullptr;
 }
 
 /**
  * @brief Accesseur au "propriétaire" de la voie. Permet de savoir quel joueur a posé ses wagon sur la voie
  * @return un pointeur vers le joueur ayant posé ses wagons sur la voie ferrée
  */
-Joueur* VoieFerree::getProprio(){
+Joueur* VoieFerree::getProprio() const {
     return proprio;
 }
 
 /**
  * @brief Mutateur qui permet de modifier l'attribut proprio lorsqu'un joueur pose ses trains
  */
-void setProprio(Joueur j){
-    proprio = &j;
+void VoieFerree::setProprio(Joueur* j){
+    proprio = j;
 }
 
 /**

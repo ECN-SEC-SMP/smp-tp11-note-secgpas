@@ -10,56 +10,83 @@
 #include "types.h"
 using namespace std;
 
+/**
+ * @brief Classe représentant une pioche de cartes dans le jeu.
+ */
 class Pioche {
+    /**
+     * @brief Deck de cartes de la pioche.
+     */
     vector<Carte*> deck_;
+    /**
+     * @brief Pile de défausse.
+     */
     vector<Carte*> defausse_;
+    /**
+     * @brief Type de la pioche (CarteW ou Ticket).
+     */
     Pioche_type_e type_;
 
     public:
     /**
-     * Créer une pioche de type CarteW ou Ticket.
+     * @brief Créer une pioche de type CarteW ou Ticket.
      * La pioche de type CarteW contient 10 cartes de chaque couleur (Jaune, Bleu, Rouge, Vert, Noir, Blanc)
      * et 12 cartes Locomotive.
      * La pioche de tickets contient 32 tickets.
      * Puis mélange les cartes de la pioche.
      * @param type Le type de la pioche (CarteW ou Ticket)
      */
-    Pioche(Pioche_type_e type) {
-        type_ = type;
+    Pioche(Pioche_type_e type);
 
-        if (type == Pioche_type_e::CarteW) {
-            for (int i = 0; i < 10; i++) {
-                deck_.push_back(new CTrain(Couleur_e::Jaune));
-                deck_.push_back(new CTrain(Couleur_e::Bleu));
-                deck_.push_back(new CTrain(Couleur_e::Rouge));
-                deck_.push_back(new CTrain(Couleur_e::Vert));
-                deck_.push_back(new CTrain(Couleur_e::Noir));
-                deck_.push_back(new CTrain(Couleur_e::Blanc));
-            }
-
-            for (int i = 0; i < 12; i++) {
-                deck_.push_back(new CTrain(Couleur_e::Locomotive));
-            }
-        } else if (type == Pioche_type_e::Ticket) {
-            // Remplir avec les tickets
-        }
-
-        melanger();
-    };
-
+    /**
+     * @brief Mélange aléatoirement les cartes du deck.
+     */
     void melanger();
+    /**
+     * @brief Vérifie si la pioche est vide.
+     * @return true si la pioche est vide, false sinon.
+     */
     bool estPiocheVide() const;
 
+    /**
+     * @brief Retourne le type de la pioche.
+     * @return Le type de la pioche.
+     */
     Pioche_type_e getPiocheType() const {
         return type_;
     };
 
+    /**
+     * @brief Retourne le deck de cartes.
+     * @return Référence vers le vecteur du deck.
+     */
     vector<Carte*> & getDeck() {
         return deck_;
     }
 
+    /**
+     * @brief Retourne la pile de défausse.
+     * @return Référence vers le vecteur de défausse.
+     */
     vector<Carte*> & getDefausse() {
         return defausse_;
+    }
+
+    /**
+     * @brief Retire la dernière carte du deck.
+     */
+    void popLastCarte() {
+        if (!deck_.empty()) {
+            deck_.pop_back();
+        }
+    }
+
+    /**
+     * @brief Ajoute une carte à la défausse.
+     * @param carte Pointeur vers la carte à ajouter.
+     */
+    void pushDefausse(Carte* carte) {
+        defausse_.push_back(carte);
     }
 };
 
