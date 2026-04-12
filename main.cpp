@@ -6,7 +6,10 @@ using namespace std;
 
 int main() {
     int nbJoueurs = 0;
-    cout << "Bienvenue dans les Aventuriers du Rail !" << endl;
+    cout << terminal::BLUE  << "Bienvenue "     << terminal::RESET <<
+            terminal::GREEN << "dans les "      << terminal::RESET <<
+            terminal::RED   << "Aventuriers "  << terminal::RESET <<
+            terminal::YELLOW << "du Rail !"    << terminal::RESET << endl;
     cout << "\n--- Règles rapides (récapitulatif) ---" << endl;
     cout << "- Chaque joueur commence avec 20 wagons." << endl;
     cout << "- Mélanger les cartes Train et distribuer 4 cartes à chaque joueur (main cachée)." << endl;
