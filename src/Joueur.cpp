@@ -202,8 +202,11 @@ void Joueur::afficherMain() const {
     cout << "--- Tickets ---" << endl;
     for (Ticket* t : mainTicket) {
         if (t == nullptr) continue;
-        cout << "  " << t->getVilleA()->getNomVille()
-             << " -> " << t->getVilleB()->getNomVille();
+        auto a = t->getVilleA();
+        auto b = t->getVilleB();
+        if (a == nullptr || b == nullptr) continue; 
+        cout << "  " << a->getNomVille()
+             << " -> " << b->getNomVille(); 
         if (t->estRealise(const_cast<Joueur*>(this))) {
             cout << " [RÉUSSI]";
         }

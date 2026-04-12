@@ -3,9 +3,10 @@
 #include "Joueur.h"
 #include "Pioche.h"
 #include "Plateau.h"
+#include "config.h"
 #include <gtest/gtest.h>
 
-TEST(JoueurTest, testDesMethodes) {
+//TEST(JoueurTest, testDesMethodes) {
 //     Joueur j1 = Joueur(Couleur_e::Bleu);
 //     EXPECT_EQ(20, j1.getMainWagon());
 //     // Vérifie que toutes les couleurs sont initialisées à 0
@@ -69,7 +70,7 @@ TEST(JoueurTest, testDesMethodes) {
 //         }
 //     }
 //     EXPECT_TRUE(voiePrise);
-}
+//}
 
 TEST(JoueurTest, testMainWConstructeurOK) {
     Joueur j1 = Joueur(Couleur_e::Bleu);
@@ -78,10 +79,61 @@ TEST(JoueurTest, testMainWConstructeurOK) {
 
 TEST(JoueurTest, testMainCConstructeurOK) {
     Joueur j1 = Joueur(Couleur_e::Bleu);
+    map<Couleur_e, int> M_cartes = j1.getMainCarte();
     // Vérifie que toutes les couleurs sont initialisées à 0
-    for (map<Couleur_e, int>::iterator it = j1.getMainCarte().begin(); it != j1.getMainCarte().end(); ++it){
+    for (map<Couleur_e, int>::iterator it = M_cartes.begin(); it != M_cartes.end(); ++it){
         EXPECT_EQ(0, it->second);
     }
+}
+
+TEST(JoueurTest, testPiocheWagon) {
+    Joueur j1 = Joueur(Couleur_e::Bleu);
+    Pioche pw(Pioche_type_e::CarteW);
+    j1.piocher(3, pw);
+    int compt = 0;
+    map<Couleur_e, int> M_cartes = j1.getMainCarte();
+    for (map<Couleur_e, int>::iterator it = M_cartes.begin(); it != M_cartes.end(); ++it){
+        compt = compt + it->second;
+    }
+    EXPECT_EQ(3, compt);
+}
+
+// 
+
+TEST(JoueurTest, testGetMainTicket) {
+    Joueur j1 = Joueur(Couleur_e::Bleu);
+    Pioche pt(Pioche_type_e::Ticket);
+    j1.piocher(2, pt);
+    EXPECT_EQ(2, j1.getMainTicket().size());
+}
+
+// TEST(JoueurTest, testAfficheCarte) {
+//     Joueur j1 = Joueur(Couleur_e::Bleu);
+//     Pioche pw(Pioche_type_e::CarteW);
+//     Plateau plat = Plateau(MAP_FILE_PATH);
+//     j1.piocher(3, pw);
+//     j1.piocher(2, pt);
+//     EXPECT_NO_THROW(j1.afficherMain());
+// }
+
+// TEST(JoueurTest, testAfficheTicket) {
+//     Joueur j1 = Joueur(Couleur_e::Bleu);
+//     Pioche pt(Pioche_type_e::Ticket);
+//     j1.piocher(2, pt);
+//     EXPECT_EQ(2, j1.getMainTicket().size());
+// }
+
+TEST(JoueurTest, testNbTicketReussi) {
+    Joueur j1 = Joueur(Couleur_e::Bleu);
+    Pioche pt(Pioche_type_e::Ticket);
+    j1.piocher(2, pt);
+    EXPECT_EQ(2, j1.getMainTicket().size());
+}
+
+TEST(JoueurTest, testNbTicketReussisVide) {
+    Joueur j(Couleur_e::Bleu);
+
+    EXPECT_EQ(0, j.getNbTicketReussis());
 }
 
 
