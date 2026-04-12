@@ -53,7 +53,8 @@ TEST(VilleTest, testEstAdjacentAvecRien) {
     Ville a = Ville(0);
     Ville b = Ville(1);
     a.ajoutVilleAdjacente(&b);
-    EXPECT_EQ(false, a.estAdjacent(nullptr));
+    Ville *c = nullptr;
+    EXPECT_EQ(false, a.estAdjacent(c));
 }
 
 TEST(VilleTest, testEstAdjacentListeVide) {
