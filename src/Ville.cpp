@@ -80,5 +80,7 @@ vector<Ville*> &Ville::getAdjacent(){
  * @param v Adresse d'une Ville
  */
 void Ville::ajoutVilleAdjacente(Ville* v){
-    villesAdjacentes.push_back(v);
+    if(v != nullptr){
+        villesAdjacentes.push_back(v);
+    }
 }
