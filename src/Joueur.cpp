@@ -26,6 +26,18 @@ vector<Ticket*> Joueur::getMainTicket() const {
 }
 
 /**
+ * @brief Retourne le nombre de cartes compatibles pour une couleur donnée.
+ * Compte les cartes de la couleur spécifiée plus les locomotives (qui peuvent servir de jokers).
+ * @param couleur La couleur de la voie.
+ * @return Le nombre total de cartes utilisables.
+ */
+int Joueur::nbCartesCompatibles(Couleur_e couleur) const {
+    int cartesColor = mainCarte.count(couleur) ? mainCarte.at(couleur) : 0;
+    int locos = mainCarte.count(Couleur_e::Locomotive) ? mainCarte.at(Couleur_e::Locomotive) : 0;
+    return cartesColor + locos;
+}
+
+/**
  * @brief Compte les tickets effectivement réussis pour ce joueur.
  * Parcourt tous les tickets en main et appelle estRealise() sur chacun.
  * @return Le nombre de tickets réussis.
