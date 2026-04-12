@@ -1,6 +1,6 @@
 #include <iostream>
-#include "VoieFerree.h"
-#include "Joueur.h"
+#include "/home/riana/Documents/smp-tp11-note-secgpas/include/VoieFerree.h"
+#include "/home/riana/Documents/smp-tp11-note-secgpas/include/Joueur.h"
 
 using namespace std;
 
@@ -31,7 +31,12 @@ Joueur* VoieFerree::getProprio() const {
  * @brief Mutateur qui permet de modifier l'attribut proprio lorsqu'un joueur pose ses trains
  */
 void VoieFerree::setProprio(Joueur* j){
-    proprio = j;
+    if (proprio == nullptr){
+        proprio = j;
+    }
+    else{
+        proprio = proprio; //ne modifie pas l'appartenance de la voie
+    }
 }
 
 /**
