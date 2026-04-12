@@ -96,6 +96,19 @@ Depuis `build` :
 ctest --output-on-failure
 ```
 
+## Génération du diagramme de classes
+### Installation de hpp2plantuml
+```bash
+python3 -m venv venv
+source venv/bin/activate  # Linux/Mac
+venv\Scripts\activate  # Windows
+pip install hpp2plantuml
+```
+### Génération du diagramme
+```bash
+hpp2plantuml -i "include/*.h" -o diagramme_classes.puml
+```
+
 Ou exécuter chaque cible :
 - `VilleTest.out`
 - `VoieFerreeTest.out`
