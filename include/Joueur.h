@@ -9,7 +9,7 @@
 #include "Pioche.h"
 #include "Ville.h"
 
-class Plateau; 
+class Plateau;
 
 using namespace std;
 
@@ -18,21 +18,13 @@ using namespace std;
  */
 class Joueur {
     private:
-        /**
-         * @brief Couleur du joueur.
-         */
+        /** @brief Couleur du joueur. */
         Couleur_e couleur;
-        /**
-         * @brief Main des cartes du joueur, mappée par couleur.
-         */
+        /** @brief Main des cartes train du joueur, mappée par couleur. */
         map<Couleur_e, int> mainCarte;
-        /**
-         * @brief Main des tickets du joueur.
-         */
+        /** @brief Main des tickets du joueur. */
         vector<Ticket*> mainTicket;
-        /**
-         * @brief Nombre de wagons restants du joueur.
-         */
+        /** @brief Nombre de wagons restants du joueur. */
         int mainWagon;
 
     public:
@@ -42,54 +34,53 @@ class Joueur {
          */
         Joueur(Couleur_e c);
 
-        /**
-         * @brief Retourne le nombre de wagons restants.
-         * @return Le nombre de wagons.
-         */
+        /** @brief Retourne le nombre de wagons restants. */
         int getMainWagon() const;
-        /**
-         * @brief Retourne la couleur du joueur.
-         * @return La couleur.
-         */
+        /** @brief Retourne la couleur du joueur. */
         Couleur_e getCouleur() const;
-        /**
-         * @brief Retourne la main des cartes.
-         * @return La map des cartes par couleur.
-         */
+        /** @brief Retourne la main des cartes train. */
         map<Couleur_e, int> getMainCarte() const;
-        /**
-         * @brief Retourne la main des tickets.
-         * @return Le vecteur des tickets.
-         */
+        /** @brief Retourne la main des tickets. */
         vector<Ticket*> getMainTicket() const;
+
         /**
-         * @brief Retourne le nombre de tickets réussis.
+         * @brief Retourne le nombre de tickets effectivement réussis.
+         * Appelle estRealise() sur chaque ticket de la main.
          * @return Le nombre de tickets réussis.
          */
         int getNbTicketReussis() const;
 
         /**
          * @brief Permet au joueur de piocher des cartes.
+         * Gère le recyclage de la défausse si la pioche est vide.
          * @param nbAPiocher Nombre de cartes à piocher.
          * @param type La pioche depuis laquelle piocher.
          */
         void piocher(int nbAPiocher, Pioche& type);
+
         /**
-         * @brief Permet au joueur de poser des wagons sur une voie.
+         * @brief Tente de poser des wagons sur la voie entre a et b.
+         * Vérifie les ressources, défausse les cartes utilisées (avec gestion
+         * des locomotives comme jokers) et appelle verifierTickets().
          * @param a Ville de départ.
          * @param b Ville d'arrivée.
-         * @param c Couleur de la voie.
+         * @param couleurVoie Couleur de la voie à prendre.
          * @param plateau Le plateau de jeu.
          */
-        void poserWagon(Ville a, Ville b, Couleur_e c, Plateau& plateau);
+        void poserWagon(Ville a, Ville b, Couleur_e couleurVoie, Plateau& plateau);
+
         /**
-         * @brief Permet au joueur de défausser des tickets et d'en piocher de nouveaux.
+         * @brief Vérifie tous les tickets en main et annonce les tickets réussis.
+         */
+        void verifierTickets();
+
+        /**
+         * @brief Défausse jusqu'à 2 tickets dans la défausse de la pioche et en pioche de nouveaux.
          * @param piocheTicket La pioche de tickets.
          */
         void defausser(Pioche& piocheTicket);
-        /**
-         * @brief Affiche la main du joueur.
-         */
+
+        /** @brief Affiche la main du joueur (cartes + tickets avec statut). */
         void afficherMain() const;
 };
 

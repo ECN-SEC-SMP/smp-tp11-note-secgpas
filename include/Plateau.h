@@ -30,7 +30,6 @@ public:
   /**
    * @brief Constructeur du plateau de jeu.
    * Il charge les villes et les voies ferrées à partir d'un fichier csv.
-   * TODO: Construire un graphe à partir des villes et des voies ferrées pour faciliter les recherches de chemins entre les villes.
    * @param nomFichierMap Le chemin vers le fichier csv contenant les informations sur les villes et les voies ferrées
    */
   Plateau(const string & nomFichierMap);
