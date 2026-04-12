@@ -122,7 +122,8 @@ void Plateau::affichePlateau() const {
                 } else {
                     stringstream ss;
 
-                    bool color_applied = false;
+                    bool color_applied        = false;
+                    int  colored_weight_count = 0;
 
                     for (size_t i = 0; i < voies_ferrees.size(); i++) {
                         color_applied = false;
@@ -131,6 +132,7 @@ void Plateau::affichePlateau() const {
                         } else {
                             ss << applyPlayerColor(to_string(voies_ferrees[i].getPoids()), voies_ferrees[i].getProprio());
                             color_applied = true;
+                            colored_weight_count++;
                         }
 
                         if (i < voies_ferrees.size() - 1) {
@@ -140,7 +142,7 @@ void Plateau::affichePlateau() const {
                     cout << " | ";
 
                     if (color_applied) {
-                        cout << setw(33);
+                        cout << setw(11 + colored_weight_count * 11);
                     } else {
                         cout << setw(11);
                     }

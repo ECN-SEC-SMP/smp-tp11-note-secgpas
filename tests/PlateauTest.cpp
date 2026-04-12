@@ -232,8 +232,42 @@ TEST(PlateauTest, VoiesFerreesInitialisation) {
     ASSERT_EQ(p.getVoieFerrees()[38].getPoids(), 3);
 }
 
+TEST(PlateauTest, AffichePlateauSansProprietaire)
+{
+    Plateau p(MAP_FILE_PATH);
 
-TEST(PlateauTest, AffichagePlateau) {
+    testing::internal::CaptureStdout();
+    p.affichePlateau();
+    std::string output = testing::internal::GetCapturedStdout();
+
+    std::string expected_output = "----------=== Plateau de jeu ===----------\n"
+"               Seattle       Calgary       Helena        San Francisco Los Angeles   Salt Lake CityAlbuquerque   Denver        Winnipeg      Duluth        Kansas City   Dallas        New Orleans   Atlanta       Miami         Chicago       Washington    Montreal      New York      \n"
+"              --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n"
+"Seattle        | X           | 4, 4        | 4           | 5           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X          \n"
+"Calgary        | 4, 4        | X           | X           | X           | X           | X           | X           | X           | 4, 4        | X           | X           | X           | X           | X           | X           | X           | X           | X           | X          \n"
+"Helena         | 4           | X           | X           | X           | X           | 3           | X           | 3           | X           | X           | 5           | X           | X           | X           | X           | X           | X           | X           | X          \n"
+"San Francisco  | 5           | X           | X           | X           | 3           | 3, 3        | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X          \n"
+"Los Angeles    | X           | X           | X           | 3           | X           | 3           | 4           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X          \n"
+"Salt Lake City | X           | X           | 3           | 3, 3        | 3           | X           | X           | 3, 3        | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X          \n"
+"Albuquerque    | X           | X           | X           | X           | 4           | X           | X           | 2           | X           | X           | X           | 3           | X           | X           | X           | X           | X           | X           | X          \n"
+"Denver         | X           | X           | 3           | X           | X           | 3, 3        | 2           | X           | X           | X           | 4           | 3           | X           | X           | X           | X           | X           | X           | X          \n"
+"Winnipeg       | X           | 4, 4        | X           | X           | X           | X           | X           | X           | X           | 3, 3        | X           | X           | X           | X           | X           | X           | X           | X           | X          \n"
+"Duluth         | X           | X           | X           | X           | X           | X           | X           | X           | 3, 3        | X           | X           | X           | X           | X           | X           | 3, 3        | X           | 4           | X          \n"
+"Kansas City    | X           | X           | 5           | X           | X           | X           | X           | 4           | X           | X           | X           | X           | X           | X           | X           | 4, 4        | X           | X           | X          \n"
+"Dallas         | X           | X           | X           | X           | X           | X           | 3           | 3           | X           | X           | X           | X           | 3           | 3           | X           | X           | X           | X           | X          \n"
+"New Orleans    | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | 3           | X           | 4           | 6           | X           | X           | X           | X          \n"
+"Atlanta        | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | 3           | 4           | X           | 5           | 4           | 3           | X           | X          \n"
+"Miami          | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | 6           | 5           | X           | X           | X           | X           | X          \n"
+"Chicago        | X           | X           | X           | X           | X           | X           | X           | X           | X           | 3, 3        | 4, 4        | X           | X           | 4           | X           | X           | 4           | X           | X          \n"
+"Washington     | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | 3           | X           | 4           | X           | X           | 3, 3       \n"
+"Montreal       | X           | X           | X           | X           | X           | X           | X           | X           | X           | 4           | X           | X           | X           | X           | X           | X           | X           | X           | 3, 3       \n"
+"New York       | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | 3, 3        | 3, 3        | X          \n";
+
+    EXPECT_EQ(expected_output, output);
+}
+
+
+TEST(PlateauTest, AffichagePlateau2Joueurs) {
     Plateau p(MAP_FILE_PATH);
     Joueur joueur_rouge(Couleur_e::Rouge);
     Joueur joueur_bleu(Couleur_e::Bleu);
@@ -241,5 +275,114 @@ TEST(PlateauTest, AffichagePlateau) {
     p.getVoieFerrees()[0].setProprio(&joueur_rouge);
     p.getVoieFerrees()[1].setProprio(&joueur_bleu);
 
+    testing::internal::CaptureStdout();
     p.affichePlateau();
+    std::string output = testing::internal::GetCapturedStdout();
+
+    std::string expected_output = "----------=== Plateau de jeu ===----------\n"
+"               Seattle       Calgary       Helena        San Francisco Los Angeles   Salt Lake CityAlbuquerque   Denver        Winnipeg      Duluth        Kansas City   Dallas        New Orleans   Atlanta       Miami         Chicago       Washington    Montreal      New York      \n"
+"              --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n"
+"Seattle        | X           | \x1B[1;31m4\x1B[0m, \x1B[1;34m4\x1B[0m        | 4           | 5           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X          \n"
+"Calgary        | \x1B[1;31m4\x1B[0m, \x1B[1;34m4\x1B[0m        | X           | X           | X           | X           | X           | X           | X           | 4, 4        | X           | X           | X           | X           | X           | X           | X           | X           | X           | X          \n"
+"Helena         | 4           | X           | X           | X           | X           | 3           | X           | 3           | X           | X           | 5           | X           | X           | X           | X           | X           | X           | X           | X          \n"
+"San Francisco  | 5           | X           | X           | X           | 3           | 3, 3        | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X          \n"
+"Los Angeles    | X           | X           | X           | 3           | X           | 3           | 4           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X          \n"
+"Salt Lake City | X           | X           | 3           | 3, 3        | 3           | X           | X           | 3, 3        | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X          \n"
+"Albuquerque    | X           | X           | X           | X           | 4           | X           | X           | 2           | X           | X           | X           | 3           | X           | X           | X           | X           | X           | X           | X          \n"
+"Denver         | X           | X           | 3           | X           | X           | 3, 3        | 2           | X           | X           | X           | 4           | 3           | X           | X           | X           | X           | X           | X           | X          \n"
+"Winnipeg       | X           | 4, 4        | X           | X           | X           | X           | X           | X           | X           | 3, 3        | X           | X           | X           | X           | X           | X           | X           | X           | X          \n"
+"Duluth         | X           | X           | X           | X           | X           | X           | X           | X           | 3, 3        | X           | X           | X           | X           | X           | X           | 3, 3        | X           | 4           | X          \n"
+"Kansas City    | X           | X           | 5           | X           | X           | X           | X           | 4           | X           | X           | X           | X           | X           | X           | X           | 4, 4        | X           | X           | X          \n"
+"Dallas         | X           | X           | X           | X           | X           | X           | 3           | 3           | X           | X           | X           | X           | 3           | 3           | X           | X           | X           | X           | X          \n"
+"New Orleans    | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | 3           | X           | 4           | 6           | X           | X           | X           | X          \n"
+"Atlanta        | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | 3           | 4           | X           | 5           | 4           | 3           | X           | X          \n"
+"Miami          | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | 6           | 5           | X           | X           | X           | X           | X          \n"
+"Chicago        | X           | X           | X           | X           | X           | X           | X           | X           | X           | 3, 3        | 4, 4        | X           | X           | 4           | X           | X           | 4           | X           | X          \n"
+"Washington     | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | 3           | X           | 4           | X           | X           | 3, 3       \n"
+"Montreal       | X           | X           | X           | X           | X           | X           | X           | X           | X           | 4           | X           | X           | X           | X           | X           | X           | X           | X           | 3, 3       \n"
+"New York       | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | 3, 3        | 3, 3        | X          \n";
+
+    EXPECT_EQ(expected_output, output);
+}
+
+TEST(PlateauTest, AffichagePlateau3Joueurs) {
+    Plateau p(MAP_FILE_PATH);
+    Joueur joueur_rouge(Couleur_e::Rouge);
+    Joueur joueur_bleu(Couleur_e::Bleu);
+    Joueur joueur_vert(Couleur_e::Vert);
+
+    p.getVoieFerrees()[0].setProprio(&joueur_rouge);
+    p.getVoieFerrees()[1].setProprio(&joueur_bleu);
+    p.getVoieFerrees()[2].setProprio(&joueur_vert);
+
+    testing::internal::CaptureStdout();
+    p.affichePlateau();
+    std::string output = testing::internal::GetCapturedStdout();
+
+    std::string expected_output = "----------=== Plateau de jeu ===----------\n"
+"               Seattle       Calgary       Helena        San Francisco Los Angeles   Salt Lake CityAlbuquerque   Denver        Winnipeg      Duluth        Kansas City   Dallas        New Orleans   Atlanta       Miami         Chicago       Washington    Montreal      New York      \n"
+"              --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n"
+"Seattle        | X           | \x1B[1;31m4\x1B[0m, \x1B[1;34m4\x1B[0m        | \x1B[1;32m4\x1B[0m           | 5           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X          \n"
+"Calgary        | \x1B[1;31m4\x1B[0m, \x1B[1;34m4\x1B[0m        | X           | X           | X           | X           | X           | X           | X           | 4, 4        | X           | X           | X           | X           | X           | X           | X           | X           | X           | X          \n"
+"Helena         | \x1B[1;32m4\x1B[0m           | X           | X           | X           | X           | 3           | X           | 3           | X           | X           | 5           | X           | X           | X           | X           | X           | X           | X           | X          \n"
+"San Francisco  | 5           | X           | X           | X           | 3           | 3, 3        | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X          \n"
+"Los Angeles    | X           | X           | X           | 3           | X           | 3           | 4           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X          \n"
+"Salt Lake City | X           | X           | 3           | 3, 3        | 3           | X           | X           | 3, 3        | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X          \n"
+"Albuquerque    | X           | X           | X           | X           | 4           | X           | X           | 2           | X           | X           | X           | 3           | X           | X           | X           | X           | X           | X           | X          \n"
+"Denver         | X           | X           | 3           | X           | X           | 3, 3        | 2           | X           | X           | X           | 4           | 3           | X           | X           | X           | X           | X           | X           | X          \n"
+"Winnipeg       | X           | 4, 4        | X           | X           | X           | X           | X           | X           | X           | 3, 3        | X           | X           | X           | X           | X           | X           | X           | X           | X          \n"
+"Duluth         | X           | X           | X           | X           | X           | X           | X           | X           | 3, 3        | X           | X           | X           | X           | X           | X           | 3, 3        | X           | 4           | X          \n"
+"Kansas City    | X           | X           | 5           | X           | X           | X           | X           | 4           | X           | X           | X           | X           | X           | X           | X           | 4, 4        | X           | X           | X          \n"
+"Dallas         | X           | X           | X           | X           | X           | X           | 3           | 3           | X           | X           | X           | X           | 3           | 3           | X           | X           | X           | X           | X          \n"
+"New Orleans    | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | 3           | X           | 4           | 6           | X           | X           | X           | X          \n"
+"Atlanta        | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | 3           | 4           | X           | 5           | 4           | 3           | X           | X          \n"
+"Miami          | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | 6           | 5           | X           | X           | X           | X           | X          \n"
+"Chicago        | X           | X           | X           | X           | X           | X           | X           | X           | X           | 3, 3        | 4, 4        | X           | X           | 4           | X           | X           | 4           | X           | X          \n"
+"Washington     | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | 3           | X           | 4           | X           | X           | 3, 3       \n"
+"Montreal       | X           | X           | X           | X           | X           | X           | X           | X           | X           | 4           | X           | X           | X           | X           | X           | X           | X           | X           | 3, 3       \n"
+"New York       | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | 3, 3        | 3, 3        | X          \n";
+
+    EXPECT_EQ(expected_output, output);
+}
+
+TEST(PlateauTest, AffichagePlateau4Joueurs) {
+    Plateau p(MAP_FILE_PATH);
+    Joueur joueur_rouge(Couleur_e::Rouge);
+    Joueur joueur_bleu(Couleur_e::Bleu);
+    Joueur joueur_vert(Couleur_e::Vert);
+    Joueur joueur_jaune(Couleur_e::Jaune);
+
+    p.getVoieFerrees()[0].setProprio(&joueur_rouge);
+    p.getVoieFerrees()[1].setProprio(&joueur_bleu);
+    p.getVoieFerrees()[2].setProprio(&joueur_vert);
+    p.getVoieFerrees()[3].setProprio(&joueur_jaune);
+
+    testing::internal::CaptureStdout();
+    p.affichePlateau();
+    std::string output = testing::internal::GetCapturedStdout();
+
+    std::string expected_output = "----------=== Plateau de jeu ===----------\n"
+"               Seattle       Calgary       Helena        San Francisco Los Angeles   Salt Lake CityAlbuquerque   Denver        Winnipeg      Duluth        Kansas City   Dallas        New Orleans   Atlanta       Miami         Chicago       Washington    Montreal      New York      \n"
+"              --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n"
+"Seattle        | X           | \x1B[1;31m4\x1B[0m, \x1B[1;34m4\x1B[0m        | \x1B[1;32m4\x1B[0m           | \x1B[1;33m5\x1B[0m           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X          \n"
+"Calgary        | \x1B[1;31m4\x1B[0m, \x1B[1;34m4\x1B[0m        | X           | X           | X           | X           | X           | X           | X           | 4, 4        | X           | X           | X           | X           | X           | X           | X           | X           | X           | X          \n"
+"Helena         | \x1B[1;32m4\x1B[0m           | X           | X           | X           | X           | 3           | X           | 3           | X           | X           | 5           | X           | X           | X           | X           | X           | X           | X           | X          \n"
+"San Francisco  | \x1B[1;33m5\x1B[0m           | X           | X           | X           | 3           | 3, 3        | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X          \n"
+"Los Angeles    | X           | X           | X           | 3           | X           | 3           | 4           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X          \n"
+"Salt Lake City | X           | X           | 3           | 3, 3        | 3           | X           | X           | 3, 3        | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X          \n"
+"Albuquerque    | X           | X           | X           | X           | 4           | X           | X           | 2           | X           | X           | X           | 3           | X           | X           | X           | X           | X           | X           | X          \n"
+"Denver         | X           | X           | 3           | X           | X           | 3, 3        | 2           | X           | X           | X           | 4           | 3           | X           | X           | X           | X           | X           | X           | X          \n"
+"Winnipeg       | X           | 4, 4        | X           | X           | X           | X           | X           | X           | X           | 3, 3        | X           | X           | X           | X           | X           | X           | X           | X           | X          \n"
+"Duluth         | X           | X           | X           | X           | X           | X           | X           | X           | 3, 3        | X           | X           | X           | X           | X           | X           | 3, 3        | X           | 4           | X          \n"
+"Kansas City    | X           | X           | 5           | X           | X           | X           | X           | 4           | X           | X           | X           | X           | X           | X           | X           | 4, 4        | X           | X           | X          \n"
+"Dallas         | X           | X           | X           | X           | X           | X           | 3           | 3           | X           | X           | X           | X           | 3           | 3           | X           | X           | X           | X           | X          \n"
+"New Orleans    | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | 3           | X           | 4           | 6           | X           | X           | X           | X          \n"
+"Atlanta        | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | 3           | 4           | X           | 5           | 4           | 3           | X           | X          \n"
+"Miami          | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | 6           | 5           | X           | X           | X           | X           | X          \n"
+"Chicago        | X           | X           | X           | X           | X           | X           | X           | X           | X           | 3, 3        | 4, 4        | X           | X           | 4           | X           | X           | 4           | X           | X          \n"
+"Washington     | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | 3           | X           | 4           | X           | X           | 3, 3       \n"
+"Montreal       | X           | X           | X           | X           | X           | X           | X           | X           | X           | 4           | X           | X           | X           | X           | X           | X           | X           | X           | 3, 3       \n"
+"New York       | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | X           | 3, 3        | 3, 3        | X          \n";
+
+    EXPECT_EQ(expected_output, output);
 }
