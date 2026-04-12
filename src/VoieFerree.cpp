@@ -1,6 +1,6 @@
 #include <iostream>
-#include "/home/riana/Documents/smp-tp11-note-secgpas/include/VoieFerree.h"
-#include "/home/riana/Documents/smp-tp11-note-secgpas/include/Joueur.h"
+#include "VoieFerree.h"
+#include "Joueur.h"
 
 using namespace std;
 
