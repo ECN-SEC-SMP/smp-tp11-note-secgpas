@@ -9,10 +9,6 @@
 
 
 TEST(VoieFerreeTest, testConstructeur) {
-    listeVoieFerre_t voies;
-    listeVille_t villes;
-    EXPECT_TRUE(ouvrirFichierMap(MAP_FILE_PATH, voies, villes));
-
     Ville a = Ville(0);
     Ville b = Ville(1);
     VoieFerree l1 = VoieFerree(&a, &b, 4, Couleur_e::Noir);
@@ -20,10 +16,6 @@ TEST(VoieFerreeTest, testConstructeur) {
 }
 
 TEST(VoieFerreeTest, testGetVilleFonctionnel) {
-    listeVoieFerre_t voies;
-    listeVille_t villes;
-    EXPECT_TRUE(ouvrirFichierMap(MAP_FILE_PATH, voies, villes));
-
     Ville a = Ville(0);
     Ville b = Ville(1);
     VoieFerree l1 = VoieFerree(&a, &b, 4, Couleur_e::Noir);
@@ -32,10 +24,6 @@ TEST(VoieFerreeTest, testGetVilleFonctionnel) {
 }
 
 TEST(VoieFerreeTest, testGetVillePasFonctionnel) {
-    listeVoieFerre_t voies;
-    listeVille_t villes;
-    EXPECT_TRUE(ouvrirFichierMap(MAP_FILE_PATH, voies, villes));
-
     Ville a = Ville(0);
     Ville b = Ville(1);
     VoieFerree l1 = VoieFerree(&a, &b, 4, Couleur_e::Noir);
@@ -44,9 +32,6 @@ TEST(VoieFerreeTest, testGetVillePasFonctionnel) {
 }
 
 TEST(VoieFerreeTest, testDisponibiliteTrue) {
-    listeVoieFerre_t voies;
-    listeVille_t villes;
-    EXPECT_TRUE(ouvrirFichierMap(MAP_FILE_PATH, voies, villes));
     Ville a = Ville(0);
     Ville b = Ville(1);
     VoieFerree l1 = VoieFerree(&a, &b, 4, Couleur_e::Noir);
@@ -57,9 +42,6 @@ TEST(VoieFerreeTest, testDisponibiliteTrue) {
 }
 
 TEST(VoieFerreeTest, testDisponibiliteFalse) {
-    listeVoieFerre_t voies;
-    listeVille_t villes;
-    EXPECT_TRUE(ouvrirFichierMap(MAP_FILE_PATH, voies, villes));
     Ville a = Ville(0);
     Ville b = Ville(1);
     VoieFerree l1 = VoieFerree(&a, &b, 4, Couleur_e::Noir);
@@ -72,9 +54,6 @@ TEST(VoieFerreeTest, testDisponibiliteFalse) {
 
 
 TEST(VoieFerreeTest, testSetProprioPremier) {
-    listeVoieFerre_t voies;
-    listeVille_t villes;
-    EXPECT_TRUE(ouvrirFichierMap(MAP_FILE_PATH, voies, villes));
     Ville a = Ville(0);
     Ville b = Ville(1);
     VoieFerree l1 = VoieFerree(&a, &b, 4, Couleur_e::Noir);
@@ -86,9 +65,6 @@ TEST(VoieFerreeTest, testSetProprioPremier) {
 }
 
 TEST(VoieFerreeTest, testSetProprioDeuxieme) {
-    listeVoieFerre_t voies;
-    listeVille_t villes;
-    EXPECT_TRUE(ouvrirFichierMap(MAP_FILE_PATH, voies, villes));
     Ville a = Ville(0);
     Ville b = Ville(1);
     VoieFerree l1 = VoieFerree(&a, &b, 4, Couleur_e::Noir);
@@ -101,9 +77,6 @@ TEST(VoieFerreeTest, testSetProprioDeuxieme) {
 }
 
 TEST(VoieFerreeTest, testGetProprioVide) {
-    listeVoieFerre_t voies;
-    listeVille_t villes;
-    EXPECT_TRUE(ouvrirFichierMap(MAP_FILE_PATH, voies, villes));
     Ville a = Ville(0);
     Ville b = Ville(1);
     VoieFerree l1 = VoieFerree(&a, &b, 4, Couleur_e::Noir);
@@ -112,9 +85,6 @@ TEST(VoieFerreeTest, testGetProprioVide) {
 }
 
 TEST(VoieFerreeTest, testGetProprio) {
-    listeVoieFerre_t voies;
-    listeVille_t villes;
-    EXPECT_TRUE(ouvrirFichierMap(MAP_FILE_PATH, voies, villes));
     Ville a = Ville(0);
     Ville b = Ville(1);
     VoieFerree l1 = VoieFerree(&a, &b, 4, Couleur_e::Noir);
@@ -126,9 +96,6 @@ TEST(VoieFerreeTest, testGetProprio) {
 }
 
 TEST(VoieFerreeTest, testGetProprioMauvais) {
-    listeVoieFerre_t voies;
-    listeVille_t villes;
-    EXPECT_TRUE(ouvrirFichierMap(MAP_FILE_PATH, voies, villes));
     Ville a = Ville(0);
     Ville b = Ville(1);
     VoieFerree l1 = VoieFerree(&a, &b, 4, Couleur_e::Noir);
@@ -141,9 +108,6 @@ TEST(VoieFerreeTest, testGetProprioMauvais) {
 }
 
 TEST(VoieFerreeTest, testGetCouleur) {
-    listeVoieFerre_t voies;
-    listeVille_t villes;
-    EXPECT_TRUE(ouvrirFichierMap(MAP_FILE_PATH, voies, villes));
     Ville a = Ville(0);
     Ville b = Ville(1);
     VoieFerree l1 = VoieFerree(&a, &b, 4, Couleur_e::Noir);
@@ -152,9 +116,6 @@ TEST(VoieFerreeTest, testGetCouleur) {
 }
 
 TEST(VoieFerreeTest, testGetPoids) {
-    listeVoieFerre_t voies;
-    listeVille_t villes;
-    EXPECT_TRUE(ouvrirFichierMap(MAP_FILE_PATH, voies, villes));
     Ville a = Ville(0);
     Ville b = Ville(1);
     VoieFerree l1 = VoieFerree(&a, &b, 4, Couleur_e::Noir);
