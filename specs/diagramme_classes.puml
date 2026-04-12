@@ -1,0 +1,237 @@
+@startuml
+
+
+
+
+
+/' Objects '/
+
+class CTrain {
+	+CTrain(Couleur_e couleur)
+	+getType() : Carte_type_e {query}
+	-couleur_ : Couleur_e
+	+getCouleur() : Couleur_e {query}
+	+estRealise(Joueur* joueur) : bool {query}
+}
+
+
+abstract class Carte {
+	+{abstract} getType() : Carte_type_e {query}
+	+{abstract} estRealise(Joueur* joueur) : bool {query}
+}
+
+
+class Jeu {
+	+Jeu(int nbJoueur)
+	-tickets : Pioche
+	-train : Pioche
+	-p : Plateau
+	+estFinie() : bool
+	-nbTour : int
+	-joueurs : vector<Joueur>
+	+afficherEtat() : void {query}
+	+partie() : void
+}
+
+
+class Joueur {
+	+Joueur(Couleur_e c)
+	-couleur : Couleur_e
+	+getCouleur() : Couleur_e {query}
+	+getMainWagon() : int {query}
+	+getNbTicketReussis() : int {query}
+	-mainWagon : int
+	+getMainCarte() : map<Couleur_e , int> {query}
+	-mainCarte : map<Couleur_e, int>
+	+getMainTicket() : vector<Ticket*> {query}
+	-mainTicket : vector<Ticket*>
+	+afficherMain() : void {query}
+	+defausser(Pioche& piocheTicket) : void
+	+piocher(int nbAPiocher, Pioche& type) : void
+	+poserWagon(Ville a, Ville b, Couleur_e c, Plateau& plateau) : void
+}
+
+
+class Pioche {
+	+Pioche(Pioche_type_e type)
+	+getPiocheType() : Pioche_type_e {query}
+	-type_ : Pioche_type_e
+	+estPiocheVide() : bool {query}
+	-deck_ : vector<Carte*>
+	-defausse_ : vector<Carte*>
+	+getDeck() : vector<Carte*>&
+	+getDefausse() : vector<Carte*>&
+	+melanger() : void
+	+popLastCarte() : void
+	+pushDefausse(Carte* carte) : void
+}
+
+
+class Plateau {
+	+Plateau(const string& nomFichierMap)
+	+getVille(int i) : Ville&
+	+getVille(const string& nomVille) : Ville*
+	-graphe_ville_ : Ville*
+	-villes_ : vector<Ville>
+	+getVilles() : vector<Ville>&
+	+getVoieFerrees(const Ville& villeA, const Ville& villeB) : vector<VoieFerree> {query}
+	-voie_ferrees_ : vector<VoieFerree>
+	+getVoieFerrees() : vector<VoieFerree>&
+	+affichePlateau() : void {query}
+}
+
+
+class Ticket {
+	+Ticket(Plateau* plateau, Ville* villeA, Ville* villeB, const int id)
+	+Ticket(Plateau* plateau, const string& nomVilleA, const string& nomVilleB, const int id)
+	+getType() : Carte_type_e {query}
+	+plateau_ : Plateau*
+	+getVilleA() : Ville* {query}
+	+getVilleB() : Ville* {query}
+	+villeA_ : Ville*
+	+villeB_ : Ville*
+	+estRealise(Joueur* joueur) : bool {query}
+	+getId() : int {query}
+	+id_ : int
+	+{static} loadFromCSVFile(Plateau* plateau, const string& nomFichierCSVTicket) : vector<Ticket>
+	+setId(const int id) : void
+	+setVilleA(Ville* villeA) : void
+	+setVilleB(Ville* villeB) : void
+}
+
+
+class Ville {
+	+Ville(int i)
+	+Ville(string NomVille)
+	+estAdjacent(Ville* ville) : bool {query}
+	+estAdjacent(const string& nomVille) : bool
+	+getNomVille() : string {query}
+	-ville_ : string
+	-villesAdjacentes : vector<Ville*>
+	+getAdjacent() : vector<Ville*>&
+	+afficheAdjacent() : void
+	+ajoutVilleAdjacente(Ville* v) : void
+}
+
+
+class VoieFerree {
+	+VoieFerree(Ville* v1, Ville* v2, int p, Couleur_e c)
+	-c : Couleur_e
+	+getCouleur() : Couleur_e
+	+getProprio() : Joueur* {query}
+	-proprio : Joueur*
+	+getVille1() : Ville*
+	+getVille1() : Ville* {query}
+	+getVille2() : Ville*
+	+getVille2() : Ville* {query}
+	-ville1 : Ville*
+	-ville2 : Ville*
+	+estDispo() : bool
+	+estProprio(Joueur* joueur) : bool {query}
+	+getPoids() : int
+	-poids : int
+	+setProprio(Joueur* j) : void
+}
+
+
+enum Carte_type_e {
+	Ticket
+	Train
+}
+
+
+enum Couleur_e {
+	Blanc
+	Bleu
+	Inconnue
+	Jaune
+	Locomotive
+	Noir
+	Orange
+	Rouge
+	Vert
+}
+
+
+enum Pioche_type_e {
+	CarteW
+	Ticket
+}
+
+
+
+
+
+/' Inheritance relationships '/
+
+Carte <|-- CTrain
+
+
+Carte <|-- Ticket
+
+
+
+
+
+/' Aggregation relationships '/
+
+CTrain *-- Couleur_e
+
+
+Jeu *-- Joueur
+
+
+Jeu "2" *-- Pioche
+
+
+Jeu *-- Plateau
+
+
+Joueur "2" *-- Couleur_e
+
+
+Joueur o-- Ticket
+
+
+Pioche "2" o-- Carte
+
+
+Pioche *-- Pioche_type_e
+
+
+Plateau o-- Ville
+
+
+Plateau *-- Ville
+
+
+Plateau *-- VoieFerree
+
+
+Ticket o-- Plateau
+
+
+Ticket "2" o-- Ville
+
+
+Ville o-- Ville
+
+
+VoieFerree *-- Couleur_e
+
+
+VoieFerree o-- Joueur
+
+
+VoieFerree "2" o-- Ville
+
+
+
+
+
+
+/' Nested objects '/
+
+
+
+@enduml
