@@ -16,7 +16,6 @@ Jeu::Jeu(int nbJoueur) : p(MAP_FILE_PATH), tickets(Pioche_type_e::Ticket), train
         }
     };
 
-    // Correction : taken n'est plus static, il vit le temps du constructeur
     vector<bool> taken(available.size(), false);
 
     for (int i = 0; i < nbJoueur; i++) {
@@ -49,7 +48,6 @@ Jeu::Jeu(int nbJoueur) : p(MAP_FILE_PATH), tickets(Pioche_type_e::Ticket), train
         }
     }
 
-    // Correction : distribution initiale APRÈS que tous les joueurs sont créés
     for (size_t i = 0; i < joueurs.size(); ++i) {
         joueurs.at(i).piocher(4, train);
     }
@@ -119,7 +117,6 @@ void Jeu::partie() {
                 cin >> decision;
             }
 
-            // Option afficher plateau / afficher main : on redemande l'action ensuite
             while (decision == 3 || decision == 4) {
                 if (decision == 3) {
                     p.affichePlateau();
