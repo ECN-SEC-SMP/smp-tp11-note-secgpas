@@ -48,7 +48,8 @@ class Joueur {
 	+afficherMain() : void {query}
 	+defausser(Pioche& piocheTicket) : void
 	+piocher(int nbAPiocher, Pioche& type) : void
-	+poserWagon(Ville a, Ville b, Couleur_e c, Plateau& plateau) : void
+	+poserWagon(Ville a, Ville b, Couleur_e couleurVoie, Plateau& plateau) : void
+	+verifierTickets() : void
 }
 
 
