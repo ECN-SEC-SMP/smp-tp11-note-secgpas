@@ -14,7 +14,13 @@ using namespace std;
  * Mélange aléatoirement les cartes du deck.
  */
 void Pioche::melanger() {
-    std::shuffle(deck_.begin(), deck_.end(), std::default_random_engine());
+    if (!TRUE_RANDOM) {
+        std::shuffle(deck_.begin(), deck_.end(), std::default_random_engine());
+    } else {
+        std::random_device rd;
+        std::mt19937 g(rd());
+        std::shuffle(deck_.begin(), deck_.end(), g);
+    }
 }
 
 /**
@@ -29,7 +35,7 @@ Pioche::Pioche(Pioche_type_e type) {
     type_ = type;
 
     if (type == Pioche_type_e::CarteW) {
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < NB_CTRAIN_PAR_COULEUR; i++) {
             deck_.push_back(new CTrain(Couleur_e::Jaune));
             deck_.push_back(new CTrain(Couleur_e::Bleu));
             deck_.push_back(new CTrain(Couleur_e::Rouge));
@@ -38,16 +44,12 @@ Pioche::Pioche(Pioche_type_e type) {
             deck_.push_back(new CTrain(Couleur_e::Blanc));
         }
 
-        for (int i = 0; i < 12; i++) {
+        for (int i = 0; i < NB_CTRAIN_LOCOMOTIVE; i++) {
             deck_.push_back(new CTrain(Couleur_e::Locomotive));
         }
     } else if (type == Pioche_type_e::Ticket) {
         Plateau p(MAP_FILE_PATH);
-        vector<Ticket> tickets = Ticket::loadFromCSVFile(&p, TICKET_FILE_PATH);
-
-        for (int i = 0; i < tickets.size(); i++) {
-            deck_.push_back(new Ticket(tickets[i]));
-        }
+        Ticket::loadFromCSVFile(&p, deck_, TICKET_FILE_PATH);
     }
 
     melanger();

@@ -11,22 +11,22 @@ class CTrain {
 	+getType() : Carte_type_e {query}
 	-couleur_ : Couleur_e
 	+getCouleur() : Couleur_e {query}
-	+estRealise(Joueur* joueur) : bool {query}
 }
 
 
 abstract class Carte {
 	+{abstract} getType() : Carte_type_e {query}
-	+{abstract} estRealise(Joueur* joueur) : bool {query}
+	+estRealise(Joueur* joueur) : bool {query}
 }
 
 
 class Jeu {
-	+Jeu(int nbJoueur)
+	+Jeu(int nbJoueur, int nbTicket)
 	-tickets : Pioche
 	-train : Pioche
 	-p : Plateau
 	+estFinie() : bool
+	-nbTicketReussis : int
 	-nbTour : int
 	-joueurs : vector<Joueur>
 	+afficherEtat() : void {query}
@@ -38,9 +38,11 @@ class Joueur {
 	+Joueur(Couleur_e c)
 	-couleur : Couleur_e
 	+getCouleur() : Couleur_e {query}
+	+poserWagon(Ville a, Ville b, Couleur_e couleurVoie, Plateau& plateau) : bool
 	+getMainWagon() : int {query}
 	+getNbTicketReussis() : int {query}
 	-mainWagon : int
+	+nbCartesCompatibles(Couleur_e couleur) : int {query}
 	+getMainCarte() : map<Couleur_e , int> {query}
 	-mainCarte : map<Couleur_e, int>
 	+getMainTicket() : vector<Ticket*> {query}
@@ -48,7 +50,7 @@ class Joueur {
 	+afficherMain() : void {query}
 	+defausser(Pioche& piocheTicket) : void
 	+piocher(int nbAPiocher, Pioche& type) : void
-	+poserWagon(Ville a, Ville b, Couleur_e c, Plateau& plateau) : void
+	+verifierTickets() : void
 }
 
 
@@ -94,6 +96,7 @@ class Ticket {
 	+getId() : int {query}
 	+id_ : int
 	+{static} loadFromCSVFile(Plateau* plateau, const string& nomFichierCSVTicket) : vector<Ticket>
+	+{static} loadFromCSVFile(Plateau* plateau, vector<Carte*>& cartes, const string& nomFichierCSVTicket) : void
 	+setId(const int id) : void
 	+setVilleA(Ville* villeA) : void
 	+setVilleB(Ville* villeB) : void

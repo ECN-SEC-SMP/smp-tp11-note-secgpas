@@ -44,6 +44,14 @@ class Joueur {
         vector<Ticket*> getMainTicket() const;
 
         /**
+         * @brief Retourne le nombre de cartes compatibles pour une couleur donnée.
+         * Compte les cartes de la couleur spécifiée plus les locomotives (qui peuvent servir de jokers).
+         * @param couleur La couleur de la voie.
+         * @return Le nombre total de cartes utilisables.
+         */
+        int nbCartesCompatibles(Couleur_e couleur) const;
+
+        /**
          * @brief Retourne le nombre de tickets effectivement réussis.
          * Appelle estRealise() sur chaque ticket de la main.
          * @return Le nombre de tickets réussis.
@@ -66,8 +74,9 @@ class Joueur {
          * @param b Ville d'arrivée.
          * @param couleurVoie Couleur de la voie à prendre.
          * @param plateau Le plateau de jeu.
+         * @return true si la pose a réussi, false sinon.
          */
-        void poserWagon(Ville a, Ville b, Couleur_e couleurVoie, Plateau& plateau);
+        bool poserWagon(Ville a, Ville b, Couleur_e couleurVoie, Plateau& plateau);
 
         /**
          * @brief Vérifie tous les tickets en main et annonce les tickets réussis.

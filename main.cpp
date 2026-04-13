@@ -1,5 +1,7 @@
 #include <iostream>
 #include <limits>
+
+#include "config.h"
 #include "Jeu.h"
 
 using namespace std;
@@ -29,14 +31,14 @@ int main() {
             cout << "Entrée invalide, veuillez saisir un entier." << endl;
             continue;
         }
-        if (nbJoueurs < 2 || nbJoueurs > 4) {
-            cout << "Nombre de joueurs invalide, réessaie (2-4)." << endl;
+        if (nbJoueurs < MIN_JOUEUR || nbJoueurs > MAX_JOUEUR) {
+            cout << "Nombre de joueurs invalide, réessaie ("<< MIN_JOUEUR << "-" << MAX_JOUEUR << ")." << endl;
             continue;
         }
         break;
     }
 
-    Jeu jeu(nbJoueurs);
+    Jeu jeu(nbJoueurs, NB_TICKET_REUSSIS);
     jeu.partie();
     jeu.afficherEtat();
 

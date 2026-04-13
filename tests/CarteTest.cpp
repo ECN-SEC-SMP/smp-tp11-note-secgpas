@@ -358,3 +358,13 @@ TEST(CarteTest, TicketShouldBeNotRealizedWithOtherPlayerOwnership) {
 
     EXPECT_FALSE(t.estRealise(&j1));
 }
+
+TEST(CarteTest, TicketConstructorWithNullPlateau) {
+    EXPECT_DEATH(Ticket(nullptr, "Seattle", "Los Angeles", 1), "Erreur : le plateau ne peut pas être nul.");
+}
+
+TEST(CarteTest, TicketEstRealiseWithInvalidVille) {
+    Plateau p(MAP_FILE_PATH);
+    EXPECT_DEATH(Ticket(&p, "InvalidCity", "Los Angeles", 1),
+                 "Erreur : la ville InvalidCity n'existe pas sur le plateau.");
+}
