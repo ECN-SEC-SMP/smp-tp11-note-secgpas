@@ -79,8 +79,8 @@ TEST(JoueurTest, testMainWConstructeurOK) {
 TEST(JoueurTest, testMainCConstructeurOK) {
     Joueur j1 = Joueur(Couleur_e::Bleu);
     // Vérifie que toutes les couleurs sont initialisées à 0
-    for (map<Couleur_e, int>::iterator it = j1.getMainCarte().begin(); it != j1.getMainCarte().end(); ++it){
-        EXPECT_EQ(0, it->second);
+    for (auto it : j1.getMainCarte()){
+        EXPECT_EQ(0, it.second);
     }
 }
 
