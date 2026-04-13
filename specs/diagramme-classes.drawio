@@ -199,7 +199,7 @@
                 <mxCell id="255" value="&amp;lt;&amp;lt;crée&amp;gt;&amp;gt; + Ticket(inout plateau : Plateau*, in nomVilleA : String , in nomVilleB : String, in id : int)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" vertex="1" parent="80">
                     <mxGeometry y="129" width="350" height="41" as="geometry"/>
                 </mxCell>
-                <mxCell id="256" value="+ loadFromCSVFile(inout plateau : Plateau*, in nomFichierCSVTicket : String) : vector&amp;lt;Ticket&amp;gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" vertex="1" parent="80">
+                <mxCell id="256" value="+ (inout plateau : Plateau*, in nomFichierCSVTicket : String) : vector&amp;lt;Ticket&amp;gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" vertex="1" parent="80">
                     <mxGeometry y="170" width="350" height="50" as="geometry"/>
                 </mxCell>
                 <mxCell id="251" value="+ getType() :&amp;nbsp;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;Carte_type_e&lt;/span&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" vertex="1" parent="80">

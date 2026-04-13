@@ -106,7 +106,7 @@ pip install hpp2plantuml
 ```
 ### Génération du diagramme
 ```bash
-hpp2plantuml -i "include/*.h" -o diagramme_classes.puml
+hpp2plantuml -i "include/*.h" -o specs/diagramme_classes.puml
 ```
 
 Ou exécuter chaque cible :

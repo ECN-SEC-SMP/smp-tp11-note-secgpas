@@ -3,7 +3,8 @@
 #include "config.h"
 #include <limits>
 
-Jeu::Jeu(int nbJoueur) : p(MAP_FILE_PATH), tickets(Pioche_type_e::Ticket), train(Pioche_type_e::CarteW), nbTour(0) {
+Jeu::Jeu(int nbJoueur, int nbTicket) : p(MAP_FILE_PATH), tickets(Pioche_type_e::Ticket), train(Pioche_type_e::CarteW),
+                                       nbTour(0), nbTicketReussis(nbTicket) {
 
     const vector<Couleur_e> available = {Couleur_e::Rouge, Couleur_e::Bleu, Couleur_e::Vert, Couleur_e::Jaune};
     auto colorName = [](Couleur_e c) -> string {
@@ -80,8 +81,8 @@ bool Jeu::estFinie() {
             cout << "Partie finie ! Joueur " << i << " n'a plus de wagons !" << endl;
             return true;
         }
-        if (joueurs.at(i).getNbTicketReussis() >= 6) {
-            cout << "Partie finie ! Joueur " << i << " a réussi 6 tickets !" << endl;
+        if (joueurs.at(i).getNbTicketReussis() >= nbTicketReussis) {
+            cout << "Partie finie ! Joueur " << i << " a réussi" << nbTicketReussis << " tickets !" << endl;
             return true;
         }
     }

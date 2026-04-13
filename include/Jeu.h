@@ -34,12 +34,13 @@ class Jeu {
          * @brief Nombre de tours joués.
          */
         int nbTour;
+        int nbTicketReussis;
     public:
         /**
          * @brief Constructeur de Jeu.
          * @param nbJoueur Nombre de joueurs.
          */
-        Jeu(int nbJoueur);
+        Jeu(int nbJoueur, int nbTicket);
         /**
          * @brief Vérifie si la partie est finie.
          * @return true si finie, false sinon.
