@@ -197,12 +197,12 @@ TEST(JoueurTest, testAfficheCarte) {
     EXPECT_NO_THROW(j1.afficherMain());
 }
 
-// TEST(JoueurTest, testAfficheTicket) {
-//     Joueur j1 = Joueur(Couleur_e::Bleu);
-//     Pioche pt(Pioche_type_e::Ticket);
-//     j1.piocher(2, pt);
-//     EXPECT_EQ(2, j1.getMainTicket().size());
-// }
+TEST(JoueurTest, testAfficheTicket) {
+    Joueur j1 = Joueur(Couleur_e::Bleu);
+    Pioche pt(Pioche_type_e::Ticket);
+    j1.piocher(2, pt);
+    EXPECT_EQ(2, j1.getMainTicket().size());
+}
 
 TEST(JoueurTest, testNbTicketReussi) {
     Joueur j1 = Joueur(Couleur_e::Bleu);
