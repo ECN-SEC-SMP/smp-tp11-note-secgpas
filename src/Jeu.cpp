@@ -92,7 +92,6 @@ void Jeu::partie() {
     while (!estFinie()) {
         nbTour++;
         for (int i = 0; i < (int)joueurs.size(); i++) {
-
             cout << "\n===== TOUR " << nbTour << " =====" << endl;
             for (int j = 0; j < (int)joueurs.size(); j++) {
                 cout << "  Joueur " << j
@@ -100,111 +99,148 @@ void Jeu::partie() {
                      << " | Tickets en main : "   << joueurs.at(j).getMainTicket().size()
                      << " | Tickets réussis : "   << joueurs.at(j).getNbTicketReussis()
                      << endl;
-            }
-
-            int decision = -1;
-            cout << "\nTour du Joueur " << i << endl;
-            cout << "0 : Piocher 2 cartes train" << endl;
-            cout << "1 : Poser wagons sur une voie" << endl;
-            cout << "2 : Passer son tour (défausser 2 tickets et en reprendre 2)" << endl;
-            cout << "3 : Afficher le plateau" << endl;
-            cout << "4 : Afficher ma main" << endl;
-            cout << "Votre choix : ";
-            cin >> decision;
-
-            while (decision < 0 || decision > 4) {
-                cout << "Choix invalide, réessaie : ";
-                cin >> decision;
-            }
-
-            while (decision == 3 || decision == 4) {
-                if (decision == 3) {
-                    p.affichePlateau();
-                } else {
-                    joueurs.at(i).afficherMain();
-                }
-                cout << "\nChoisissez une action : 0:Piocher | 1:Poser wagon | 2:Passer | 3:Plateau | 4:Main" << endl;
+            }  
+            bool actionReussie = false;
+            while (!actionReussie) {
+                int decision = -1;
+                cout << "\nTour du Joueur " << i << endl;
+                cout << "0 : Piocher 2 cartes train" << endl;
+                cout << "1 : Poser wagons sur une voie" << endl;
+                cout << "2 : Passer son tour (défausser 2 tickets et en reprendre 2)" << endl;
+                cout << "3 : Afficher le plateau" << endl;
+                cout << "4 : Afficher ma main" << endl;
+                cout << "Votre choix : ";
                 cin >> decision;
                 while (decision < 0 || decision > 4) {
                     cout << "Choix invalide, réessaie : ";
                     cin >> decision;
                 }
-            }
-
-            if (decision == 0) {
-                // Piocher 2 cartes train
-                joueurs.at(i).piocher(2, train);
-                cout << "Vous avez pioché 2 cartes train." << endl;
-            }
-            else if (decision == 1) {
-                // Poser wagons : choisir villes et couleur de voie
-                auto& villes = p.getVilles();
-                cout << "Villes disponibles :" << endl;
-                for (size_t idx = 0; idx < villes.size(); ++idx) {
-                    cout << "  " << idx << " : " << villes[idx].getNomVille() << endl;
-                }
-
-                int v1 = -1, v2 = -1;
-                while (true) {
-                    cout << "Ville départ (index) : ";
-                    if (!(cin >> v1)) {
-                        cin.clear();
-                        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                        cout << "Entrée invalide." << endl; continue;
-                    }
-                    if (v1 < 0 || static_cast<size_t>(v1) >= villes.size()) {
-                        cout << "Indice hors plage." << endl; continue;
-                    }
-                    break;
-                }
-                while (true) {
-                    cout << "Ville arrivée (index) : ";
-                    if (!(cin >> v2)) {
-                        cin.clear();
-                        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                        cout << "Entrée invalide." << endl; continue;
-                    }
-                    if (v2 < 0 || static_cast<size_t>(v2) >= villes.size()) {
-                        cout << "Indice hors plage." << endl; continue;
-                    }
-                    break;
-                }
-
-                // Afficher les voies disponibles entre ces deux villes
-                Ville& va = p.getVille(v1);
-                Ville& vb = p.getVille(v2);
-                vector<VoieFerree> voiesDispo = p.getVoieFerrees(va, vb);
-
-                if (voiesDispo.empty()) {
-                    cout << "Aucune voie ferrée entre ces deux villes." << endl;
-                }
-                else {
-                    cout << "Voies disponibles :" << endl;
-                    for (size_t k = 0; k < voiesDispo.size(); ++k) {
-                        cout << "  " << k << " : couleur=" << static_cast<int>(voiesDispo[k].getCouleur())
-                             << " poids=" << voiesDispo[k].getPoids()
-                             << (voiesDispo[k].estDispo() ? "" : " [PRISE]") << endl;
-                    }
-
-                    // Demander la couleur de la voie à prendre
-                    cout << "Entrez la couleur de la voie (0=Loco,1=Jaune,2=Bleu,3=Rouge,4=Vert,5=Noir,6=Blanc,7=Orange) : ";
-                    int couleurInt = -1;
-                    cin >> couleurInt;
-                    if (couleurInt < 0 || couleurInt > 7) {
-                        cout << "Couleur invalide." << endl;
+                while (decision == 3 || decision == 4) {
+                    if (decision == 3) {
+                        p.affichePlateau();
                     } else {
-                        Couleur_e couleurVoie = static_cast<Couleur_e>(couleurInt);
-                        joueurs.at(i).poserWagon(va, vb, couleurVoie, p);
+                        joueurs.at(i).afficherMain();
+                    }
+                    cout << "\nChoisissez une action : 0:Piocher | 1:Poser wagon | 2:Passer | 3:Plateau | 4:Main" << endl;
+                    cin >> decision;
+                    while (decision < 0 || decision > 4) {
+                        cout << "Choix invalide, réessaie : ";
+                        cin >> decision;
                     }
                 }
+                if (decision == 0) {
+                    // Piocher 2 cartes train
+                    joueurs.at(i).piocher(2, train);
+                    cout << "Vous avez pioché 2 cartes train." << endl;
+                    actionReussie = true;
+                }
+                else if (decision == 1) {
+                    // Poser wagons : choisir villes et couleur de voie
+                    auto& villes = p.getVilles();
+                    cout << "Villes disponibles :" << endl;
+                    for (size_t idx = 0; idx < villes.size(); ++idx) {
+                        cout << "  " << idx << " : " << villes[idx].getNomVille() << endl;
+                    }
+                    int v1 = -1, v2 = -1;
+                    while (true) {
+                        cout << "Ville départ (index) : ";
+                        if (!(cin >> v1)) {
+                            cin.clear();
+                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                            cout << "Entrée invalide." << endl; continue;
+                        }
+                        if (v1 < 0 || static_cast<size_t>(v1) >= villes.size()) {
+                            cout << "Indice hors plage." << endl; continue;
+                        }
+                        break;
+                    }
+                    while (true) {
+                        cout << "Ville arrivée (index) : ";
+                        if (!(cin >> v2)) {
+                            cin.clear();
+                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                            cout << "Entrée invalide." << endl; continue;
+                        }
+                        if (v2 < 0 || static_cast<size_t>(v2) >= villes.size()) {
+                            cout << "Indice hors plage." << endl; continue;
+                        }
+                        break;
+                    }
+                    Ville& va = p.getVille(v1);
+                    Ville& vb = p.getVille(v2);
+                    vector<VoieFerree> voiesDispo = p.getVoieFerrees(va, vb);
+                    if (voiesDispo.empty()) {
+                        cout << "Aucune voie ferrée entre ces deux villes. Choisissez une autre action." << endl;
+                    }
+                    else {
+                        cout << "Voies disponibles :" << endl;
+                        for (size_t k = 0; k < voiesDispo.size(); ++k) {
+                            cout << "  " << k << " : couleur=" << static_cast<int>(voiesDispo[k].getCouleur())
+                                 << " poids=" << voiesDispo[k].getPoids()
+                                 << (voiesDispo[k].estDispo() ? "" : " [PRISE]") << endl;
+                        }
+                        cout << "Entrez la couleur de la voie (0=Loco,1=Jaune,2=Bleu,3=Rouge,4=Vert,5=Noir,6=Blanc,7=Orange) : ";
+                        int couleurInt;
+                        if (!(cin >> couleurInt) || couleurInt < 0 || couleurInt > 7) {
+                            cin.clear();
+                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                            cout << "Couleur invalide. Choisissez une autre action." << endl;
+                        }
+                        else {
+                            Couleur_e couleurVoie = static_cast<Couleur_e>(couleurInt);
+     
+                            // Vérifications explicites pour afficher un message précis
+                            bool voieTrouvee = false;
+                            bool voieLibre   = false;
+                            bool assezCartes = false;
+     
+                            for (auto& vf : voiesDispo) {
+                                if (vf.getCouleur() == couleurVoie) {
+                                    voieTrouvee = true;
+                                    if (!vf.estDispo()) {
+                                        cout << "Cette voie est déjà prise par un autre joueur." << endl;
+                                    } else {
+                                        voieLibre = true;
+                                        int nbCartes = joueurs.at(i).nbCartesCompatibles(couleurVoie);
+                                        if (nbCartes >= vf.getPoids()) {
+                                            assezCartes = true;
+                                        } else {
+                                            cout << "Pas assez de cartes : vous avez " << nbCartes
+                                                 << " carte(s) compatible(s) mais la voie en demande "
+                                                 << vf.getPoids() << "." << endl;
+                                        }
+                                    }
+                                    break;
+                                }
+                            }
+     
+                            if (!voieTrouvee) {
+                                cout << "Aucune voie de cette couleur entre ces deux villes." << endl;
+                            }
+     
+                            if (voieTrouvee && voieLibre && assezCartes) {
+                                bool poseReussie = joueurs.at(i).poserWagon(va, vb, couleurVoie, p);
+                                if (poseReussie) {
+                                    cout << "Wagons posés avec succès !" << endl;
+                                    actionReussie = true;
+                                } else {
+                                    cout << "La pose a échoué pour une raison inconnue." << endl;
+                                }
+                            } else {
+                                cout << "Pose impossible. Choisissez une autre action." << endl;
+                            }
+                        }
+                    }
+                }
+                else if (decision == 2) {
+                    // Passer son tour : défausser 2 tickets et en reprendre 2
+                    joueurs.at(i).defausser(tickets);
+                    cout << "Vous avez défaussé vos tickets et pioché de nouveaux." << endl;
+                    actionReussie = true;
+                }
+                
+                if (estFinie()) return;
             }
-            else if (decision == 2) {
-                // Passer son tour : défausser 2 tickets et en reprendre 2
-                joueurs.at(i).defausser(tickets);
-                cout << "Vous avez défaussé vos tickets et pioché de nouveaux." << endl;
-            }
-
-            if (estFinie()) return;
         }
     }
 }
