@@ -21,7 +21,9 @@ class Carte {
      * @param joueur Pointeur vers le joueur pour lequel vérifier la réalisation de la carte.
      * @return true si réalisée, false sinon.
      */
-    virtual bool estRealise(Joueur *joueur) const = 0;
+    virtual bool estRealise(Joueur *joueur) const {
+        return false;
+    };
     /**
      * @brief Retourne le type de la carte.
      * @return Le type de la carte.
@@ -62,15 +64,6 @@ public:
     Carte_type_e getType() const override {
         return Carte_type_e::Train;
     }
-
-    /**
-     * @brief Vérifie si la carte train est réalisée.
-     * @return true si réalisée, false sinon.
-     */
-    bool estRealise(Joueur *joueur) const {
-        // TODO: implémenter CTrain::estRealise
-        return false;
-    };
 };
 
 /**
@@ -137,9 +130,11 @@ public:
      * @brief Charge les tickets depuis un fichier CSV.
      * @param plateau Pointeur vers le plateau.
      * @param nomFichierCSVTicket Nom du fichier CSV.
-     * @return Vecteur de tickets chargés.
+     * @param cartes Le vector qui stocke les cartes
      */
-    static vector<Ticket> loadFromCSVFile(Plateau *plateau, const string & nomFichierCSVTicket);
+    static void loadFromCSVFile(Plateau *plateau,  vector<Carte*>& cartes, const string & nomFichierCSVTicket);
+
+    static vector<Ticket> loadFromCSVFile(Plateau *plateau, const string &nomFichierCSVTicket);
 
     /**
      * @brief Vérifie si le ticket est réalisé pour un joueur donné.

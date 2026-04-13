@@ -43,11 +43,7 @@ Pioche::Pioche(Pioche_type_e type) {
         }
     } else if (type == Pioche_type_e::Ticket) {
         Plateau p(MAP_FILE_PATH);
-        vector<Ticket> tickets = Ticket::loadFromCSVFile(&p, TICKET_FILE_PATH);
-
-        for (int i = 0; i < tickets.size(); i++) {
-            deck_.push_back(new Ticket(tickets[i]));
-        }
+        Ticket::loadFromCSVFile(&p, deck_, TICKET_FILE_PATH);
     }
 
     melanger();

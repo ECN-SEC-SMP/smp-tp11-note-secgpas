@@ -63,10 +63,44 @@ vector<Ticket> Ticket::loadFromCSVFile(Plateau *plateau, const string &nomFichie
     }
 }
 
+void Ticket::loadFromCSVFile(Plateau *plateau, vector<Carte *> &cartes, const string &nomFichierCSVTicket) {
+    string ligne;
+    ifstream fichier(nomFichierCSVTicket);
+
+    if (fichier.is_open()){
+        getline(fichier,ligne);
+        while (getline(fichier,ligne)){
+            string info;
+            vector<string> colonne;
+            stringstream ss(ligne);
+            while (getline(ss, info, ',')) {
+                colonne.push_back(info);
+            }
+            if (colonne.size() == 3){
+                cartes.push_back(new Ticket(plateau, colonne[1], colonne[2],  stoi(colonne[0])));
+            }
+        }
+    }
+    else{
+        cerr << "fichier contenant les tickets non ouvert" << endl;
+        cerr << "Nom du fichier : " << nomFichierCSVTicket << endl;
+        exit(EXIT_FAILURE);
+    }
+}
+
 bool Ticket::estRealise(Joueur *joueur) const {
     if (joueur == nullptr) {
         cerr << "Erreur : le joueur ne peut pas être nul." << endl;
         exit(EXIT_FAILURE);
+    }
+
+    if (plateau_ == nullptr) {
+        cerr << "Erreur : le plateau ne peut pas être nul." << endl;
+        exit(EXIT_FAILURE);
+    }
+
+    if (villeA_ == nullptr || villeB_ == nullptr) {
+        return false;
     }
 
     stack<Ville*> aTraiter;
