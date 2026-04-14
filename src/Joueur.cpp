@@ -226,3 +226,15 @@ void Joueur::afficherMain() const {
         cout << endl;
     }
 }
+
+void Joueur::ajoutMainCarte(Couleur_e couleur, int nb){
+    mainCarte[couleur] = nb;
+}
+
+void Joueur::setWagon(int nb){
+    mainWagon = nb;
+}
+
+void Joueur::ajoutTicket(Ticket* t){
+    mainTicket.push_back(t);
+}

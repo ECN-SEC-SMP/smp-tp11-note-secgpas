@@ -91,6 +91,22 @@ class Joueur {
 
         /** @brief Affiche la main du joueur (cartes + tickets avec statut). */
         void afficherMain() const;
+        
+        /** @brief Dans le but de réaliser les tests unitaires, on crée artificiellement des mains de joueur
+         * @param couleur couleur de la carte que l'on souhaite ajouter
+         * @param nb le nombre de carte de la couleur à ajouter dans la main du joueur
+          */
+        void ajoutMainCarte(Couleur_e couleur, int nb);
+
+        /** @brief Dans le but de réaliser les tests unitaires, on crée artificiellement des mains de joueur
+         * @param nb le nombre de wagon de la main d'un joueur
+          */
+        void setWagon(int nb);
+
+        /** @brief Dans le but de réaliser les tests unitaires, on crée artificiellement des mains de joueur
+         * @param nb le nombre de wagon de la main d'un joueur
+          */
+        void ajoutTicket(Ticket* t);
 };
 
 #endif
