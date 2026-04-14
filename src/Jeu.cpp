@@ -179,9 +179,9 @@ void Jeu::partie() {
                                  << " poids=" << voiesDispo[k].getPoids()
                                  << (voiesDispo[k].estDispo() ? "" : " [PRISE]") << endl;
                         }
-                        cout << "Entrez la couleur de la voie (0=Loco,1=Jaune,2=Bleu,3=Rouge,4=Vert,5=Noir,6=Blanc,7=Orange) : ";
+                        cout << "Entrez la couleur de la voie (1=Jaune,2=Bleu,3=Rouge,4=Vert,5=Noir,6=Blanc,7=Orange) : ";
                         int couleurInt;
-                        if (!(cin >> couleurInt) || couleurInt < 0 || couleurInt > 7) {
+                        if (!(cin >> couleurInt) || couleurInt < 1 || couleurInt > 7) {
                             cin.clear();
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
                             cout << "Couleur invalide. Choisissez une autre action." << endl;
