@@ -13,6 +13,6 @@ const unsigned    MAX_JOUEUR       = 4;
 const unsigned    NB_TICKET_REUSSIS= 6;
 const unsigned    NB_CTRAIN_LOCOMOTIVE = 12;
 const unsigned    NB_CTRAIN_PAR_COULEUR = 10;
-const bool        TRUE_RANDOM           = false;
+const bool        TRUE_RANDOM           = true;
 
 #endif //TP11_NOTE_CONFIG_H

@@ -216,7 +216,7 @@ TEST(JoueurTest, PoseWagonReussie) {
     Ville v1("Seattle");
     Ville v2("Calgary");
 
-    Plateau plateau("map.csv");
+    Plateau plateau(MAP_FILE_PATH);
     plateau.getVoieFerrees().clear();
 
     plateau.getVoieFerrees().push_back(
@@ -235,7 +235,7 @@ TEST(JoueurTest, PasAssezDeWagons) {
     Ville v1("Seattle");
     Ville v2("Calgary");
 
-    Plateau plateau("map.csv");
+    Plateau plateau(MAP_FILE_PATH);
     plateau.getVoieFerrees().clear();
 
     plateau.getVoieFerrees().push_back(
@@ -254,7 +254,7 @@ TEST(JoueurTest, PasAssezDeCartes) {
     Ville v1("Seattle");
     Ville v2("Calgary");
 
-    Plateau plateau("map.csv");
+    Plateau plateau(MAP_FILE_PATH);
     plateau.getVoieFerrees().clear();
 
     plateau.getVoieFerrees().push_back(
@@ -275,7 +275,7 @@ TEST(JoueurTest, MauvaiseCouleur) {
     Ville v1("Seattle");
     Ville v2("Calgary");
 
-    Plateau plateau("map.csv");
+    Plateau plateau(MAP_FILE_PATH);
     plateau.getVoieFerrees().clear();
 
     plateau.getVoieFerrees().push_back(
@@ -294,7 +294,7 @@ TEST(JoueurTest, VoieDejaPrise) {
     Ville v1("Seattle");
     Ville v2("Calgary");
 
-    Plateau plateau("map.csv");
+    Plateau plateau(MAP_FILE_PATH);
     plateau.getVoieFerrees().clear();
 
     plateau.getVoieFerrees().push_back(
@@ -319,7 +319,7 @@ TEST(JoueurTest, AucuneVoieTrouvee) {
     Ville v2("Calgary");
     Ville v3("Denver");
 
-    Plateau plateau("map.csv");
+    Plateau plateau(MAP_FILE_PATH);
     plateau.getVoieFerrees().clear();
 
     plateau.getVoieFerrees().push_back(
@@ -339,7 +339,7 @@ TEST(JoueurTest, UtilisationLocomotives) {
     Ville v1("Seattle");
     Ville v2("Calgary");
 
-    Plateau plateau("map.csv");
+    Plateau plateau(MAP_FILE_PATH);
     plateau.getVoieFerrees().clear();
 
     plateau.getVoieFerrees().push_back(
@@ -360,7 +360,7 @@ TEST(JoueurTest, UtilisationLocomotives) {
 
 TEST(JoueurTest, DefausserDeuxTickets) {
     Joueur j(Couleur_e::Rouge);
-    Plateau plateau("map.csv");
+    Plateau plateau(MAP_FILE_PATH);
     Pioche pioche(Pioche_type_e::Ticket);
 
     Ville v1("A"), v2("B"), v3("C"), v4("D"), v5("E"), v6("F");
@@ -385,7 +385,7 @@ TEST(JoueurTest, DefausserDeuxTickets) {
 
 TEST(JoueurTest, DefausserUnTicket) {
     Joueur j(Couleur_e::Rouge);
-    Plateau plateau("map.csv");
+    Plateau plateau(MAP_FILE_PATH);
     Pioche pioche(Pioche_type_e::Ticket);
 
     Ville v1("A"), v2("B");
@@ -412,7 +412,7 @@ TEST(JoueurTest, DefausserAucunTicket) {
 
 TEST(JoueurTest, DefausserOrdre) {
     Joueur j(Couleur_e::Rouge);
-    Plateau plateau("map.csv");
+    Plateau plateau(MAP_FILE_PATH);
     Pioche pioche(Pioche_type_e::Ticket);
 
     Ville v1("A"), v2("B"), v3("C"), v4("D"), v5("E"), v6("F");
