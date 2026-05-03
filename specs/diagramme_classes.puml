@@ -48,8 +48,11 @@ class Joueur {
 	+getMainTicket() : vector<Ticket*> {query}
 	-mainTicket : vector<Ticket*>
 	+afficherMain() : void {query}
+	+ajoutMainCarte(Couleur_e couleur, int nb) : void
+	+ajoutTicket(Ticket* t) : void
 	+defausser(Pioche& piocheTicket) : void
 	+piocher(int nbAPiocher, Pioche& type) : void
+	+setWagon(int nb) : void
 	+verifierTickets() : void
 }
 
